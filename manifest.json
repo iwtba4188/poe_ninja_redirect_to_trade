@@ -1,0 +1,17 @@
+{
+    "name": "poe_ninja_redirect_to_trade",
+    "description": "This extension allows users using poe.ninja redirect to poe trade to get ",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "scripting"
+    ],
+    "host_permissions": [
+        "*://*.poe.ninja/builds/*"
+    ]
+}
