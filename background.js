@@ -63,54 +63,163 @@ async function inject_script(stats_data, query_data, equipment_data) {
     // console.log(query_data);
     // console.log(equipment_data);
 
-    function find_stat_id(stat_string, stat_index) {
+    function cal_difference(int1, int2) {
+        if (int1 > int2) return int1 - int2;
+        else if (int2 > int1) return int2 - int1;
+    };
+
+    function find_mod_id(stat_string, stat_index) {
         var entries = stats_data["result"][stat_index]["entries"];
         stat_string = stat_string.replace(/[\+]+/, "\\+");
-        stat_string = stat_string.replace(/[-]+/, "-");
-        stat_string = stat_string.replace(/[\d#.]+/g, ".?");
+        stat_string = stat_string.replace(/^[-]+/, "");
+        stat_string = stat_string.replace(/[\d.]+/g, ".+?");
 
-        var res = [];
+        var res_id = "";
+        var res_text = "";
         Object.values(entries).some(function (key) {
             if (RegExp(stat_string).test(key["text"])) {
-                res.push(key.id);
+                if (Math.abs(key.text.length - stat_string.length) < Math.abs(res_text.length - stat_string.length)) {
+                    [res_id, res_text] = [key.id, key.text];
+                }
             }
         });
 
-        if (res.length === 0) console.log(stat_index + stat_string);
+        if (res_id.length === 0) console.log(stat_index + ": " + stat_string);
         // console.log(res);
-        return res;
+        return res_id;
     };
 
-    function fix_enchant(mod) {
+    function fix_enchant(mod, item_type) {
+        var filter = { "id": -1 };
         // fix "Allocates #"
         if (/Allocates/.test(mod)) {
-            console.log(mod.match(/Allocates (.+)/)[1]);
-            // filter["value"] = { "option": mod.match(/Allocates (.+)/) };
-            // mod = mod.replace(/Allocates .+?/, "Allocates #");
+            // console.log(mod.match(/Allocates (.+)/)[1]);
+            var passives_list = stats_data["result"][4]["entries"][4]["option"]["options"];
+
+            var passive_name = mod.match(/Allocates (.+)/)[1];
+            var passive_id = -1;
+            Object.values(passives_list).some(function (passives) {
+                if (passives.text === passive_name) passive_id = passives.id;
+            });
+
+            filter["value"] = { "option": passive_id };
+            mod = "Allocates #";
+        }
+        // fix "Added Small Passive Skills grant: #"
+        if (/Added Small Passive Skills grant: /.test(mod)) {
+            var passives_list = stats_data["result"][4]["entries"][0]["option"]["options"];
+
+            var passive_name = mod.match(/Added Small Passive Skills grant: (.+)/)[1];
+            var passive_id = -1;
+            Object.values(passives_list).some(function (passives) {
+                if (passives.text === passive_name) passive_id = passives.id;
+            });
+
+            filter["value"] = { "option": passive_id };
+            mod = "Added Small Passive Skills grant: #";
+        }
+        // fix "Enemies Blinded by you have #% reduced Critical Strike Chance"
+        mod = mod.replace(/(Enemies Blinded by you have .+% reduced Critical Strike Chance)/, "Enemies Blinded by you have #% increased Critical Strike Chance");
+
+        return [mod, filter];
+    };
+    function fix_implicit(mod, item_type) {
+        var filter = { "id": -1 };
+        return [mod, filter];
+    };
+    function fix_fractured(mod, item_type) {
+        var filter = { "id": -1 };
+        return [mod, filter];
+    };
+    function fix_explicit(mod, item_type) {
+        var filter = { "id": -1 };
+
+        if (item_type === "items") {
+            // fix "#% Chance to Block Attack Damage"
+            mod = mod.replace(/(^[^+]\d+% Chance to Block Attack Damage)/, "#% Chance to Block Attack Damage");
+            // fix "#% Chance to Block Spell Damage"
+            mod = mod.replace(/(^[^+]\d+% Chance to Block Spell Damage)/, "#% Chance to Block Spell Damage");
+            // fix "Items and Gems have #% reduced Attribute Requirements"
+            mod = mod.replace(/(reduced Attribute Requirements)/, "increased Attribute Requirements");
+            // fix "#% reduced Global Physical Damage"
+            mod = mod.replace(/(reduced Global Physical Damage)/, "increased Global Physical Damage");
+            // fix "Shocks you inflict spread to other Enemies within 1.5 metres"
+            mod = mod.replace(/(within 1.5 metres)/, "within 1.5 metre");
+            // fix "Leftmost # Magic Utility Flasks constantly apply their Flask Effects to you"
+            // mod = mod.replace(/(Magic Utility Flasks constantly apply their Flask Effects to you)/, "Magic Utility Flask constantly applies its Flask Effect to you");
+            mod = mod.replace(/(Flasks|Flask)/, "\(Flasks|Flask\)");
+            mod = mod.replace(/(applies|apply)/, "\(applies|apply\)");
+            mod = mod.replace(/(Effects|Effect)/, "\(Effects|Effect\)");
+            mod = mod.replace(/(its|their)/, "\(its|their\)");
+            // fix "#% increased Evasion and Energy Shield"
+            mod = mod.replace(/(Evasion and Energy Shield)/, "Evasion and Energy Shield \\(Local\\)");
+            // fix "#% Chance to Block Attack Damage while wielding a Staff"
+            mod = mod.replace(/(% Chance to Block Attack Damage while wielding a Staff)/, "% Chance to Block Attack Damage while wielding a Staff \\(Staves\\)");
+            // fix "#% increased Evasion Rating"
+            mod = mod.replace(/(increased Evasion Rating$)/, "increased Evasion Rating \\(Local\\)");
+            // fix "#% increased Armour"
+            mod = mod.replace(/(increased Armour$)/, "increased Armour \\(Local\\)");
+            // fix "Non-Channelling Skills have -# to Total Mana Cost"
+            mod = mod.replace(/(Non-Channelling Skills have .+ to Total Mana Cost)/, "Non-Channelling Skills have \+# to Total Mana Cost");
+        } else if (item_type === "flasks") {
+            mod = mod.replace(/(Charges|Charge)/, "\(Charges|Charge\)");
+            // fix "#% reduced Charges per use"
+            mod = mod.replace(/(reduced \(Charges\|Charge\) per use)/, "increased \(Charges|Charge\) per use");
+            // fix "#% reduced Amount Recovered"
+            mod = mod.replace(/(reduced Amount Recovered)/, "increased Amount Recovered");
+            // fix "#% reduced Effect of Shock on you during Effect"
+            mod = mod.replace(/(reduced Effect of Shock on you during Effect)/, "increased Effect of Shock on you during Effect");
+            // fix "+#% reduced Duration"
+            mod = mod.replace(/(reduced Duration)/, "increased Duration");
+            // fix "Consumes Frenzy Charges on use"
+            mod = mod.replace(/(Consumes Frenzy Charges on use)/, "Consumes 1 Frenzy Charge on use");
+            // fix "less Duration"
+            mod = mod.replace(/(less Duration)/, "more Duration");
+            // fix "#% reduced Charges per use"
+            mod = mod.replace(/(reduced Charges per use)/, "increased Charges per use");
+        } else if (item_type === "jewels") {
+            // fix "Passives in Radius of # can be Allocated\nwithout being connected to your tree"
+            if (/Passives in Radius of .+ can be Allocated\nwithout being connected to your tree/.test(mod)) {
+                var passives_list = stats_data["result"][1]["entries"][1787]["option"]["options"];
+
+                var passive_name = mod.match(/Passives in Radius of (.+) can be Allocated/)[1];
+                console.log(passive_name);
+                var passive_id = -1;
+                Object.values(passives_list).some(function (passives) {
+                    if (passives.text === passive_name) passive_id = passives.id;
+                });
+
+                filter["value"] = { "option": passive_id };
+                mod = "Passives in Radius of # can be Allocated\nwithout being connected to your tree";
+            }
         }
 
-        return mod;
-    };
-    function fix_implicit(mod) {
-        return mod;
-    };
-    function fix_fractured(mod) {
-        return mod;
-    };
-    function fix_explicit(mod) {
-        // fix "#% reduced Amount Recovered"
-        mod = mod.replace(/(reduced Amount Recovered)/, "increased Amount Recovered");
-        // fix "Items and Gems have #% reduced Attribute Requirements"
-        mod = mod.replace(/(reduced Attribute Requirements)/, "increased Attribute Requirements");
-        // fix "Shocks you inflict spread to other Enemies within 1.5 metres"
-        mod = mod.replace(/(within 1.5 metres)/, "within 1.5 metre");
-        // fix "#% increased Evasion and Energy Shield"
-        mod = mod.replace(/(Evasion and Energy Shield)/, "Evasion and Energy Shield \\(Local\\)");
+        // fix "Grants Summon Harbinger"
+        if (/Grants Summon.+?Harbinger/.test(mod)) {
+            var passives_list = stats_data["result"][1]["entries"][1125]["option"]["options"];
 
-        return mod;
+            var passive_name = mod.match(/Grants Summon (.+) Skill/)[1];
+            console.log(passive_name);
+            var passive_id = -1;
+            Object.values(passives_list).some(function (passives) {
+                if (passives.text === passive_name) passive_id = passives.id;
+            });
+
+            filter["value"] = { "option": passive_id };
+            mod = "Grants Summon Harbinger";
+        }
+
+        return [mod, filter];
     };
-    function fix_crafted(mod) {
-        return mod;
+    function fix_crafted(mod, item_type) {
+        var filter = { "id": -1 };
+
+        // fix "#% reduced Mana Cost of Skills during Effect"
+        mod = mod.replace(/(reduced Mana Cost of Skills during Effect)/, "increased Mana Cost of Skills during Effect");
+        // fix "Non-Channelling Skills have -# to Total Mana Cost"
+        mod = mod.replace(/(Non-Channelling Skills have .+ to Total Mana Cost)/, "Non-Channelling Skills have \+# to Total Mana Cost");
+
+        return [mod, filter];
     };
 
     // type: items, flasks, jewels
@@ -122,11 +231,11 @@ async function inject_script(stats_data, query_data, equipment_data) {
         // enchant stat index = 4
         if (item_data["enchantMods"].length !== 0) {
             for (const mod of item_data["enchantMods"]) {
-                var filter = {};
-                var mod_id = find_stat_id(fix_enchant(mod), 4);
+                var [fixed_mod, filter] = fix_enchant(mod, item_type);
+                var mod_id = find_mod_id(fixed_mod, 4);
 
                 if (mod_id.length !== 0) {
-                    filter["id"] = mod_id[0];
+                    filter["id"] = mod_id;
                     this_query["query"]["stats"][0]["filters"].push(filter);
                 }
             }
@@ -136,11 +245,11 @@ async function inject_script(stats_data, query_data, equipment_data) {
         // implicit stat index = 2
         if (item_data["implicitMods"].length !== 0) {
             for (const mod of item_data["implicitMods"]) {
-                var filter = {};
-                var mod_id = find_stat_id(fix_implicit(mod), 2);
+                var [fixed_mod, filter] = fix_implicit(mod, item_type);
+                var mod_id = find_mod_id(fixed_mod, 2);
 
                 if (mod_id.length !== 0) {
-                    filter["id"] = mod_id[0];
+                    filter["id"] = mod_id;
                     this_query["query"]["stats"][0]["filters"].push(filter);
                 }
             }
@@ -150,11 +259,11 @@ async function inject_script(stats_data, query_data, equipment_data) {
         // fractured stat index = 3
         if (item_data["fracturedMods"].length !== 0) {
             for (const mod of item_data["fracturedMods"]) {
-                var filter = {};
-                var mod_id = find_stat_id(fix_fractured(mod), 3);
+                var [fixed_mod, filter] = fix_fractured(mod, item_type);
+                var mod_id = find_mod_id(fixed_mod, 3);
 
                 if (mod_id.length !== 0) {
-                    filter["id"] = mod_id[0];
+                    filter["id"] = mod_id;
                     this_query["query"]["stats"][0]["filters"].push(filter);
                 }
             }
@@ -164,11 +273,11 @@ async function inject_script(stats_data, query_data, equipment_data) {
         // explicit stat index = 1
         if (item_data["explicitMods"].length !== 0) {
             for (const mod of item_data["explicitMods"]) {
-                var filter = {};
-                var mod_id = find_stat_id(fix_explicit(mod), 1);
+                var [fixed_mod, filter] = fix_explicit(mod, item_type);
+                var mod_id = find_mod_id(fixed_mod, 1);
 
                 if (mod_id.length !== 0) {
-                    filter["id"] = mod_id[0];
+                    filter["id"] = mod_id;
                     this_query["query"]["stats"][0]["filters"].push(filter);
                 }
             }
@@ -178,11 +287,11 @@ async function inject_script(stats_data, query_data, equipment_data) {
         // crafted stat index = 6
         if (item_data["craftedMods"].length !== 0) {
             for (const mod of item_data["craftedMods"]) {
-                var filter = {};
-                var mod_id = find_stat_id(fix_crafted(mod), 6);
+                var [fixed_mod, filter] = fix_crafted(mod, item_type);
+                var mod_id = find_mod_id(fixed_mod, 6);
 
                 if (mod_id.length !== 0) {
-                    filter["id"] = mod_id[0];
+                    filter["id"] = mod_id;
                     this_query["query"]["stats"][0]["filters"].push(filter);
                 }
             }
@@ -195,14 +304,16 @@ async function inject_script(stats_data, query_data, equipment_data) {
 
     // 將按鈕insert進頁面
     async function add_button_to_page() {
-        var items = document.body.getElementsByClassName("_item-hover_8bh10_26");
+        // var items = document.body.getElementsByClassName("_item-hover_8bh10_26");
+        var items = document.body.querySelectorAll("div.content.p-6:nth-child(2) button");
+        console.log(items);
 
         // items
         for (var i = 0; i < items.length; i += 1) {
             var slot_num = 0;
             if (i < equipment_data["items"].length) { //items
                 slot_num = equipment_data["items"][i]["itemSlot"];
-            } else { // flasks
+            } else if (i < equipment_data["items"].length) { // flasks or jewels
                 slot_num = 13;
             }
 
@@ -222,7 +333,8 @@ async function inject_script(stats_data, query_data, equipment_data) {
             new_node.setAttribute("data-variant", "plain");
             new_node.setAttribute("data-size", "xsmall");
             if (i < equipment_data["items"].length) /* items */ var target_url = await generate_target_url(i, "items");
-            else /* flasks */ var target_url = await generate_target_url(i - equipment_data["items"].length, "flasks");
+            else if (i < equipment_data["items"].length + equipment_data["flasks"].length) /* flasks */ var target_url = await generate_target_url(i - equipment_data["items"].length, "flasks");
+            else /* jewels */ var target_url = await generate_target_url(i - equipment_data["items"].length - equipment_data["flasks"].length, "jewels");
             new_node.setAttribute("onclick", `window.open('${POE_TRADE_URL}?q=${target_url}', '_blank');`);
 
             if ([1, 2, 3, 5, 6, 7, 10].includes(slot_num)) /* top */ new_node.setAttribute("style", "opacity: 0; position: absolute; top: 0px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
@@ -232,7 +344,7 @@ async function inject_script(stats_data, query_data, equipment_data) {
             new_node.appendChild(balance_icon_node);
             new_node.appendChild(text_node);
 
-            items[i].appendChild(new_node);
+            items[i].insertAdjacentElement("afterend", new_node);
             // console.log(items[i].appendChild(new_node));
         }
 
