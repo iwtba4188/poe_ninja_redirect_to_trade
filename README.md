@@ -30,8 +30,8 @@ This Chrome extension is not currently available on the Chrome Web Store. If you
 ![usage_3](./image/usage_3.png)
 
 ## TODO
-- [ ] There are still some errors in word pendant pairing or unsuccessful matches.
+- [ ] There are still errors in modifier matching or matches that are not successful.
 - [x] The sequence of flasks and jewels is incorrect.
 
-## Note
+## Acknowledges
 To avoid numerous grammatical errors in my poor English, this README was translated using Copilot and manually corrected for inaccuracies.
