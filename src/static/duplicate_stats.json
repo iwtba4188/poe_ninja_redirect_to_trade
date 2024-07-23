@@ -43,6 +43,9 @@
         "explicit.stat_389725673",
         "explicit.stat_133340941",
         "explicit.stat_3665534869",
+        "explicit.stat_4197676934",
+        "explicit.stat_2178803872",
+        "explicit.indexable_support_106",
         "explicit.stat_3430523735",
         "explicit.stat_740728913",
         "explicit.stat_1535626285",
@@ -89,16 +92,24 @@
         "explicit.indexable_support_74",
         "explicit.stat_4020144606",
         "explicit.indexable_support_127",
+        "explicit.stat_1108755349",
+        "explicit.indexable_support_67",
+        "explicit.stat_2532625478",
+        "explicit.indexable_support_76",
         "explicit.stat_369650395",
         "explicit.indexable_support_28",
         "explicit.stat_3720936304",
         "explicit.indexable_support_69",
+        "explicit.stat_2325632050",
+        "explicit.indexable_support_113",
         "explicit.stat_1991958615",
         "explicit.indexable_support_100",
         "explicit.stat_3039589351",
         "explicit.stat_2355741828",
         "explicit.stat_2388360415",
         "explicit.indexable_support_98",
+        "explicit.stat_99089516",
+        "explicit.indexable_support_84",
         "explicit.stat_749770518",
         "explicit.indexable_support_24",
         "explicit.stat_1866911844",
@@ -126,6 +137,8 @@
         "explicit.indexable_support_114",
         "explicit.stat_2228279620",
         "explicit.indexable_support_31",
+        "explicit.stat_3814066599",
+        "explicit.indexable_support_7",
         "explicit.stat_3718597497",
         "explicit.indexable_support_97",
         "explicit.stat_1859244771",
@@ -148,6 +161,8 @@
         "explicit.indexable_support_51",
         "explicit.stat_3237923082",
         "explicit.indexable_support_37",
+        "explicit.stat_2501237765",
+        "explicit.indexable_support_41",
         "explicit.stat_2985291457",
         "explicit.indexable_support_46",
         "explicit.stat_2696557965",
@@ -176,6 +191,8 @@
         "explicit.indexable_skill_16",
         "explicit.stat_3839163699",
         "explicit.indexable_support_6",
+        "explicit.stat_1811422871",
+        "explicit.indexable_support_45",
         "explicit.stat_3030692053",
         "explicit.indexable_support_27",
         "explicit.stat_696805682",
@@ -186,12 +203,17 @@
         "explicit.indexable_support_58",
         "explicit.stat_2169938251",
         "explicit.indexable_support_85",
+        "explicit.stat_1316646496",
+        "explicit.indexable_support_108",
         "explicit.stat_2593773031",
         "explicit.indexable_support_77",
         "explicit.stat_3826977109",
         "explicit.indexable_support_50",
+        "explicit.stat_1567462963",
+        "explicit.indexable_support_124",
         "explicit.stat_254728692",
         "explicit.indexable_support_33",
+        "explicit.stat_2433615566",
         "explicit.stat_4066711249",
         "explicit.indexable_support_56",
         "explicit.stat_3463633447",
@@ -210,6 +232,10 @@
         "explicit.indexable_support_25",
         "explicit.stat_1337327984",
         "explicit.indexable_support_63",
+        "explicit.stat_891277550",
+        "explicit.indexable_support_52",
+        "explicit.stat_1079148723",
+        "explicit.indexable_support_109",
         "explicit.stat_251446805",
         "explicit.indexable_support_59",
         "explicit.stat_3235814433",
@@ -222,14 +248,22 @@
         "explicit.indexable_support_65",
         "explicit.stat_995332031",
         "explicit.indexable_support_62",
+        "explicit.stat_3312593243",
+        "explicit.indexable_support_110",
         "explicit.stat_3375208082",
         "explicit.indexable_support_88",
         "explicit.stat_2608615082",
         "explicit.indexable_support_49",
         "explicit.stat_858460086",
         "explicit.indexable_support_48",
+        "explicit.stat_952060721",
+        "explicit.indexable_support_81",
         "explicit.stat_3274973940",
         "explicit.indexable_support_142",
+        "explicit.stat_2223640518",
+        "explicit.indexable_support_118",
+        "explicit.stat_3878987051",
+        "explicit.indexable_support_111",
         "explicit.stat_3924539382",
         "explicit.indexable_support_91",
         "explicit.stat_28821524",
@@ -243,12 +277,16 @@
         "explicit.stat_3848992177",
         "explicit.stat_503990161",
         "explicit.indexable_support_17",
+        "explicit.stat_983989924",
+        "explicit.stat_3859593448",
         "explicit.indexable_support_1",
         "explicit.stat_359450079",
         "explicit.indexable_support_96",
         "explicit.stat_1135493957",
         "explicit.indexable_support_2",
         "explicit.stat_1866583932",
+        "explicit.stat_2589042711",
+        "explicit.stat_838272676",
         "explicit.indexable_support_26",
         "explicit.stat_1636220212",
         "explicit.indexable_support_10",
@@ -271,8 +309,14 @@
         "explicit.stat_4048257027",
         "explicit.indexable_support_92",
         "explicit.stat_388696990",
+        "explicit.indexable_support_47",
+        "explicit.stat_2126431157",
+        "explicit.indexable_support_53",
+        "explicit.stat_2032386732",
         "explicit.indexable_support_153",
         "explicit.stat_3713917371",
+        "explicit.indexable_support_34",
+        "explicit.stat_3327487371",
         "explicit.indexable_support_156",
         "explicit.stat_4184135167",
         "explicit.indexable_support_149",
@@ -293,12 +337,16 @@
         "explicit.stat_4021476585",
         "explicit.indexable_support_43",
         "explicit.stat_3239503729",
+        "explicit.indexable_support_80",
+        "explicit.stat_2062753054",
         "explicit.indexable_support_117",
         "explicit.stat_804508379",
         "explicit.indexable_support_144",
         "explicit.stat_3462081007",
         "explicit.indexable_support_136",
         "explicit.stat_1679136",
+        "explicit.indexable_support_12",
+        "explicit.stat_689720069",
         "explicit.indexable_support_44",
         "explicit.stat_2805586447",
         "explicit.indexable_support_140",
@@ -446,7 +494,7 @@
             "id": "explicit.stat_475518267"
         }
     ],
-    "NUM_PERCENT chance to impale enemies on HIT with attacks": [
+    "NUM_PERCENT chance to impale ENEMY on HIT with attacks": [
         {
             "id": "explicit.stat_3739863694"
         },
@@ -486,7 +534,7 @@
             "id": "explicit.stat_308396001"
         }
     ],
-    "trigger level NUM assassin's mark when you HIT NUM rare or unique enemy and have no mark": [
+    "trigger level NUM assassin's mark when you HIT NUM rare or unique ENEMY and have no mark": [
         {
             "id": "explicit.stat_3924520095"
         },
@@ -521,7 +569,7 @@
             "id": "explicit.stat_156080652"
         }
     ],
-    "NUM_PERCENT INC&RED damage with HIT and ailments against blinded enemies": [
+    "NUM_PERCENT INC&RED damage with HIT and ailments against blinded ENEMY": [
         {
             "id": "explicit.stat_3503466234"
         },
@@ -529,7 +577,7 @@
             "id": "explicit.stat_3565956680"
         }
     ],
-    "trigger level NUM poacher's mark when you HIT NUM rare or unique enemy and have no mark": [
+    "trigger level NUM poacher's mark when you HIT NUM rare or unique ENEMY and have no mark": [
         {
             "id": "explicit.stat_3904501306"
         },
@@ -583,6 +631,17 @@
             "id": "explicit.stat_3665534869"
         }
     ],
+    "socketed gems are supported by level NUM chance to bleed": [
+        {
+            "id": "explicit.stat_4197676934"
+        },
+        {
+            "id": "explicit.stat_2178803872"
+        },
+        {
+            "id": "explicit.indexable_support_106"
+        }
+    ],
     "dread banner grants NUM additional NUM to maximum fortification when placing the banner": [
         {
             "id": "explicit.stat_3430523735"
@@ -607,7 +666,7 @@
             "id": "explicit.stat_1029319062"
         }
     ],
-    "CURSE enemies with temporal chains on HIT": [
+    "CURSE ENEMY with temporal chains on HIT": [
         {
             "id": "explicit.stat_3433724931"
         },
@@ -631,7 +690,7 @@
             "id": "explicit.indexable_support_73"
         }
     ],
-    "CURSE enemies with flammability on HIT": [
+    "CURSE ENEMY with flammability on HIT": [
         {
             "id": "explicit.stat_338121249"
         },
@@ -655,7 +714,7 @@
             "id": "explicit.stat_2923442950"
         }
     ],
-    "NUM_PERCENT chance to intimidate enemies for NUM SECOND on HIT": [
+    "NUM_PERCENT chance to intimidate ENEMY for NUM SECOND on HIT": [
         {
             "id": "explicit.stat_2089652545"
         },
@@ -663,7 +722,7 @@
             "id": "explicit.stat_78985352"
         }
     ],
-    "nearby enemies are chilled": [
+    "nearby ENEMY are chilled": [
         {
             "id": "explicit.stat_2159555743"
         },
@@ -767,6 +826,22 @@
             "id": "explicit.indexable_support_127"
         }
     ],
+    "socketed gems are supported by level NUM INC&RED critical damage": [
+        {
+            "id": "explicit.stat_1108755349"
+        },
+        {
+            "id": "explicit.indexable_support_67"
+        }
+    ],
+    "socketed gems are supported by level NUM elemental damage with attacks": [
+        {
+            "id": "explicit.stat_2532625478"
+        },
+        {
+            "id": "explicit.indexable_support_76"
+        }
+    ],
     "socketed gems are supported by level NUM rage": [
         {
             "id": "explicit.stat_369650395"
@@ -781,6 +856,14 @@
         },
         {
             "id": "explicit.indexable_support_69"
+        }
+    ],
+    "socketed gems are supported by level NUM cast on critical strike": [
+        {
+            "id": "explicit.stat_2325632050"
+        },
+        {
+            "id": "explicit.indexable_support_113"
         }
     ],
     "socketed gems are supported by level NUM cold penetration": [
@@ -805,6 +888,14 @@
         },
         {
             "id": "explicit.indexable_support_98"
+        }
+    ],
+    "socketed gems are supported by level NUM faster PROJECTILE": [
+        {
+            "id": "explicit.stat_99089516"
+        },
+        {
+            "id": "explicit.indexable_support_84"
         }
     ],
     "socketed gems are supported by level NUM inspiration": [
@@ -858,7 +949,7 @@
             "id": "explicit.indexable_support_21"
         }
     ],
-    "socketed gems are supported by level NUM vicious projectiles": [
+    "socketed gems are supported by level NUM vicious PROJECTILE": [
         {
             "id": "explicit.stat_2513293614"
         },
@@ -914,6 +1005,14 @@
             "id": "explicit.indexable_support_31"
         }
     ],
+    "socketed gems are supported by level NUM trap and mine damage": [
+        {
+            "id": "explicit.stat_3814066599"
+        },
+        {
+            "id": "explicit.indexable_support_7"
+        }
+    ],
     "socketed gems are supported by level NUM controlled destruction": [
         {
             "id": "explicit.stat_3718597497"
@@ -938,7 +1037,7 @@
             "id": "explicit.indexable_support_123"
         }
     ],
-    "socketed gems are supported by level NUM lesser multiple projectiles": [
+    "socketed gems are supported by level NUM lesser multiple PROJECTILE": [
         {
             "id": "explicit.stat_584144941"
         },
@@ -1002,6 +1101,14 @@
             "id": "explicit.indexable_support_37"
         }
     ],
+    "socketed gems are supported by level NUM multistrike": [
+        {
+            "id": "explicit.stat_2501237765"
+        },
+        {
+            "id": "explicit.indexable_support_41"
+        }
+    ],
     "socketed gems are supported by level NUM melee physical damage": [
         {
             "id": "explicit.stat_2985291457"
@@ -1026,7 +1133,7 @@
             "id": "explicit.indexable_support_3"
         }
     ],
-    "socketed gems are supported by level NUM slower projectiles": [
+    "socketed gems are supported by level NUM slower PROJECTILE": [
         {
             "id": "explicit.stat_1390285657"
         },
@@ -1114,6 +1221,14 @@
             "id": "explicit.indexable_support_6"
         }
     ],
+    "socketed gems are supported by level NUM melee splash": [
+        {
+            "id": "explicit.stat_1811422871"
+        },
+        {
+            "id": "explicit.indexable_support_45"
+        }
+    ],
     "socketed gems are supported by level NUM ballista totem": [
         {
             "id": "explicit.stat_3030692053"
@@ -1154,6 +1269,14 @@
             "id": "explicit.indexable_support_85"
         }
     ],
+    "socketed gems are supported by level NUM cast while channelling": [
+        {
+            "id": "explicit.stat_1316646496"
+        },
+        {
+            "id": "explicit.indexable_support_108"
+        }
+    ],
     "socketed gems are supported by level NUM generosity": [
         {
             "id": "explicit.stat_2593773031"
@@ -1170,12 +1293,23 @@
             "id": "explicit.indexable_support_50"
         }
     ],
+    "socketed gems are supported by level NUM additional accuracy": [
+        {
+            "id": "explicit.stat_1567462963"
+        },
+        {
+            "id": "explicit.indexable_support_124"
+        }
+    ],
     "socketed gems are supported by level NUM pierce": [
         {
             "id": "explicit.stat_254728692"
         },
         {
             "id": "explicit.indexable_support_33"
+        },
+        {
+            "id": "explicit.stat_2433615566"
         }
     ],
     "socketed gems are supported by level NUM knockback": [
@@ -1218,7 +1352,7 @@
             "id": "explicit.indexable_support_112"
         }
     ],
-    "socketed gems are supported by level NUM arrow nova": [
+    "socketed gems are supported by level NUM ARROW nova": [
         {
             "id": "explicit.stat_1331336999"
         },
@@ -1248,6 +1382,22 @@
         },
         {
             "id": "explicit.indexable_support_63"
+        }
+    ],
+    "socketed gems are supported by level NUM life leech": [
+        {
+            "id": "explicit.stat_891277550"
+        },
+        {
+            "id": "explicit.indexable_support_52"
+        }
+    ],
+    "socketed gems are supported by level NUM cast when stunned": [
+        {
+            "id": "explicit.stat_1079148723"
+        },
+        {
+            "id": "explicit.indexable_support_109"
         }
     ],
     "socketed gems are supported by level NUM iron grip": [
@@ -1298,6 +1448,14 @@
             "id": "explicit.indexable_support_62"
         }
     ],
+    "socketed gems are supported by level NUM cast on melee kill": [
+        {
+            "id": "explicit.stat_3312593243"
+        },
+        {
+            "id": "explicit.indexable_support_110"
+        }
+    ],
     "socketed gems are supported by level NUM endurance CHARGE on melee stun": [
         {
             "id": "explicit.stat_3375208082"
@@ -1322,12 +1480,36 @@
             "id": "explicit.indexable_support_48"
         }
     ],
+    "socketed gems are supported by level NUM chance to flee": [
+        {
+            "id": "explicit.stat_952060721"
+        },
+        {
+            "id": "explicit.indexable_support_81"
+        }
+    ],
     "socketed gems are supported by level NUM divine blessing": [
         {
             "id": "explicit.stat_3274973940"
         },
         {
             "id": "explicit.indexable_support_142"
+        }
+    ],
+    "socketed gems are supported by level NUM blind": [
+        {
+            "id": "explicit.stat_2223640518"
+        },
+        {
+            "id": "explicit.indexable_support_118"
+        }
+    ],
+    "socketed gems are supported by level NUM cast on death": [
+        {
+            "id": "explicit.stat_3878987051"
+        },
+        {
+            "id": "explicit.indexable_support_111"
         }
     ],
     "socketed gems are supported by level NUM efficacy": [
@@ -1381,7 +1563,15 @@
             "id": "explicit.indexable_support_17"
         }
     ],
-    "socketed gems are supported by level NUM greater multiple projectiles": [
+    "NUM_PERCENT INC&RED elemental damage taken while stationary": [
+        {
+            "id": "explicit.stat_983989924"
+        },
+        {
+            "id": "explicit.stat_3859593448"
+        }
+    ],
+    "socketed gems are supported by level NUM greater multiple PROJECTILE": [
         {
             "id": "explicit.indexable_support_1"
         },
@@ -1403,6 +1593,14 @@
         },
         {
             "id": "explicit.stat_1866583932"
+        }
+    ],
+    "lose NUM mana per SECOND": [
+        {
+            "id": "explicit.stat_2589042711"
+        },
+        {
+            "id": "explicit.stat_838272676"
         }
     ],
     "socketed gems are supported by level NUM swift affliction": [
@@ -1493,12 +1691,36 @@
             "id": "explicit.stat_388696990"
         }
     ],
+    "socketed gems are supported by level NUM damage on full life": [
+        {
+            "id": "explicit.indexable_support_47"
+        },
+        {
+            "id": "explicit.stat_2126431157"
+        }
+    ],
+    "socketed gems are supported by level NUM life GAIN&LOSS on HIT": [
+        {
+            "id": "explicit.indexable_support_53"
+        },
+        {
+            "id": "explicit.stat_2032386732"
+        }
+    ],
     "socketed gems are supported by level NUM fresh meat": [
         {
             "id": "explicit.indexable_support_153"
         },
         {
             "id": "explicit.stat_3713917371"
+        }
+    ],
+    "socketed gems are supported by level NUM physical to lightning": [
+        {
+            "id": "explicit.indexable_support_34"
+        },
+        {
+            "id": "explicit.stat_3327487371"
         }
     ],
     "socketed gems are supported by level NUM volatility": [
@@ -1509,7 +1731,7 @@
             "id": "explicit.stat_4184135167"
         }
     ],
-    "socketed gems are supported by level NUM returning projectiles": [
+    "socketed gems are supported by level NUM returning PROJECTILE": [
         {
             "id": "explicit.indexable_support_149"
         },
@@ -1525,7 +1747,7 @@
             "id": "explicit.stat_3827538724"
         }
     ],
-    "socketed gems are supported by level NUM manaforged arrows": [
+    "socketed gems are supported by level NUM manaforged ARROW": [
         {
             "id": "explicit.indexable_support_147"
         },
@@ -1581,6 +1803,14 @@
             "id": "explicit.stat_3239503729"
         }
     ],
+    "socketed gems are supported by level NUM fork": [
+        {
+            "id": "explicit.indexable_support_80"
+        },
+        {
+            "id": "explicit.stat_2062753054"
+        }
+    ],
     "socketed gems are supported by level NUM bloodlust": [
         {
             "id": "explicit.indexable_support_117"
@@ -1603,6 +1833,14 @@
         },
         {
             "id": "explicit.stat_1679136"
+        }
+    ],
+    "socketed gems are supported by level NUM stun": [
+        {
+            "id": "explicit.indexable_support_12"
+        },
+        {
+            "id": "explicit.stat_689720069"
         }
     ],
     "socketed gems are supported by level NUM minefield": [
@@ -2053,7 +2291,7 @@
             "id": "explicit.stat_4202507508"
         }
     ],
-    "shock enemies as though dealing NUM_PERCENT MORE&LESS damage": [
+    "shock ENEMY as though dealing NUM_PERCENT MORE&LESS damage": [
         {
             "id": "explicit.stat_2206792089"
         },

@@ -1,11 +1,11 @@
-import json
+from json_loader import load_json, save_json
 import logging
 import re
 
-STATS_PATH = "stats_data_240719.json"
-STATS_SAVE_PATH = "preprocessed_stats_data_240719.json"
-OPTION_MODS_PATH = "option_stats.json"
-DUPLICATE_MODS_PATH = "duplicate_stats.json"
+STATS_PATH = "../static/stats_data_240719.json"
+STATS_SAVE_PATH = "../static/preprocessed_stats_data_240719.json"
+OPTION_MODS_PATH = "../static/option_stats.json"
+DUPLICATE_MODS_PATH = "../static/duplicate_stats.json"
 
 words_set = set()
 
@@ -91,6 +91,15 @@ replace_dict_lower_b = [
     # a, an
     ("an", "NUM"),
     ("a", "NUM"),
+    # arrow, arrows
+    ("arrows", "ARROW"),
+    ("arrow", "ARROW"),
+    # projectiles, projectile
+    ("projectiles", "PROJECTILE"),
+    ("projectile", "PROJECTILE"),
+    # enemies, enemy
+    ("enemies", "ENEMY"),
+    ("enemy", "ENEMY"),
     # # is a, are
     # ("is a", "ISA&ARE"),
     # ("are", "ISA&ARE"),
@@ -98,20 +107,6 @@ replace_dict_lower_b = [
     # ("skills", "SKILL"),
     # ("skill", "SKILL"),
 ]
-
-
-def load_json(file_name: str) -> dict:
-    """Load json file."""
-
-    with open(file_name, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_json(data: dict | list, file_name: str) -> None:
-    """Save data to json file."""
-
-    with open(file_name, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
 
 
 def transform_mod(mod: str) -> str:
@@ -136,10 +131,12 @@ def transform_stats(stats: dict) -> dict:
         for mod in mod_types["entries"]:
 
             logging.debug(f"Original text: {mod['text']}")
-            # ## extract words
-            # for i in mod["text"].split():
-            #     words_set.add(i)
-            # ##
+            ## extract words
+            for i in mod["text"].split():
+                words_set.add(i)
+
+            # print(words_set)
+            ##
             mod["text"] = transform_mod(mod["text"])
 
 
@@ -180,6 +177,12 @@ def transform_structure(stats: dict) -> tuple[dict, list]:
                     tmp[mod["text"]]["options"][option["text"]] = option["id"]
             else:
                 tmp[mod["text"]] = mod["id"]
+                if re.match(r"^NUM_PERCENT chance to ", mod["text"]):
+                    new_mod = re.sub(r"^NUM_PERCENT chance to ", "", mod["text"])
+                    if new_mod not in tmp:
+                        tmp[new_mod] = mod["id"]
+                    else:
+                        print(f"Duplicate mod: {new_mod}")
 
         res[mod_type_name] = tmp
 
@@ -196,13 +199,14 @@ def gen_duplicate_mods(stats: dict) -> dict:
     tmp = dict()
     # idx 1: "explicit"
     for mod in stats_alias[1]["entries"]:
-        if mod["text"] in tmp and mod["text"] not in res:
-            res[mod["text"]] = [tmp[mod["text"]], mod["id"]]
-            print(res[mod["text"]])
-        elif mod["text"] in tmp:
-            res[mod["text"]].append(mod["id"])
+        mod_text = mod["text"].lower()
+        if mod_text in tmp and mod_text not in res:
+            res[mod_text] = [tmp[mod_text], mod["id"]]
+            print(res[mod_text])
+        elif mod_text in tmp:
+            res[mod_text].append(mod["id"])
 
-        tmp[mod["text"]] = mod["id"]
+        tmp[mod_text] = mod["id"]
 
     return res
 
@@ -214,9 +218,9 @@ def gen_structured_stats():
 
     transform_stats(stats)
     stats, options_regex = transform_structure(stats)
-    save_json(stats, "new_" + STATS_SAVE_PATH)
+    save_json(stats, STATS_SAVE_PATH)
 
-    # save_json(sorted(list(words_set)), "words_set.json")
+    save_json(sorted(list(words_set)), "words_set.json")
 
     save_json(options_regex, OPTION_MODS_PATH)
 
