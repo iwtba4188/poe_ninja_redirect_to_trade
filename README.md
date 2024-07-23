@@ -1,13 +1,37 @@
-# poe_ninja_redirect_to_trade
+# poe ninja redirect to trade（忍者網裝備重新導向交易市集）
+
+English | [繁體中文](./docs/README-zh-TW.md) 
 
 ## Introduction
-This is a simple Chrome extension designed to redirect character gear from poe.ninja to the official trade website.
+This is a simple Chrome extension designed to automatically generate buttons that link to the official trading site for all equipment (including flasks, jewels, and gems) of each character listed on [poe ninja](https://poe.ninja/builds).
+
+## Features
+- Equipments, flasks, jewels, and gems can be quickly redirected to the official trade market with a single click, while applying filters for modifiers (and for gems, filtering by quality and gem level).
 
 ## Getting Started
-The extension is currently not available in the Chrome extension store. To install this Chrome extension, please use Developer Mode. You can Google the detailed method for installation.
+This Chrome extension is not currently available on the Chrome Web Store. If you need to install it, please search for the relevant methods or follow the installation instructions provided below.
+
+### Installation
+1. To download the current script content as a ZIP file from the [Github page](https://github.com/iwtba4188/poe_ninja_redirect_to_trade), follow these steps.
+![installation_1](./image/installation_1.png)
+2. For instance, in the Edge browser, select "Load unpacked."
+![installation_2](./image/installation_2.png)
+3. Locate the ZIP file you just downloaded (no need to extract), select it, and click OK.
+4. Then, go to any character's equipment page, and you can quickly navigate to the trading marketplace with one click.
+
+### Usage
+1. Navigate to any character page, hover the mouse over the equipment, and if 'Trade' appears, it indicates that the system is functioning properly, and you can click to proceed to the trading marketplace.
+![usage_1](./image/usage_1.png)
+
+2. The method for using flasks and jewels is the same. **Note: The jewel button is located below the jewel image (as shown), and it will not display a green button, but you can still click to proceed.**
+![usage_2](./image/usage_2.png)
+
+3. Gems are displayed to the left of the gem name.<br>
+![usage_3](./image/usage_3.png)
 
 ## TODO
-Currently, many modifiers still fail to correspond or are matched incorrectly. In the future, I will consider using a hash table or reverse matching to achieve a higher modifiers match rate.
+- [ ] There are still some errors in word pendant pairing or unsuccessful matches.
+- [x] The sequence of flasks and jewels is incorrect.
 
 ## Note
 To avoid numerous grammatical errors in my poor English, this README was translated using Copilot and manually corrected for inaccuracies.
