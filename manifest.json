@@ -1,15 +1,19 @@
 {
-    "name": "poe_ninja_redirect_to_trade",
+    "name": "POE ninja item redirect to official trade",
     "description": "This extension allows users using poe.ninja redirect to poe trade to get ",
     "version": "0.1",
     "manifest_version": 3,
+    "action": {
+        "default_popup": "./src/popup.html"
+    },
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "./src/background.js"
     },
     "permissions": [
         "tabs",
         "webRequest",
-        "scripting"
+        "scripting",
+        "storage"
     ],
     "host_permissions": [
         "*://*.poe.ninja/builds/*"
