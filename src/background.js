@@ -318,7 +318,7 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
             { regex: /^(ADD NUM to NUM chaos damage)$/, replace: "ADD NUM to NUM chaos damage (local)" },
             { regex: /^(ADD NUM to NUM physical damage)$/, replace: "ADD NUM to NUM physical damage (local)" },
             // accuracy rating
-            { regex: /^(PLUS&MINUS_NUM to accuracy rating)$/, replace: "PLUS&MINUS_NUM to accuracy rating (local)" },
+            { regex: /^(NUM to accuracy rating)$/, replace: "NUM to accuracy rating (local)" },
             // #% of Physical Attack Damage Leeched as Life
             { regex: /^(NUM_PERCENT of physical attack damage leeched as life)$/, replace: "NUM_PERCENT of physical attack damage leeched as life (local)" },
             // #% of Physical Attack Damage Leeched as Mana
@@ -340,13 +340,13 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
         const localMods = [
             // energy shield
             { regex: /^(NUM_PERCENT INC&RED energy shield)$/, replace: "NUM_PERCENT INC&RED energy shield (local)" },
-            { regex: /^(PLUS&MINUS_NUM to maximum energy shield)$/, replace: "PLUS&MINUS_NUM to maximum energy shield (local)" },
+            { regex: /^(NUM to maximum energy shield)$/, replace: "NUM to maximum energy shield (local)" },
             // evasion rating
             { regex: /^(NUM_PERCENT INC&RED evasion rating)$/, replace: "NUM_PERCENT INC&RED evasion rating (local)" },
-            { regex: /^(PLUS&MINUS_NUM to evasion rating)$/, replace: "PLUS&MINUS_NUM to evasion rating (local)" },
+            { regex: /^(NUM to evasion rating)$/, replace: "NUM to evasion rating (local)" },
             // armour 
             { regex: /^(NUM_PERCENT INC&RED armour)$/, replace: "NUM_PERCENT INC&RED armour (local)" },
-            { regex: /^(PLUS&MINUS_NUM to armour)$/, replace: "PLUS&MINUS_NUM to armour (local)" },
+            { regex: /^(NUM to armour)$/, replace: "NUM to armour (local)" },
             // armour and energy shield
             { regex: /^(NUM_PERCENT INC&RED armour and energy shield)$/, replace: "NUM_PERCENT INC&RED armour and energy shield (local)" },
             // armour and evasion
