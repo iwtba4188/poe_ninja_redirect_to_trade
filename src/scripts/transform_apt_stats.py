@@ -185,9 +185,11 @@ def sort_matcher_structure():
     for key, value in en_matcher_structure.items():
         kl = key.split(" ")
         if len(kl) >= 2:
-            k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-2]) + kl[-1]
+            k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-2]) + re.sub(
+                r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-1]
+            )
         else:
-            k = kl[-1]
+            k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-1])
         k = k.lower()
 
         key = key.replace("#%", "(?<percent>[\+-]?[\d\.]+%)")
