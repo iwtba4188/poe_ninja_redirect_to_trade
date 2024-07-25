@@ -1,8 +1,9 @@
 {
-    "name": "POE ninja item redirect to official trade",
-    "description": "One-click redirection from poe.ninja to the Path of Exile trade. 忍者網裝備一鍵重導向至流亡黯道官方交易市集，附加詞綴中文化。",
+    "name": "__MSG_extension_name__",
+    "description": "__MSG_extension_description__",
     "version": "1.0",
     "manifest_version": 3,
+    "default_locale": "zh_TW",
     "icons": {
         "128": "./image/icon/icon.png"
     },

@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "POE Ninja 重新導向交易市集",
+        "description": "extension_name"
+    },
+    "extension_description": {
+        "message": "忍者網裝備一鍵重導向至流亡黯道官方交易市集，附加詞綴中文化。",
+        "description": "extension_description"
+    }
+}

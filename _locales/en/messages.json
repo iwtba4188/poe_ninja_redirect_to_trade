@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "POE Ninja Redirect to Trade",
+        "description": "extension_name"
+    },
+    "extension_description": {
+        "message": "One-click redirection from poe.ninja to the Path of Exile trade.",
+        "description": "extension_description"
+    }
+}
