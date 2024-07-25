@@ -17,7 +17,7 @@ This Chrome extension is not currently available on the Chrome Web Store. If you
 ![installation_1](./image/installation_1.png)
 2. For instance, in the Edge browser, select "Load unpacked."
 ![installation_2](./image/installation_2.png)
-3. Locate the ZIP file you just downloaded (no need to extract), select it, and click OK.
+3. Locate the ZIP file you just downloaded (need to extract), select it, and click OK.
 4. Then, go to any character's equipment page, and you can quickly navigate to the trading marketplace with one click.
 
 ### Usage
