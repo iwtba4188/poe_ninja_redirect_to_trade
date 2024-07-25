@@ -1,5 +1,6 @@
 import requests
 import json
+from json_loader import load_json, save_json
 import datetime
 
 defualt_headers = {
@@ -23,20 +24,6 @@ defualt_headers = {
     "Upgrade-Insecure-Requests": "1",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0",
 }
-
-
-def load_json(file_name: str) -> dict:
-    """Load json file."""
-
-    with open(file_name, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_json(data: dict | list, file_name: str) -> None:
-    """Save data to json file."""
-
-    with open(file_name, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
 
 
 def download_stats() -> None:
@@ -64,6 +51,15 @@ def download_gems() -> None:
     )
 
 
+def download_cof_data() -> None:
+    res = requests.get("https://www.craftofexile.com/json/data/main/poec_data.json")
+    save_json(
+        res.text,
+        f"../static/cof_data_{datetime.datetime.now().strftime('%y%m%d')}.json",
+    )
+
+
 if __name__ == "__main__":
-    download_stats()
-    download_gems()
+    # download_stats()
+    # download_gems()
+    # download_cof_data()
