@@ -2,7 +2,8 @@ const FILTER = {
     urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
 };
 const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.json";
-const GEMS_DATA_PATH = "./data/preprocessed_gems_data_240723.json";
+const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
+const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
 const QUERY_PATH = "./data/query.json";
 const GEMS_QUERY_PATH = "./data/query_gems.json";
 
@@ -12,6 +13,8 @@ var stats_data;
 fetch(STATS_DATA_PATH).then((response) => response.json()).then((json) => stats_data = json);
 var gems_data;
 fetch(GEMS_DATA_PATH).then((response) => response.json()).then((json) => gems_data = json);
+var tw_gems_data;
+fetch(TW_GEMS_DATA_PATH).then((response) => response.json()).then((json) => tw_gems_data = json);
 var query_data;
 fetch(QUERY_PATH).then((response) => response.json()).then((json) => query_data = json);
 var gems_query_data;
@@ -60,7 +63,7 @@ async function fetch_character_data(details) {
     chrome.scripting.executeScript({
         target: { tabId: details.tabId },
         function: inject_script,
-        args: [stats_data, gems_data, query_data, gems_query_data, equipment_data],
+        args: [stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data],
     });
 }
 
@@ -68,12 +71,13 @@ async function fetch_character_data(details) {
  * 要 inject 進目前 tab 的 script，功能：加入按鈕，轉換物品 mod 到 stats id
  * @param {Object} stats_data 整理過的詞墜表，提升查找效率與準確率
  * @param {Object} gems_data 整理過的寶石詞墜表，提升查找效率與準確率
+ * @param {Object} tw_gems_data 整理過的台服寶石詞墜表，提升查找效率與準確率
  * @param {Object} query_data poe trade 的 query 格式，詳見 POE 官網及 query_example.json 示範
  * @param {Object} gems_query_data poe trade 的 query 格式，詳見 POE 官網及 query_example.json 示範
  * @param {Object} equipment_data 抓取到的角色裝備資料，內容來源為 poe.ninja，但格式是 POE 官方定義的
  * @return {None}
  */
-async function inject_script(stats_data, gems_data, query_data, gems_query_data, equipment_data) {
+async function inject_script(stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data) {
 
     var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"];
     var redirect_to_tw = (await chrome.storage.local.get(["redirect_to_tw"]))["redirect_to_tw"];
@@ -203,11 +207,12 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
      * @param {string} name 寶石名稱
      * @param {int} level 該寶石的等級
      * @param {int} quality 該寶石的品質
+     * @param {string} server_type 0: www.pathofexile.com, 1: www.pathofexile.tw
      * @returns {string} 生成的 query json string
      */
-    function gen_skills_target_query_str(name, level, quality) {
+    function gen_skills_target_query_str(name, level, quality, server_type) {
         const this_query = JSON.parse(JSON.stringify(gems_query_data));
-        var gems_info = gems_data[name];
+        var gems_info = server_type === 0 ? gems_data[name] : tw_gems_data[name];
 
         if (!gems_info) return;
 
@@ -352,7 +357,7 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
      * 建立所有物品 mods 和 query string 的 mapping
      * @returns {object} 所有物品的 mods mapping query string
      */
-    function gen_all_target_query_mapping() {
+    async function gen_all_target_query_mapping() {
         var mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
         var item_types = ["items", "flasks", "jewels"];
 
@@ -365,10 +370,11 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
             }
         }
 
+        var server_type = (await chrome.storage.local.get(["redirect_to_tw"]))["redirect_to_tw"];
         // gen skills type
         for (var skill_section of equipment_data["skills"]) {
             for (var gem of skill_section["allGems"]) {
-                var target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality);
+                var target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
                 mapping["skills"].push(target_query);
             }
         }
@@ -406,7 +412,7 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
 
     dbg_add_msg_to_page_top("[DEBUGGING]");
 
-    var mods_mapping_target_query = gen_all_target_query_mapping();
+    var mods_mapping_target_query = await gen_all_target_query_mapping();
     dbg_log("=============================");
     dbg_log(mods_mapping_target_query);
     dbg_log("=============================");

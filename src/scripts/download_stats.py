@@ -26,28 +26,31 @@ defualt_headers = {
 }
 
 
-def download_stats() -> None:
+def download_stats(domain) -> None:
     """Download stats data from pathofexile.com."""
 
     res = requests.get(
-        "https://www.pathofexile.com/api/trade/data/stats", headers=defualt_headers
+        f"https://www.pathofexile.{domain}/api/trade/data/stats",
+        headers=defualt_headers,
     )
     stats = json.loads(res.text)
     save_json(
         stats,
-        f"../static/stats_data_{datetime.datetime.now().strftime('%y%m%d')}.json",
+        f"../data/{domain}_stats_data.json",
     )
 
 
-def download_gems() -> None:
+def download_gems(domain) -> None:
     """Download gems data from pathofexile.com."""
 
     res = requests.get(
-        "https://www.pathofexile.com/api/trade/data/items", headers=defualt_headers
+        f"https://www.pathofexile.{domain}/api/trade/data/items",
+        headers=defualt_headers,
     )
     gems = json.loads(res.text)
     save_json(
-        gems, f"../static/gems_data_{datetime.datetime.now().strftime('%y%m%d')}.json"
+        gems,
+        f"../data/{domain}_gems_data.json",
     )
 
 
@@ -55,11 +58,12 @@ def download_cof_data() -> None:
     res = requests.get("https://www.craftofexile.com/json/data/main/poec_data.json")
     save_json(
         res.text,
-        f"../static/cof_data_{datetime.datetime.now().strftime('%y%m%d')}.json",
+        f"../data/cof_data_{datetime.datetime.now().strftime('%y%m%d')}.json",
     )
 
 
 if __name__ == "__main__":
     # download_stats()
-    # download_gems()
+    download_gems("tw")
     # download_cof_data()
+    pass
