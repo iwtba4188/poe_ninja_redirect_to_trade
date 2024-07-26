@@ -28,8 +28,8 @@ async function refresh_mode() {
     var is_zh_tw = (await chrome.storage.local.get(["zh_tw"]))["zh_tw"];
     console.log(is_zh_tw);
 
-    if (is_zh_tw) document.getElementById("zh-tw").innerText = "詞墜中文化目前為 開啟";
-    else document.getElementById("zh-tw").innerText = "詞墜中文化目前為 關閉";
+    if (is_zh_tw) document.getElementById("zh-tw").innerText = "詞綴中文化目前為 開啟";
+    else document.getElementById("zh-tw").innerText = "詞綴中文化目前為 關閉";
 };
 
 refresh_mode();
