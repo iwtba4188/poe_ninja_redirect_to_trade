@@ -1,37 +1,31 @@
-async function switch_debug_mode() {
-    var is_debug = (await chrome.storage.local.get(["debug"]))["debug"];
-    console.log(is_debug);
-
-    if (is_debug) chrome.storage.local.set({ "debug": false });
-    else chrome.storage.local.set({ "debug": true });
-
-    refresh_mode();
+async function get_status(slot) {
+    return (await chrome.storage.local.get([slot]))[slot];
 };
 
-async function switch_zh_tw_mode() {
-    var is_zh_tw = (await chrome.storage.local.get(["zh_tw"]))["zh_tw"];
-    console.log(is_zh_tw);
+async function switch_status(slot) {
+    if (await get_status(slot)) chrome.storage.local.set({ [slot]: false });
+    else chrome.storage.local.set({ [slot]: true });
 
-    if (is_zh_tw) chrome.storage.local.set({ "zh_tw": false });
-    else chrome.storage.local.set({ "zh_tw": true });
+    refresh_modes();
 
-    refresh_mode();
+    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/builds/*" }, function (tabs) {
+        if (tabs.length > 0) chrome.tabs.update(tabs[0].id, { url: tabs[0].url });
+    });
 };
 
-async function refresh_mode() {
-    var is_debug = (await chrome.storage.local.get(["debug"]))["debug"];
-    console.log(is_debug);
+async function refresh_modes() {
+    if (await get_status("redirect_to_tw")) document.getElementById("redirect-to").innerText = "目前重新導向至 台服";
+    else document.getElementById("redirect-to").innerText = "目前重新導向至 國際服";
 
-    if (is_debug) document.getElementById("debug").innerText = "Debug Mode is ON.";
-    else document.getElementById("debug").innerText = "Debug Mode is OFF.";
-
-    var is_zh_tw = (await chrome.storage.local.get(["zh_tw"]))["zh_tw"];
-    console.log(is_zh_tw);
-
-    if (is_zh_tw) document.getElementById("zh-tw").innerText = "詞綴中文化目前為 開啟";
+    if (await get_status("zh_tw")) document.getElementById("zh-tw").innerText = "詞綴中文化目前為 開啟";
     else document.getElementById("zh-tw").innerText = "詞綴中文化目前為 關閉";
+
+    if (await get_status("debug")) document.getElementById("debug").innerText = "Debug Mode is ON.";
+    else document.getElementById("debug").innerText = "Debug Mode is OFF.";
 };
 
-refresh_mode();
-document.getElementById("debug").addEventListener("click", switch_debug_mode);
-document.getElementById("zh-tw").addEventListener("click", switch_zh_tw_mode);
+refresh_modes();
+
+document.getElementById("redirect-to").addEventListener("click", () => switch_status("redirect_to_tw"));
+document.getElementById("zh-tw").addEventListener("click", () => switch_status("zh_tw"));
+document.getElementById("debug").addEventListener("click", () => switch_status("debug"));

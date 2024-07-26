@@ -77,7 +77,8 @@ async function fetch_character_data(details) {
 async function inject_script(stats_data, gems_data, query_data, gems_query_data, equipment_data) {
 
     var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"];
-    const POE_TRADE_URL = "https://www.pathofexile.com/trade/search";
+    var redirect_to_tw = (await chrome.storage.local.get(["redirect_to_tw"]))["redirect_to_tw"];
+    const POE_TRADE_URL = redirect_to_tw ? "https://www.pathofexile.tw/trade/search" : "https://www.pathofexile.com/trade/search";
     const BALANCE_ICON = `<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
     <g id="SVGRepo_iconCarrier">
