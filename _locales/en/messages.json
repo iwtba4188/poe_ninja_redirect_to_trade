@@ -6,5 +6,21 @@
     "extension_description": {
         "message": "One-click redirection from poe.ninja to the Path of Exile trade.",
         "description": "extension_description"
+    },
+    "redirect_to_tw": {
+        "message": "Redirecting to www.pathofexile.tw now",
+        "description": "redirect to tw"
+    },
+    "redirect_to_com": {
+        "message": "Redirecting to www.pathofexile.com now",
+        "description": "redirect to com"
+    },
+    "mods_zh_tw": {
+        "message": "Modifiers are zh-TW now",
+        "description": "modifiers is zh-TW"
+    },
+    "mods_en": {
+        "message": "Modifiers are en now",
+        "description": "modifiers is en"
     }
 }

@@ -30,7 +30,7 @@ This Chrome extension is not currently available on the Chrome Web Store. If you
 3. Gems are displayed to the left of the gem name.<br>
 ![usage_3](./image/usage_3.png)
 
-4. Click on the extension icon, then click "詞綴中文化目前為 關閉" to change it to "詞綴中文化目前為 開啟"
+4. Click on the extension icon, then click "Modifiers are en now" to change it to "Modifiers are zh-TW now."
 
 5. If some word drop-downs do not take effect immediately, please refresh the page (F5 or Ctrl+R).
 ![usage_4](./image/usage_4.png)
