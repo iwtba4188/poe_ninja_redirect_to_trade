@@ -104,6 +104,8 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
 
         var matchers = stats_data[last_two_char.toLowerCase()];
 
+        if (!matchers) return null;
+
         for (var matcher of matchers) {
             var match_string = matcher["matcher"];
             var match_regex = RegExp(match_string, "g");
