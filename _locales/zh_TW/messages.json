@@ -7,20 +7,24 @@
         "message": "忍者網裝備一鍵重導向至流亡黯道官方交易市集，附加詞綴中文化。",
         "description": "extension_description"
     },
-    "redirect_to_tw": {
-        "message": "目前重新導向至 www.pathofexile.tw",
-        "description": "redirect to tw"
-    },
     "redirect_to_com": {
-        "message": "目前重新導向至 www.pathofexile.com",
+        "message": "目前重新導向至 「www.pathofexile.com」",
         "description": "redirect to com"
     },
-    "mods_zh_tw": {
-        "message": "詞綴中文化目前為 開啟",
-        "description": "modifiers is zh-TW"
+    "redirect_to_tw": {
+        "message": "目前重新導向至 「www.pathofexile.tw」",
+        "description": "redirect to tw"
     },
     "mods_en": {
-        "message": "詞綴中文化目前為 關閉",
+        "message": "詞綴顯示 「英文」",
         "description": "modifiers is en"
+    },
+    "mods_zh_tw": {
+        "message": "詞綴顯示 「中文」",
+        "description": "modifiers is zh-TW"
+    },
+    "mods_en_zh_tw": {
+        "message": "詞綴顯示 「英文 & 中文」",
+        "description": "modifiers is en & zh_TW"
     }
 }

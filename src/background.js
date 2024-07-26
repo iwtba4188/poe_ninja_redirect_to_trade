@@ -446,16 +446,31 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
             tippy_mods_record[tippy_id] = mod_text;
 
             // 中文化區塊 start
-            var is_zh_tw = (await chrome.storage.local.get("zh_tw"))["zh_tw"];
-            if (is_zh_tw && enchant) {
+            var lang = (await chrome.storage.local.get("lang"))["lang"];
+            if (lang > 0 && enchant) {
                 var all_mod_elements = enchant.querySelectorAll("div");
-                for (var ele of all_mod_elements) { ele.innerText = mod_to_zh_tw(ele.innerText); }
+                for (var ele of all_mod_elements) {
+                    // zh-TW
+                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
+                    // en & zh-TW
+                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                }
             }
-            if (is_zh_tw && implicit) {
-                for (var ele of implicit_all) { ele.innerText = mod_to_zh_tw(ele.innerText); }
+            if (lang > 0 && implicit) {
+                for (var ele of implicit_all) {
+                    // zh-TW
+                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
+                    // en & zh-TW
+                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                }
             }
-            if (is_zh_tw && explicit) {
-                for (var ele of explicit_all) { ele.innerText = mod_to_zh_tw(ele.innerText); }
+            if (lang > 0 && explicit) {
+                for (var ele of explicit_all) {
+                    // zh-TW
+                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
+                    // en & zh-TW
+                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                }
             }
             // 中文化區塊 end
         }
