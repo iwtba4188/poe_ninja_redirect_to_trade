@@ -51,15 +51,14 @@ async function fetch_url(target_url) {
  */
 async function fetch_character_data(details) {
 
-    // 去除監聽器避免抓取此函式發出的 request 導致無限循環
-    chrome.webRequest.onCompleted.removeListener(fetch_character_data);
+    if (details.tabId === -1) return;
 
     var api_url = details.url;
 
     equipment_data = await fetch_url(api_url);
 
     chrome.scripting.executeScript({
-        target: { tabId: trigger_tab_id },
+        target: { tabId: details.tabId },
         function: inject_script,
         args: [stats_data, gems_data, query_data, gems_query_data, equipment_data],
     });
@@ -561,10 +560,4 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
 };
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.status === "complete") {
-        console.log(tabId + " is updated!");
-        trigger_tab_id = tabId;
-        chrome.webRequest.onCompleted.addListener(fetch_character_data, FILTER);
-    }
-});
+chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, FILTER));
