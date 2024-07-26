@@ -111,9 +111,16 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
             var match_regex = RegExp(match_string, "g");
 
             if (match_regex.test(mod_string)) {
-                if (matcher["res"]["zh-tw"]) {
-                    zh_tw_matching[mod_string] = mod_string.replace(match_regex, RegExp(matcher["res"]["zh-tw"])).replaceAll("/", "").replaceAll("\\n", "\n");
+                if (!matcher["res"]["zh-tw"]) {
+                    return matcher["res"];
                 }
+
+                var zh_tw_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"]["zh-tw"])).replaceAll("/", "").replaceAll("\\n", "\n");
+
+                // 珠寶換行的詞綴在 tippy 中是用空格分開，ex: "Added Small Passive Skills grant: 12% increased Trap Damage Added Small Passive Skills grant: 12% increased Mine Damage"
+                if (mod_string.indexOf("\n") !== -1) zh_tw_matching[mod_string.replace("\n", " ")] = zh_tw_mod_string;
+                zh_tw_matching[mod_string] = zh_tw_mod_string;
+
                 return matcher["res"];
             }
         }
@@ -390,6 +397,7 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
      * @returns {string} 翻譯成中文的詞墜
      */
     function mod_to_zh_tw(mod_string) {
+        dbg_log(`mod_string = "${mod_string}", zh_tw_matching[mod_string] = "${zh_tw_matching[mod_string]}"`);
         if (zh_tw_matching[mod_string]) return zh_tw_matching[mod_string];
         else return mod_string;
     }
@@ -526,9 +534,14 @@ async function inject_script(stats_data, gems_data, query_data, gems_query_data,
             attributeOldValue: true
         });
     }
+    try {
+        add_btn_items();
+        add_btn_skills();
+    } catch (e) {
+        dbg_warn(e);
+    }
 
-    add_btn_items();
-    add_btn_skills();
+    // dbg_log(zh_tw_matching);
 };
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
