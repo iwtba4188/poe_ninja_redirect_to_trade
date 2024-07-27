@@ -2,6 +2,8 @@
 
 [English](../README.md) | 繁體中文 
 
+[![extension badge](../image/icon/extension_badge.png)](https://chromewebstore.google.com/detail/poe-ninja-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E4%BA%A4%E6%98%93%E5%B8%82%E9%9B%86/booomkjelcadmolknnllecpgfiehiddm)
+
 ## Introduction
 這是一個簡易的 Chrome 擴充功能（Chrome extension），用來自動生成 [poe ninja](https://poe.ninja/builds) 中各角色所有裝備（含藥劑、珠寶及寶石）導向至官方交易網站的按鈕，並內建提供詞綴中文化功能（可關閉）。
 
@@ -10,7 +12,7 @@
 - 裝備、藥劑及珠寶的詞綴中文化。
 
 ## Getting Started
-目前這個 Chrome 擴充功能尚未上架至 Chrome 線上應用程式商店。如需安裝，請自行搜尋相關方法，或按照下文介紹安裝。
+目前這個 Chrome 擴充功能已經上架至 Chrome 線上應用程式商店。如需手動安裝，請自行搜尋相關方法，或按照下文介紹安裝。
 
 ### Installation
 1. 從 [Github 網頁](https://github.com/iwtba4188/poe_ninja_redirect_to_trade) 下載當前腳本內容的 ZIP 檔。
@@ -30,7 +32,8 @@
 3. 寶石則顯示在寶石名稱左方。<br>
 ![usage_3](../image/usage_3.png)
 
-4. 按下擴充功能的圖示（目前是白底黑色 T），點擊「詞綴中文化目前為 關閉」，使其轉變為「詞綴中文化目前為 開啟」。
+4. 按下擴充功能的圖示（目前是白底黑色 T），點擊「詞綴顯示 「英文」」，使其轉變為「詞綴顯示 「中文」」，再按一次變為「詞綴顯示 「英文 & 中文」」。
+![usage_5](../image/usage_5.png)
 
 5. 如果部分詞綴沒有立即生效的話，請重新整理頁面（F5 或 Ctrl+R）。
 ![usage_4](../image/usage_4.png)
