@@ -151,7 +151,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             if (item_mods.length === 0) continue;
 
             for (const mod of item_mods) {
-                var res = find_mod_id(mod);
+                try {
+                    var res = find_mod_id(mod);
+                } catch (e) {
+                    dbg_warn(e);
+                    dbg_add_msg_to_page_top(e);
+                }
 
                 if (!res) {
                     dbg_warn("[MOD NOT FOUND] mod_type=" + type_name + ", mod_string='" + mod + "'");
