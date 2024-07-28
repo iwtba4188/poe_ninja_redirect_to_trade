@@ -1,26 +1,26 @@
 {
     "extension_name": {
-        "message": "PoE Ninja Redirect to Trade",
+        "message": "PoE Ninja 거래소 리다이렉트",
         "description": "extension_name"
     },
     "extension_description": {
-        "message": "One-click redirection from poe.ninja to the Path of Exile trade.",
+        "message": "Ninja 웹사이트의 장비를 Path of Exile 공식 거래소로 한 번에 리다이렉트하며, 접두사와 접미사를 한국어로 표시합니다.",
         "description": "extension_description"
     },
     "description_redirect_domain": {
-        "message": "Redirecting to",
+        "message": "리다이렉트 대상",
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "International Server",
+        "message": "국제 서버",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "Taiwan Server",
+        "message": "대만 서버",
         "description": "redirect to tw"
     },
     "description_lang": {
-        "message": "Modifiers display language",
+        "message": "접두사와 접미사 표시 언어",
         "description": "lang"
     },
     "opt_mods_en": {

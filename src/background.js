@@ -81,6 +81,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
     var redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+    var now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
+    var now_lang_for_lang_matching = now_lang.replace("en-", "");
+
     const POE_TRADE_URL = `https://www.pathofexile.${redirect_to}/trade/search`;
     const BALANCE_ICON = `<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -90,7 +93,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             fill="#ffffff"></path>
     </g>`;
 
-    var zh_tw_matching = {};
+    var lang_matching = {};
 
     function dbg_log(msg) { if (is_debugging) console.log(msg); };
     function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
@@ -115,15 +118,15 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             var match_regex = RegExp(match_string, "g");
 
             if (match_regex.test(mod_string)) {
-                if (!matcher["res"]["zh-tw"]) {
+                if (!matcher["res"][now_lang_for_lang_matching]) {
                     return matcher["res"];
                 }
 
-                var zh_tw_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"]["zh-tw"])).replaceAll("/", "").replaceAll("\\n", "\n");
+                var lang_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"][now_lang_for_lang_matching])).replaceAll("/", "").replaceAll("\\n", "\n");
 
                 // 珠寶換行的詞綴在 tippy 中是用空格分開，ex: "Added Small Passive Skills grant: 12% increased Trap Damage Added Small Passive Skills grant: 12% increased Mine Damage"
-                if (mod_string.indexOf("\n") !== -1) zh_tw_matching[mod_string.replace("\n", " ")] = zh_tw_mod_string;
-                zh_tw_matching[mod_string] = zh_tw_mod_string;
+                if (mod_string.indexOf("\n") !== -1) lang_matching[mod_string.replace("\n", " ")] = lang_mod_string;
+                lang_matching[mod_string] = lang_mod_string;
 
                 return matcher["res"];
             }
@@ -405,9 +408,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @param {string} mod_string 要翻譯的英文詞墜
      * @returns {string} 翻譯成中文的詞墜
      */
-    function mod_to_zh_tw(mod_string) {
-        dbg_log(`mod_string = "${mod_string}", zh_tw_matching[mod_string] = "${zh_tw_matching[mod_string]}"`);
-        if (zh_tw_matching[mod_string]) return zh_tw_matching[mod_string];
+    function mod_to_lang(mod_string) {
+        dbg_log(`mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
+        if (lang_matching[mod_string]) return lang_matching[mod_string];
         else return mod_string;
     }
 
@@ -454,30 +457,29 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             tippy_mods_record[tippy_id] = mod_text;
 
             // 中文化區塊 start
-            var lang = (await chrome.storage.local.get("lang"))["lang"];
-            if (lang !== "en" && enchant) {
+            if (now_lang !== "en" && enchant) {
                 var all_mod_elements = enchant.querySelectorAll("div");
                 for (var ele of all_mod_elements) {
-                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+                    var lang_mod_string = mod_to_lang(ele.innerText);
 
-                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
-                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
+                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
+                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
                 }
             }
-            if (lang !== "en" && implicit) {
+            if (now_lang !== "en" && implicit) {
                 for (var ele of implicit_all) {
-                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+                    var lang_mod_string = mod_to_lang(ele.innerText);
 
-                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
-                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
+                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
+                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
                 }
             }
-            if (lang !== "en" && explicit) {
+            if (now_lang !== "en" && explicit) {
                 for (var ele of explicit_all) {
-                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+                    var lang_mod_string = mod_to_lang(ele.innerText);
 
-                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
-                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
+                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
+                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
                 }
             }
             // 中文化區塊 end
@@ -571,7 +573,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         dbg_warn(e);
     }
 
-    // dbg_log(zh_tw_matching);
+    dbg_log(lang_matching);
 };
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址

@@ -1,26 +1,26 @@
 {
     "extension_name": {
-        "message": "PoE Ninja Redirect to Trade",
+        "message": "PoE Ninja перенаправление на торговую площадку",
         "description": "extension_name"
     },
     "extension_description": {
-        "message": "One-click redirection from poe.ninja to the Path of Exile trade.",
+        "message": "Перенаправление снаряжения с сайта Ninja на официальную торговую площадку Path of Exile с русифицированными аффиксами.",
         "description": "extension_description"
     },
     "description_redirect_domain": {
-        "message": "Redirecting to",
+        "message": "Перенаправить на",
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "International Server",
+        "message": "Международный сервер",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "Taiwan Server",
+        "message": "Тайваньский сервер",
         "description": "redirect to tw"
     },
     "description_lang": {
-        "message": "Modifiers display language",
+        "message": "Язык отображения аффиксов",
         "description": "lang"
     },
     "opt_mods_en": {

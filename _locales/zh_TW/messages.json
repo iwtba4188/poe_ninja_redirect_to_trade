@@ -34,5 +34,21 @@
     "opt_mods_en_zh_tw": {
         "message": "英文 & 繁體中文",
         "description": "modifiers is en & zh_TW"
+    },
+    "opt_mods_ko": {
+        "message": "韓文",
+        "description": "modifiers is ko"
+    },
+    "opt_mods_en_ko": {
+        "message": "英文 & 韓文",
+        "description": "modifiers is en & ko"
+    },
+    "opt_mods_ru": {
+        "message": "俄文",
+        "description": "modifiers is ru"
+    },
+    "opt_mods_en_ru": {
+        "message": "英文 & 俄文",
+        "description": "modifiers is en & ru"
     }
 }
