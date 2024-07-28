@@ -45,5 +45,5 @@
 - [ ] 更多自定義 Filter 規則。
 
 ## Acknowledges
-- 詞綴查找使用 [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe) 中的詞綴比對表（中英文）。
+- 詞綴查找使用 [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe) 中的詞綴比對表（中英文、韓文、俄文）。
 - 英文版本使用 Copilot 協助翻譯。

@@ -1,15 +1,15 @@
-# poe ninja redirect to trade (and Chinese localization of modifiers)
+# poe ninja redirect to trade (and Chinese, Korean language and Russian localization of modifiers)
 
 English | [繁體中文](./docs/README-zh-TW.md) 
 
 [![extension badge](./image/icon/extension_badge.png)](https://chromewebstore.google.com/detail/poe-ninja-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E4%BA%A4%E6%98%93%E5%B8%82%E9%9B%86/booomkjelcadmolknnllecpgfiehiddm)
 
 ## Introduction
-This is a simple Chrome extension designed to automatically generate buttons that link to the official trading site for all equipment (including flasks, jewels, and gems) of each character listed on [poe ninja](https://poe.ninja/builds), and it includes a built-in feature for Chinese localization of modifiers (which can be disabled)..
+This is a simple Chrome extension designed to automatically generate buttons that link to the official trading site for all equipment (including flasks, jewels, and gems) of each character listed on [poe ninja](https://poe.ninja/builds), and it includes a built-in feature for Chinese, Korean language and Russian localization of modifiers (which can be disabled)..
 
 ## Features
 - Equipments, flasks, jewels, and gems can be quickly redirected to the official trade market with a single click, while applying filters for modifiers (and for gems, filtering by quality and gem level).
-- Equipments, flasks, and jewels modifiers localized in Chinese.
+- Equipments, flasks, and jewels modifiers localized in Chinese, Korean language and Russian.
 
 ## Getting Started
 This Chrome extension is currently available on the Chrome Web Store. If you need to install it manually, please search for the relevant methods or follow the installation instructions provided below.
@@ -45,5 +45,5 @@ This Chrome extension is currently available on the Chrome Web Store. If you nee
 - [ ] Add more custom Filter rules.
 
 ## Acknowledges
-- The modifier matching utilizes the matching table (Chinese & English) in [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe).
+- The modifier matching utilizes the matching table (English, Chinese, Korean language and Russian) in [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe).
 - To avoid numerous grammatical errors in my poor English, this README was translated using Copilot and manually corrected for inaccuracies.
