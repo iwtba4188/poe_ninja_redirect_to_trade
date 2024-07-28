@@ -91,40 +91,40 @@ def calculate_apt_stats() -> None:
     return
 
 
-def tw_make_string_matching_table() -> dict:
+def make_string_matching_table(lang) -> dict:
     with open(
-        "../data/awakened poe trade/zh-tw_stats.ndjson", "r", encoding="utf-8"
+        f"../data/awakened poe trade/{lang}_stats.ndjson", "r", encoding="utf-8"
     ) as f:
-        tw_original_data = f.read()
+        lang_original_data = f.read()
 
-    tw_original_data_list = tw_original_data.split("\n")[:-1]
+    lang_original_data_list = lang_original_data.split("\n")[:-1]
 
-    tw_table = {}
-    for i in tw_original_data_list:
-        tw_load = json.loads(i)
-        for matcher in tw_load["matchers"]:
+    lang_table = {}
+    for i in lang_original_data_list:
+        lang_load = json.loads(i)
+        for matcher in lang_load["matchers"]:
             if (
-                tw_load.get("ref"),
+                lang_load.get("ref"),
                 matcher.get("value"),
                 matcher.get("negate"),
                 matcher["string"].count("#"),
-            ) not in tw_table:
+            ) not in lang_table:
                 res_str = matcher["string"]
 
                 res_str = res_str.replace("#%", "$<percent>")
                 for idx in range(0, 5):
                     res_str = res_str.replace("#", f"$<num{idx}>", 1)
 
-                tw_table[
+                lang_table[
                     (
-                        tw_load.get("ref"),
+                        lang_load.get("ref"),
                         matcher.get("value"),
                         matcher.get("negate"),
                         matcher["string"].count("#"),
                     )
                 ] = res_str
 
-    return tw_table
+    return lang_table
 
 
 def en_make_matcher_structure() -> dict:
@@ -133,7 +133,9 @@ def en_make_matcher_structure() -> dict:
 
     en_original_data_list = en_original_data.split("\n")[:-1]
 
-    tw_table = tw_make_string_matching_table()
+    tw_table = make_string_matching_table("zh-tw")
+    ko_table = make_string_matching_table("ko")
+    ru_table = make_string_matching_table("ru")
 
     count = 0
     en_table = {}
@@ -154,6 +156,22 @@ def en_make_matcher_structure() -> dict:
                         matcher["string"].count("#"),
                     )
                 ),
+                "ko": ko_table.get(
+                    (
+                        en_load.get("ref"),
+                        matcher.get("value"),
+                        matcher.get("negate"),
+                        matcher["string"].count("#"),
+                    )
+                ),
+                "ru": ru_table.get(
+                    (
+                        en_load.get("ref"),
+                        matcher.get("value"),
+                        matcher.get("negate"),
+                        matcher["string"].count("#"),
+                    )
+                ),
                 "explicitMods": en_load["trade"]["ids"].get("explicit"),
                 "implicitMods": en_load["trade"]["ids"].get("implicit"),
                 "fracturedMods": en_load["trade"]["ids"].get("fractured"),
@@ -161,17 +179,25 @@ def en_make_matcher_structure() -> dict:
                 "craftedMods": en_load["trade"]["ids"].get("crafted"),
                 "pseudoMods": en_load["trade"]["ids"].get("pseudo"),
             }
-            if en_table[matcher["string"]]["zh-tw"] != None:
-                count += 1
-                # if matcher["string"].count("#") != en_table[matcher["string"]][
-                #     "zh-tw"
-                # ].count("#"):re
-                #     print(f'en: {matcher["string"]}')
-                #     print(f'tw: {en_table[matcher["string"]]["zh-tw"]}')
-                #     print()
 
-                if matcher["string"].count("#%") >= 3:
-                    pass
+            # remove null entries
+            en_table[matcher["string"]] = {
+                key: value
+                for key, value in en_table[matcher["string"]].items()
+                if value != None
+            }
+
+            # if en_table[matcher["string"]]["zh-tw"] != None:
+            #     count += 1
+            #     # if matcher["string"].count("#") != en_table[matcher["string"]][
+            #     #     "zh-tw"
+            #     # ].count("#"):re
+            #     #     print(f'en: {matcher["string"]}')
+            #     #     print(f'tw: {en_table[matcher["string"]]["zh-tw"]}')
+            #     #     print()
+
+            #     if matcher["string"].count("#%") >= 3:
+            #         pass
 
     # save_json(en_table, "../data/awakened poe trade/en_stats.json")
 
@@ -211,6 +237,8 @@ def sort_matcher_structure():
             "res": {
                 "value": None,
                 "zh-tw": "攻擊投射物返回你",
+                "ko": "공격 투사체가 자신에게 돌아옴",
+                "ru": "Снаряды от атак возвращаются к вам",
                 "explicitMods": ["explicit.stat_1658124062"],
                 "implicitMods": None,
                 "fracturedMods": None,
@@ -232,7 +260,7 @@ def sort_matcher_structure():
             max_len_value = len(value)
     print(f"{max_key} 數量最多，有 {max_len_value} 項")
 
-    save_json(en_table, "../data/awakened poe trade/en_stats.json")
+    save_json(en_table, "../data/awakened poe trade/en_stats_test.json")
 
 
 if __name__ == "__main__":
