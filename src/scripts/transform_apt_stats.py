@@ -183,7 +183,7 @@ def sort_matcher_structure():
 
     en_matcher_structure = en_make_matcher_structure()
     for key, value in en_matcher_structure.items():
-        kl = key.split(" ")
+        kl = key.strip().split(" ")
         if len(kl) >= 2:
             k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-2]) + re.sub(
                 r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-1]
@@ -192,10 +192,12 @@ def sort_matcher_structure():
             k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-1])
         k = k.lower()
 
-        key = key.replace("#%", "(?<percent>[\+-]?[\d\.]+%)")
+        key = key.strip().replace("#%", "(?<percent>[\+-]?[\d\.]+%)")
         for idx in range(0, 5):
             key = key.replace("#", f"(?<num{idx}>[\+-]?[\d\.]+)", 1)
 
+        if key[0] == "+":
+            key = "\\" + key
         key = f"^{key}$"
 
         if k not in en_table:
