@@ -79,9 +79,9 @@ async function fetch_character_data(details) {
  */
 async function inject_script(stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data) {
 
-    var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"];
-    var redirect_to_tw = (await chrome.storage.local.get(["redirect_to_tw"]))["redirect_to_tw"];
-    const POE_TRADE_URL = redirect_to_tw ? "https://www.pathofexile.tw/trade/search" : "https://www.pathofexile.com/trade/search";
+    var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
+    var redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+    const POE_TRADE_URL = `https://www.pathofexile.${redirect_to}/trade/search`;
     const BALANCE_ICON = `<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
     <g id="SVGRepo_iconCarrier">
@@ -189,10 +189,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
                 }
                 // no duplicate mods
                 else {
-                    if (value) {
-                        if (value === 100) target_query.query.stats[0].filters.push({ "id": mod_ids[0], "value": { "min": value } });
-                        else target_query.query.stats[0].filters.push({ "id": mod_ids[0], "option": value });
-                    }
+                    if (value && value === 100) target_query.query.stats[0].filters.push({ "id": mod_ids[0], "value": { "min": value } });
+                    else if (value) target_query.query.stats[0].filters.push({ "id": mod_ids[0], "option": value });
                     else target_query.query.stats[0].filters.push({ "id": mod_ids[0] });
                 }
                 dbg_log("[SUCCESS] id=" + mod_ids[0] + ", value=" + value + ", mod_string='" + mod + "'");
@@ -207,29 +205,29 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @param {string} name 寶石名稱
      * @param {int} level 該寶石的等級
      * @param {int} quality 該寶石的品質
-     * @param {string} server_type 0: www.pathofexile.com, 1: www.pathofexile.tw
+     * @param {string} server_type com: www.pathofexile.com, tw: www.pathofexile.tw
      * @returns {string} 生成的 query json string
      */
     function gen_skills_target_query_str(name, level, quality, server_type) {
-        const this_query = JSON.parse(JSON.stringify(gems_query_data));
-        var gems_info = server_type === 0 ? gems_data[name] : tw_gems_data[name];
+        const target_query = JSON.parse(JSON.stringify(gems_query_data));
+        var gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
 
         if (!gems_info) return;
 
         // alter version gems
         if (gems_info["disc"]) {
-            this_query.query.type.option = gems_info["type"];
-            this_query.query.type.discriminator = gems_info["disc"];
+            target_query.query.type.option = gems_info["type"];
+            target_query.query.type.discriminator = gems_info["disc"];
         }
         // normal gems
         else {
-            this_query.query.type = gems_info["type"];
+            target_query.query.type = gems_info["type"];
         }
 
-        this_query.query.filters.misc_filters.filters.gem_level.min = level;
-        this_query.query.filters.misc_filters.filters.quality.min = quality;
+        target_query.query.filters.misc_filters.filters.gem_level.min = level;
+        target_query.query.filters.misc_filters.filters.quality.min = quality;
 
-        return JSON.stringify(this_query);
+        return JSON.stringify(target_query);
     }
 
     /**
@@ -370,7 +368,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             }
         }
 
-        var server_type = (await chrome.storage.local.get(["redirect_to_tw"]))["redirect_to_tw"];
+        var server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
         // gen skills type
         for (var skill_section of equipment_data["skills"]) {
             for (var gem of skill_section["allGems"]) {
@@ -452,32 +450,37 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
             // 中文化區塊 start
             var lang = (await chrome.storage.local.get("lang"))["lang"];
-            if (lang > 0 && enchant) {
+            if (lang !== "en" && enchant) {
                 var all_mod_elements = enchant.querySelectorAll("div");
                 for (var ele of all_mod_elements) {
-                    // zh-TW
-                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
-                    // en & zh-TW
-                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+
+                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
+                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
                 }
             }
-            if (lang > 0 && implicit) {
+            if (lang !== "en" && implicit) {
                 for (var ele of implicit_all) {
-                    // zh-TW
-                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
-                    // en & zh-TW
-                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+
+                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
+                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
                 }
             }
-            if (lang > 0 && explicit) {
+            if (lang !== "en" && explicit) {
                 for (var ele of explicit_all) {
-                    // zh-TW
-                    if (lang === 1) ele.innerText = mod_to_zh_tw(ele.innerText);
-                    // en & zh-TW
-                    else if (lang === 2) ele.innerText += "\n" + mod_to_zh_tw(ele.innerText);
+                    var zh_tw_mod_string = mod_to_zh_tw(ele.innerText);
+
+                    if (lang === "zh-tw") ele.innerText = zh_tw_mod_string;
+                    else if (lang === "en-zh-tw" && ele.innerText !== zh_tw_mod_string) ele.innerText += "\n" + zh_tw_mod_string;
                 }
             }
             // 中文化區塊 end
+
+            // 顯示 tippy element
+            // var tmp = mutationRecord.target.querySelector("div[data-tippy-root]");
+            // tmp.setAttribute("data-state", "");
+            // dbg_log(tmp.outerHTML);
         }
     });
     observer.observe(document.body, {
@@ -555,6 +558,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             attributeOldValue: true
         });
     }
+
     try {
         add_btn_items();
         add_btn_skills();

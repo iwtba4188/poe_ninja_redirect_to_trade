@@ -1,43 +1,71 @@
-const option_count = {
-    "redirect_to_tw": 2,  // 0: www.pathofexile.com, 1: www.pathofexile.tw
-    "lang": 3,  // 0: en, 1: zh-TW, 2: en & zh-TW
-    "debug": 2  // 0: false, 1: true
-};
-
 async function get_status(slot) {
     var val = (await chrome.storage.local.get([slot]))[slot];
 
-    if (!val) return 0;
-    else return val;
+    if (!val && slot === "redirect-to") {
+        chrome.storage.local.set({ [slot]: "com" });
+        return "com";
+    } else if (!val && slot === "lang") {
+        chrome.storage.local.set({ [slot]: "en" });
+        return "en";
+    } else if (!val && slot === "debug") {
+        chrome.storage.local.set({ [slot]: "off" });
+        return "off";
+    }
+
+    return val;
 };
 
-async function switch_status(slot) {
-    var now_val = await get_status(slot);
+async function set_status(slot, value) {
+    chrome.storage.local.set({ [slot]: value });
 
-    chrome.storage.local.set({ [slot]: ((now_val + 1) % option_count[slot]) });
-
-    refresh_modes();
-
+    // refresh current focus ninja page
     chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/builds/*" }, function (tabs) {
         if (tabs.length > 0) chrome.tabs.update(tabs[0].id, { url: tabs[0].url });
     });
 };
 
-async function refresh_modes() {
-    if (await get_status("redirect_to_tw") === 0) document.getElementById("redirect-to").innerText = chrome.i18n.getMessage("redirect_to_com");
-    else document.getElementById("redirect-to").innerText = chrome.i18n.getMessage("redirect_to_tw");
+async function on_change_event() {
+    if (await get_status("redirect-to") !== document.getElementById("redirect-to").value) {
+        set_status("redirect-to", document.getElementById("redirect-to").value);
+    }
+    if (await get_status("lang") !== document.getElementById("lang").value) {
+        set_status("lang", document.getElementById("lang").value);
+    }
+    if (await get_status("debug") !== document.getElementById("debug").value) {
+        set_status("debug", document.getElementById("debug").value);
+    }
 
-    if (await get_status("lang") === 0) document.getElementById("zh-tw").innerText = chrome.i18n.getMessage("mods_en");
-    else if (await get_status("lang") === 1) document.getElementById("zh-tw").innerText = chrome.i18n.getMessage("mods_zh_tw");
-    else document.getElementById("zh-tw").innerText = chrome.i18n.getMessage("mods_en_zh_tw");
+    refresh_html();
+};
 
-    if (await get_status("debug") === 0) document.getElementById("debug").innerText = "Debug Mode is OFF.";
-    else document.getElementById("debug").innerText = "Debug Mode is ON.";
+async function refresh_html() {
+    document.getElementById("redirect-to").value = await get_status("redirect-to");
+    document.getElementById("lang").value = await get_status("lang");
+    document.getElementById("debug").value = await get_status("debug");
+};
+
+function init() {
+    var i18n_nodes = document.getElementsByClassName("i18n");
+    for (var i18n_node of i18n_nodes) {
+        var msg_name = i18n_node.innerText.replace(/__MSG_(?<name>\w+)__/, /$<name>/).replaceAll("/", "");
+        i18n_node.innerText = chrome.i18n.getMessage(msg_name);
+    }
+
+    refresh_html();
+
+    var css_node = document.createElement("link");
+    css_node.href = "./modules/bootstrap.min.css";
+    css_node.rel = "stylesheet";
+    document.head.appendChild(css_node);
+
+    var js_node = document.createElement("script");
+    js_node.src = "./modules/bootstrap.bundle.min.js";
+    document.body.appendChild(js_node);
 };
 
 // chrome.storage.local.clear();
-refresh_modes();
+init();
 
-document.getElementById("redirect-to").addEventListener("click", () => switch_status("redirect_to_tw"));
-document.getElementById("zh-tw").addEventListener("click", () => switch_status("lang"));
-document.getElementById("debug").addEventListener("click", () => switch_status("debug"));
+document.getElementById("redirect-to").addEventListener("change", on_change_event);
+document.getElementById("lang").addEventListener("change", on_change_event);
+document.getElementById("debug").addEventListener("change", on_change_event);

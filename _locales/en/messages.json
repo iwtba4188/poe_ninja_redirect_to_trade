@@ -7,24 +7,32 @@
         "message": "One-click redirection from poe.ninja to the Path of Exile trade.",
         "description": "extension_description"
     },
-    "redirect_to_com": {
-        "message": "Redirecting to \"www.pathofexile.com\" now",
+    "description_redirect_domain": {
+        "message": "Redirecting to",
+        "description": "redirect domain"
+    },
+    "opt_redirect_to_com": {
+        "message": "International Server",
         "description": "redirect to com"
     },
-    "redirect_to_tw": {
-        "message": "Redirecting to \"www.pathofexile.tw\" now",
+    "opt_redirect_to_tw": {
+        "message": "Taiwan Server",
         "description": "redirect to tw"
     },
-    "mods_en": {
-        "message": "Modifiers are \"en\" now",
+    "description_lang": {
+        "message": "Modifiers display language",
+        "description": "lang"
+    },
+    "opt_mods_en": {
+        "message": "English",
         "description": "modifiers is en"
     },
-    "mods_zh_tw": {
-        "message": "Modifiers are \"zh-TW\" now",
+    "opt_mods_zh_tw": {
+        "message": "繁體中文",
         "description": "modifiers is zh-TW"
     },
-    "mods_en_zh_tw": {
-        "message": "Modifiers are \"en & zh-TW\" now",
+    "opt_mods_en_zh_tw": {
+        "message": "Both English & 繁體中文",
         "description": "modifiers is en & zh_TW"
     }
 }

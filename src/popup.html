@@ -1,32 +1,58 @@
+<!doctype html>
 <html>
 
     <head>
-        <meta charset="utf-8">
-        <title>POE ninja item redirect to official trade</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title class="i18n">__MSG_extension_name__</title>
         <style>
-            body {
-                margin: 0px;
-                padding: 0px;
+            html {
                 height: max-content;
                 width: max-content;
-                background-size: contain;
             }
 
-            button {
-                font-size: 20px;
+            select {
+                min-width: max-content;
             }
         </style>
     </head>
 
     <body>
-        <button id="redirect-to"> 目前重新導向至 ??? </button>
-        <br />
-        <br />
-        <button id="zh-tw"> 詞綴中文化目前為 ??? </button>
-        <br />
-        <br />
-        <button id="debug"> Debug Mode is ???. </button>
-        <script src="popup.js"></script>
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col"> <label class="i18n" for="redirect-to">__MSG_description_redirect_domain__</label>
+                </div>
+                <div class="col">
+                    <select id="redirect-to" class="form-select form-select-sm">
+                        <option value="com" class="i18n">__MSG_opt_redirect_to_com__</option>
+                        <option value="tw" class="i18n">__MSG_opt_redirect_to_tw__</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row align-items-center py-2">
+                <div class="col"> <label class="i18n" for="lang">__MSG_description_lang__</label> </div>
+                <div class="col">
+                    <select id="lang" class="form-select form-select-sm">
+                        <option value="en" class="i18n">__MSG_opt_mods_en__</option>
+                        <option value="zh-tw" class="i18n">__MSG_opt_mods_zh_tw__</option>
+                        <option value="en-zh-tw" class="i18n">__MSG_opt_mods_en_zh_tw__</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row align-items-center py-2">
+                <div class="col"><label for="debug">Debug Mode</label></div>
+                <div class="col">
+                    <select id="debug" class="form-select form-select-sm">
+                        <option value="on">ON</option>
+                        <option value="off">OFF</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="./popup.js"></script>
     </body>
 
 </html>
