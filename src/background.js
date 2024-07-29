@@ -1,7 +1,7 @@
 const FILTER = {
     urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
 };
-const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.json";
+const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.min.json";
 const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
 const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
 const QUERY_PATH = "./data/query.json";

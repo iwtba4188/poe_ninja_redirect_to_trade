@@ -8,8 +8,11 @@ def load_json(file_name: str) -> dict:
         return json.load(f)
 
 
-def save_json(data: dict | list, file_name: str) -> None:
+def save_json(data: dict | list, file_name: str, minify: bool = False) -> None:
     """Save data to json file."""
 
     with open(file_name, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        if minify:
+            json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+        else:
+            json.dump(data, f, ensure_ascii=False, indent=4)

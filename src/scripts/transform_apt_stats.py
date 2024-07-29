@@ -260,7 +260,8 @@ def sort_matcher_structure():
             max_len_value = len(value)
     print(f"{max_key} 數量最多，有 {max_len_value} 項")
 
-    save_json(en_table, "../data/awakened poe trade/en_stats_test.json")
+    save_json(en_table, "../data/awakened poe trade/en_stats.json")
+    save_json(en_table, "../data/awakened poe trade/en_stats.min.json", minify=True)
 
 
 if __name__ == "__main__":
