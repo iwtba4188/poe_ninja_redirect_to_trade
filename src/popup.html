@@ -13,6 +13,10 @@
             select {
                 min-width: max-content;
             }
+
+            span#version {
+                font-size: xx-small;
+            }
         </style>
     </head>
 
@@ -52,6 +56,12 @@
                         <option value="off">OFF</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="row align-items-center">
+                <!-- dummy col -->
+                <div class="col"></div>
+                <div class="col text-end"><span id="version"> unknown </span></div>
             </div>
 
         </div>

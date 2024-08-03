@@ -61,6 +61,8 @@ function init() {
     var js_node = document.createElement("script");
     js_node.src = "./modules/bootstrap.bundle.min.js";
     document.body.appendChild(js_node);
+
+    document.getElementById("version").innerText = "v" + chrome.runtime.getManifest().version;
 };
 
 // chrome.storage.local.clear();
