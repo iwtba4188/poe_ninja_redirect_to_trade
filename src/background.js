@@ -7,6 +7,14 @@ const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
 const QUERY_PATH = "./data/query.json";
 const GEMS_QUERY_PATH = "./data/query_gems.json";
 
+const ONLINE_STATS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/awakened%20poe%20trade/en_stats.json";
+const ONLINE_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/com_preprocessed_gems_data.json";
+const ONLINE_TW_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/tw_preprocessed_gems_data.json";
+
+const STATS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/awakened%20poe%20trade/en_stats.min.json";
+const GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/com_preprocessed_gems_data.json";
+const TW_GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/tw_preprocessed_gems_data.json";
+
 var equipment_data = {};
 var trigger_tab_id = 0;
 var stats_data;
@@ -20,13 +28,40 @@ fetch(QUERY_PATH).then((response) => response.json()).then((json) => query_data 
 var gems_query_data;
 fetch(GEMS_QUERY_PATH).then((response) => response.json()).then((json) => gems_query_data = json);
 
+
+/**
+ * init key value if needed
+ * @returns {None}
+ */
+async function init_status() {
+    var val = (await chrome.storage.local.get());
+    for (var slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
+        if (!(slot in val)) {
+            if (slot === "redirect-to") chrome.storage.local.set({ [slot]: "com" });
+            else if (slot === "lang") chrome.storage.local.set({ [slot]: "en" });
+            else if (slot === "mods-file-mode") chrome.storage.local.set({ [slot]: "build-in" });
+            else if (slot === "debug") chrome.storage.local.set({ [slot]: "off" });
+        }
+    }
+};
+
+/**
+ * 用 key 取得 chrome.storage.local 的 value
+ * @param {string} slot 要取得的 key
+ * @returns {string} 用 key 取得的 value 
+ */
+async function get_status(slot) {
+    var val = (await chrome.storage.local.get([slot]))[slot];
+
+    return val;
+};
+
 /**
  * 使用 fecth 方法取得該網頁的資料
  * @param {string} target_url 目標網頁，在此應為 poe.ninja 網頁網址
  * @returns {string} @param target_url 轉換為 JSON 的結果
  */
 async function fetch_url(target_url) {
-
     var res;
 
     await fetch(target_url).then(
@@ -53,7 +88,6 @@ async function fetch_url(target_url) {
  * @return {None}
  */
 async function fetch_character_data(details) {
-
     if (details.tabId === -1) return;
 
     var api_url = details.url;
@@ -575,6 +609,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     dbg_log(lang_matching);
 };
+
+// 初始化所需設定
+chrome.runtime.onInstalled.addListener(init_status)
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
 chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, FILTER));
