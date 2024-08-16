@@ -50,5 +50,21 @@
     "opt_mods_en_ru": {
         "message": "Both English & русский",
         "description": "modifiers is en & ru"
+    },
+    "description_mods_file_using": {
+        "message": "The built-in version of the mods file is data that is installed, which can save data usage. The online version of the mods file will automatically retrieve the latest data from GitHub.",
+        "description": "explain the diff between mods file using build-in and online version"
+    },
+    "description_mods_file_mode": {
+        "message": "Mods file using",
+        "description": "version of online mods file"
+    },
+    "opt_mods_file_build_in": {
+        "message": "Build-in version",
+        "description": "using build-in mods file"
+    },
+    "opt_mods_file_online": {
+        "message": "Online version (Recommended)",
+        "description": "using online mods file"
     }
 }

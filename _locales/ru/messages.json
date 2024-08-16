@@ -50,5 +50,21 @@
     "opt_mods_en_ru": {
         "message": "Both English & русский",
         "description": "modifiers is en & ru"
+    },
+    "description_mods_file_using": {
+        "message": "Встроенная версия таблицы суффиксов используется при установке, что позволяет экономить трафик. Онлайн-версия таблицы суффиксов автоматически получает последние данные с GitHub.",
+        "description": "explain the diff between mods file using build-in and online version"
+    },
+    "description_mods_file_mode": {
+        "message": "Использование таблицы суффиксов",
+        "description": "version of online mods file"
+    },
+    "opt_mods_file_build_in": {
+        "message": "Офлайн-версия",
+        "description": "using build-in mods file"
+    },
+    "opt_mods_file_online": {
+        "message": "Онлайн-версия (рекомендуется)",
+        "description": "using online mods file"
     }
 }

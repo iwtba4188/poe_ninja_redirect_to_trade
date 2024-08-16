@@ -50,5 +50,21 @@
     "opt_mods_en_ru": {
         "message": "英文 & 俄文",
         "description": "modifiers is en & ru"
+    },
+    "description_mods_file_using": {
+        "message": "內建版本詞綴表是安裝時的資料，可以節省流量。線上版本詞綴表會自動獲取 GitHub 上最新的資料。",
+        "description": "explain the diff between mods file using build-in and online version"
+    },
+    "description_mods_file_mode": {
+        "message": "詞綴表使用",
+        "description": "version of online mods file"
+    },
+    "opt_mods_file_build_in": {
+        "message": "離線版本",
+        "description": "using build-in mods file"
+    },
+    "opt_mods_file_online": {
+        "message": "線上版本 (建議)",
+        "description": "using online mods file"
     }
 }

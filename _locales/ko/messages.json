@@ -50,5 +50,21 @@
     "opt_mods_en_ru": {
         "message": "Both English & русский",
         "description": "modifiers is en & ru"
+    },
+    "description_mods_file_using": {
+        "message": "내장 버전 접미사 표는 설치 시의 데이터로, 트래픽을 절약할 수 있습니다. 온라인 버전 접미사 표는 GitHub에서 최신 데이터를 자동으로 가져옵니다.",
+        "description": "explain the diff between mods file using build-in and online version"
+    },
+    "description_mods_file_mode": {
+        "message": "접미사 표 사용",
+        "description": "version of online mods file"
+    },
+    "opt_mods_file_build_in": {
+        "message": "내장 버전",
+        "description": "using build-in mods file"
+    },
+    "opt_mods_file_online": {
+        "message": "온라인 버전 (권장)",
+        "description": "using online mods file"
     }
 }
