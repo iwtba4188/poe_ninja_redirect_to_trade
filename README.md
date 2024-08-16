@@ -32,7 +32,7 @@ This Chrome extension is currently available on the Chrome Web Store. If you nee
 3. Gems are displayed to the left of the gem name.<br>
 ![usage_3](./image/usage_3.png)
 
-4. Click on the extension icon, then click "Modifiers are "en" now" to change it to "Modifiers are "zh-TW" now," and click again to switch to "Modifiers are "en & zh-TW" now".
+4. To change the display language of modifiers and other settings, click on the extension icon, then click the dropdown for each setting to change it.
 ![usage_5](./image/usage_5.png)
 
 5. If some word drop-downs do not take effect immediately, please refresh the page (F5 or Ctrl+R).
