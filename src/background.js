@@ -1,8 +1,8 @@
 const FILTER = {
     urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
 };
-// const FETCH_ONLINE_URL_INTERVAL = 10 * 60 * 1000;    // ms, 10 min * 60 sec/min * 1000 ms/sec
-const FETCH_ONLINE_URL_INTERVAL = 10 * 1000;    // ms, 10 sec * 1000 ms/sec
+const FETCH_ONLINE_URL_INTERVAL = 5 * 60 * 1000;    // ms, 5 min * 60 sec/min * 1000 ms/sec
+// const FETCH_ONLINE_URL_INTERVAL = 10 * 1000;    // ms, 10 sec * 1000 ms/sec
 
 const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.min.json";
 const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
@@ -151,10 +151,6 @@ async function update_online_data() {
     fetch(STATS_DATA_URL).then((response) => response.json()).then((json) => online_stats_data = json);
     fetch(GEMS_DATA_URL).then((response) => response.json()).then((json) => online_gems_data = json);
     fetch(TW_GEMS_DATA_URL).then((response) => response.json()).then((json) => online_tw_gems_data = json);
-
-    console.log(online_stats_data);
-    console.log(online_gems_data);
-    console.log(online_tw_gems_data);
 }
 
 /**
@@ -176,11 +172,20 @@ async function fetch_character_data(details) {
     }
 
     if (await get_status("mods-file-mode") === "online") {
-        chrome.scripting.executeScript({
-            target: { tabId: details.tabId },
-            function: inject_script,
-            args: [online_stats_data, online_gems_data, online_tw_gems_data, query_data, gems_query_data, equipment_data],
-        });
+        try {
+            chrome.scripting.executeScript({
+                target: { tabId: details.tabId },
+                function: inject_script,
+                args: [online_stats_data, online_gems_data, online_tw_gems_data, query_data, gems_query_data, equipment_data],
+            });
+        } catch (e) {
+            console.warn(e);
+            chrome.scripting.executeScript({
+                target: { tabId: details.tabId },
+                function: inject_script,
+                args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+            });
+        }
     } else {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
