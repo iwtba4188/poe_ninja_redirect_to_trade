@@ -1,6 +1,9 @@
 const FILTER = {
     urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
 };
+const FETCH_ONLINE_URL_INTERVAL = 10 * 60 * 1000;    // ms, 10 min * 60 sec/min * 1000 ms/sec
+// const FETCH_ONLINE_URL_INTERVAL = 10 * 1000;    // ms, 10 sec * 1000 ms/sec
+
 const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.min.json";
 const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
 const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
@@ -17,12 +20,17 @@ const TW_GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_
 
 var equipment_data = {};
 var trigger_tab_id = 0;
-var stats_data;
-fetch(STATS_DATA_PATH).then((response) => response.json()).then((json) => stats_data = json);
-var gems_data;
-fetch(GEMS_DATA_PATH).then((response) => response.json()).then((json) => gems_data = json);
-var tw_gems_data;
-fetch(TW_GEMS_DATA_PATH).then((response) => response.json()).then((json) => tw_gems_data = json);
+var local_stats_data;
+fetch(STATS_DATA_PATH).then((response) => response.json()).then((json) => local_stats_data = json);
+var local_gems_data;
+fetch(GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_gems_data = json);
+var local_tw_gems_data;
+fetch(TW_GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_tw_gems_data = json);
+
+var online_stats_data;
+var online_gems_data;
+var online_tw_gems_data;
+
 var query_data;
 fetch(QUERY_PATH).then((response) => response.json()).then((json) => query_data = json);
 var gems_query_data;
@@ -57,6 +65,15 @@ async function get_status(slot) {
 };
 
 /**
+ * 設定 chrome.storage.local 的 key: value pair
+ * @param {string} slot 要設定的 key
+ * @param {string} value 要設定的 value
+ */
+async function set_status(slot, value) {
+    chrome.storage.local.set({ [slot]: value });
+};
+
+/**
  * 使用 fecth 方法取得該網頁的資料
  * @param {string} target_url 目標網頁，在此應為 poe.ninja 網頁網址
  * @returns {string} @param target_url 轉換為 JSON 的結果
@@ -83,6 +100,60 @@ async function fetch_url(target_url) {
 };
 
 /**
+ * 每經過 FETCH_ONLINE_URL_INTERVAL 才能再次確認 GitHub 狀態，避免 429 Too Many Requests
+ * @returns {Boolean} 是否可以再次傳送請求了
+ */
+async function can_fetch_again() {
+    var now_time = Date.now();
+    var last_fetch_time = await get_status("last-fetch-time");
+
+    if (!last_fetch_time || ((now_time - Number(last_fetch_time)) >= FETCH_ONLINE_URL_INTERVAL)) {
+        await set_status("last-fetch-time", now_time);
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * 確認上次 fetch 的 online 詞綴表的 sha 和 online 的是否一致
+ * @returns {Boolean} 線上詞綴表是否有更新
+ */
+async function has_newer_data_version() {
+    var local_stats_data_sha = await get_status("stats-data-sha");
+    var local_gems_data_sha = await get_status("gems-data-sha");
+    var local_tw_gems_data_sha = await get_status("tw-gems-data-sha");
+
+    var github_stats_data_sha = (await fetch_url(ONLINE_STATS_DATA_VER_CHECK_URL)).sha;
+    var github_gems_data_sha = (await fetch_url(ONLINE_GEMS_DATA_VER_CHECK_URL)).sha;
+    var github_tw_gems_data_sha = (await fetch_url(ONLINE_TW_GEMS_DATA_VER_CHECK_URL)).sha;
+
+    var local_shas = [local_stats_data_sha, local_gems_data_sha, local_tw_gems_data_sha];
+    var github_shas = [github_stats_data_sha, github_gems_data_sha, github_tw_gems_data_sha];
+    var slot_keys = ["stats-data-sha", "gems-data-sha", "tw-gems-data-sha"];
+
+    var flag = false;
+    for (var i = 0; i < 3; i++) {
+        if (!local_shas[i] || local_shas[i] !== github_shas[i]) {
+            flag = true;
+            await set_status(slot_keys[i], github_shas[i]);
+        }
+    }
+
+    return flag;
+};
+
+/**
+ * 更新線上詞綴表的資料
+ * @returns {None}
+ */
+async function update_online_data() {
+    fetch(STATS_DATA_URL).then((response) => response.json()).then((json) => online_stats_data = json);
+    fetch(GEMS_DATA_URL).then((response) => response.json()).then((json) => online_gems_data = json);
+    fetch(TW_GEMS_DATA_URL).then((response) => response.json()).then((json) => online_tw_gems_data = json);
+}
+
+/**
  * 利用取得的角色資訊，內含本專案所需之裝備資料
  * @param {any} details 詳見 google extension webRequest api
  * @return {None}
@@ -94,11 +165,22 @@ async function fetch_character_data(details) {
 
     equipment_data = await fetch_url(api_url);
 
-    chrome.scripting.executeScript({
-        target: { tabId: details.tabId },
-        function: inject_script,
-        args: [stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data],
-    });
+    if (await get_status("mods-file-mode") === "online" && await can_fetch_again()) {
+        if (has_newer_data_version()) {
+            update_online_data();
+        }
+        chrome.scripting.executeScript({
+            target: { tabId: details.tabId },
+            function: inject_script,
+            args: [online_stats_data, online_gems_data, online_tw_gems_data, query_data, gems_query_data, equipment_data],
+        });
+    } else {
+        chrome.scripting.executeScript({
+            target: { tabId: details.tabId },
+            function: inject_script,
+            args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+        });
+    }
 }
 
 /**

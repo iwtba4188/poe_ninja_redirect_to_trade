@@ -27,8 +27,19 @@ async function get_status(slot) {
     return val;
 };
 
+/**
+ * 設定 chrome.storage.local 的 key: value pair
+ * @param {string} slot 要設定的 key
+ * @param {string} value 要設定的 value
+ */
 async function set_status(slot, value) {
     chrome.storage.local.set({ [slot]: value });
+
+    if (slot === "mods-file-mode" && value === "build-in") {
+        set_status("stats-data-sha", undefined);
+        set_status("gems-data-sha", undefined);
+        set_status("tw-gems-data-sha", undefined);
+    }
 
     // refresh current focus ninja page
     chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/builds/*" }, function (tabs) {

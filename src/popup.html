@@ -49,6 +49,19 @@
             </div>
 
             <div class="row align-items-center py-2">
+                <div class="col"> <label class="i18n" for="mods-file-mode">__MSG_description_mods_file_mode__</label>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="__MSG_description_mods_file_using__"
+                        class="i18n"><img src="./icon/info-vscode.svg" alt="info mark" width="17px" /></a>
+                </div>
+                <div class="col">
+                    <select id="mods-file-mode" class="form-select form-select-sm">
+                        <option value="build-in" class="i18n">__MSG_opt_mods_file_build_in__</option>
+                        <option value="online" class="i18n">__MSG_opt_mods_file_online__</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row align-items-center py-2">
                 <div class="col"><label for="debug">Debug Mode</label></div>
                 <div class="col">
                     <select id="debug" class="form-select form-select-sm">
@@ -66,7 +79,7 @@
 
         </div>
 
-        <script src="./popup.js"></script>
+        <script src="./popup.js" type="module"></script>
     </body>
 
 </html>
