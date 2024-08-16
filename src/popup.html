@@ -22,7 +22,13 @@
 
     <body>
         <div class="container">
-            <div class="row align-items-center py-2">
+            <div class="row align-items-center p-1">
+                <!-- dummy col -->
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row-sm align-items-center p-2">
                 <div class="col"> <label class="i18n" for="redirect-to">__MSG_description_redirect_domain__</label>
                 </div>
                 <div class="col">
@@ -33,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="row align-items-center py-2">
+            <div class="row-sm align-items-center p-2">
                 <div class="col"> <label class="i18n" for="lang">__MSG_description_lang__</label> </div>
                 <div class="col">
                     <select id="lang" class="form-select form-select-sm">
@@ -48,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="row align-items-center py-2">
+            <div class="row-sm align-items-center p-2">
                 <div class="col"> <label class="i18n" for="mods-file-mode">__MSG_description_mods_file_mode__</label>
                     <a data-bs-toggle="tooltip" data-bs-placement="top" title="__MSG_description_mods_file_using__"
                         class="i18n"><img src="./icon/info-vscode.svg" alt="info mark" width="17px" /></a>
@@ -61,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="row align-items-center py-2">
+            <div class="row-sm align-items-center p-2">
                 <div class="col"><label for="debug">Debug Mode</label></div>
                 <div class="col">
                     <select id="debug" class="form-select form-select-sm">
