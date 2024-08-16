@@ -111,7 +111,8 @@ def make_string_matching_table(lang) -> dict:
             ) not in lang_table:
                 res_str = matcher["string"]
 
-                res_str = res_str.replace("#%", "$<percent>")
+                for idx in range(0, 5):
+                    res_str = res_str.replace("#%", f"$<percent{idx}>", 1)
                 for idx in range(0, 5):
                     res_str = res_str.replace("#", f"$<num{idx}>", 1)
 
@@ -218,7 +219,9 @@ def sort_matcher_structure():
             k = re.sub(r"(([\+-]?[\d\.]+%?)|(#%)|(#))", "", kl[-1])
         k = k.lower()
 
-        key = key.strip().replace("#%", "(?<percent>[\+-]?[\d\.]+%)")
+        key = key.strip()
+        for idx in range(0, 5):
+            key = key.replace("#%", f"(?<percent{idx}>[\+-]?[\d\.]+%)", 1)
         for idx in range(0, 5):
             key = key.replace("#", f"(?<num{idx}>[\+-]?[\d\.]+)", 1)
 
