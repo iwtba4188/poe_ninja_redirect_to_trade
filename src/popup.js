@@ -48,17 +48,10 @@ async function set_status(slot, value) {
 };
 
 async function on_change_event() {
-    if (await get_status("redirect-to") !== document.getElementById("redirect-to").value) {
-        set_status("redirect-to", document.getElementById("redirect-to").value);
-    }
-    if (await get_status("lang") !== document.getElementById("lang").value) {
-        set_status("lang", document.getElementById("lang").value);
-    }
-    if (await get_status("mods-file-mode") !== document.getElementById("mods-file-mode").value) {
-        set_status("mods-file-mode", document.getElementById("mods-file-mode").value);
-    }
-    if (await get_status("debug") !== document.getElementById("debug").value) {
-        set_status("debug", document.getElementById("debug").value);
+    for (var id of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
+        if (await get_status(id) !== document.getElementById(id).value) {
+            set_status(id, document.getElementById(id).value);
+        }
     }
 
     update_select_elements();
@@ -85,6 +78,17 @@ async function update_select_elements() {
     document.getElementById("debug").value = await get_status("debug");
 };
 
+function insert_bootstrap_css_js() {
+    var css_node = document.createElement("link");
+    css_node.href = "./modules/bootstrap.min.css";
+    css_node.rel = "stylesheet";
+    document.head.appendChild(css_node);
+
+    var js_node = document.createElement("script");
+    js_node.src = "./modules/bootstrap.bundle.min.js";
+    document.body.appendChild(js_node);
+};
+
 function init_bs5_tooltips() {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new window.bootstrap.Tooltip(tooltipTriggerEl));
@@ -97,15 +101,7 @@ function init() {
 
     update_select_elements();
 
-    // init bootstrap 5 css and js
-    var css_node = document.createElement("link");
-    css_node.href = "./modules/bootstrap.min.css";
-    css_node.rel = "stylesheet";
-    document.head.appendChild(css_node);
-
-    var js_node = document.createElement("script");
-    js_node.src = "./modules/bootstrap.bundle.min.js";
-    document.body.appendChild(js_node);
+    insert_bootstrap_css_js();
 
     init_bs5_tooltips();
 
