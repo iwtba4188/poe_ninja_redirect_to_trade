@@ -1,7 +1,10 @@
-from json_loader import save_json
 import json
 import re
 
+from json_loader import save_json
+from logger import get_logger
+
+logger = get_logger("process_apt_stats")
 
 not_in_zh_tw = [
     "#% of Chaos Damage Leeched by Enemy as Life",
@@ -26,6 +29,7 @@ not_in_zh_tw = [
 
 
 def calculate_apt_stats() -> None:
+    logger.info("Starting APT stats calculation...")
     with open("../data/awakened poe trade/en_stats.ndjson", "r", encoding="utf-8") as f:
         en_original_data = f.read()
     with open(
@@ -35,6 +39,10 @@ def calculate_apt_stats() -> None:
 
     en_original_data_list = en_original_data.split("\n")[:-1]
     tw_original_data_list = tw_original_data.split("\n")[:-1]
+
+    logger.info(
+        f"Loaded {len(en_original_data_list)} English entries and {len(tw_original_data_list)} TW entries"
+    )
 
     en_table = {}
     for i in en_original_data_list:
@@ -55,11 +63,11 @@ def calculate_apt_stats() -> None:
         en_load = json.loads(en_original_data_list[i])
         if en_load["ref"] in tw_table:
             if len(en_load["matchers"]) != len(tw_table[en_load["ref"]]["matchers"]):
-                # print(f'en[{len(en_load["matchers"])}]: {en_load["matchers"]}')
-                # print(
+                # logger.info(f'en[{len(en_load["matchers"])}]: {en_load["matchers"]}')
+                # logger.info(
                 #     f'tw[{len(tw_table[en_load["ref"]]["matchers"])}]: {tw_table[en_load["ref"]]["matchers"]}'
                 # )
-                # print()
+                # logger.info()
                 not_processed_matchers[0] += len(en_load["matchers"])
                 not_processed_matchers[1] += len(tw_table[en_load["ref"]]["matchers"])
                 not_processed_stats += 1
@@ -73,31 +81,33 @@ def calculate_apt_stats() -> None:
                 #     if en_load["matchers"][idx]["string"].count("#") != tw_table[
                 #         en_load["ref"]
                 #     ]["matchers"][idx]["string"].count("#"):
-                #         print(f'en: {en_load["matchers"][idx]["string"]}')
-                #         print(
+                #         logger.info(f'en: {en_load["matchers"][idx]["string"]}')
+                #         logger.info(
                 #             f'tw: {tw_table[en_load["ref"]]["matchers"][idx]["string"]}'
                 #         )
-                #         print()
+                #         logger.info()
 
                 #     idx += 1
 
-    print(f"共處理了 {processed_stats} 個詞墜類型, {not_processed_stats} 未處理")
-    print(
+    logger.info(f"共處理了 {processed_stats} 個詞墜類型, {not_processed_stats} 未處理")
+    logger.info(
         f"英文詞墜共處理了 {processed_matchers[0]} 個配對, {not_processed_matchers[0]} 未處理"
     )
-    print(
+    logger.info(
         f"中文詞墜共處理了 {processed_matchers[1]} 個配對, {not_processed_matchers[1]} 未處理"
     )
     return
 
 
 def make_string_matching_table(lang) -> dict:
+    logger.info(f"Creating string matching table for language: {lang}")
     with open(
         f"../data/awakened poe trade/{lang}_stats.ndjson", "r", encoding="utf-8"
     ) as f:
         lang_original_data = f.read()
 
     lang_original_data_list = lang_original_data.split("\n")[:-1]
+    logger.info(f"Processing {len(lang_original_data_list)} entries for {lang}")
 
     lang_table = {}
     for i in lang_original_data_list:
@@ -125,20 +135,22 @@ def make_string_matching_table(lang) -> dict:
                     )
                 ] = res_str
 
+    logger.info(f"Created {len(lang_table)} string matching entries for {lang}")
     return lang_table
 
 
 def en_make_matcher_structure() -> dict:
+    logger.info("Creating English matcher structure...")
     with open("../data/awakened poe trade/en_stats.ndjson", "r", encoding="utf-8") as f:
         en_original_data = f.read()
 
     en_original_data_list = en_original_data.split("\n")[:-1]
+    logger.info(f"Processing {len(en_original_data_list)} English entries")
 
     tw_table = make_string_matching_table("zh-tw")
     ko_table = make_string_matching_table("ko")
     ru_table = make_string_matching_table("ru")
 
-    count = 0
     en_table = {}
 
     matcher_count = 0
@@ -185,7 +197,7 @@ def en_make_matcher_structure() -> dict:
             en_table[matcher["string"]] = {
                 key: value
                 for key, value in en_table[matcher["string"]].items()
-                if value != None
+                if value is not None
             }
 
             # if en_table[matcher["string"]]["zh-tw"] != None:
@@ -193,22 +205,25 @@ def en_make_matcher_structure() -> dict:
             #     # if matcher["string"].count("#") != en_table[matcher["string"]][
             #     #     "zh-tw"
             #     # ].count("#"):re
-            #     #     print(f'en: {matcher["string"]}')
-            #     #     print(f'tw: {en_table[matcher["string"]]["zh-tw"]}')
-            #     #     print()
+            #     #     logger.info(f'en: {matcher["string"]}')
+            #     #     logger.info(f'tw: {en_table[matcher["string"]]["zh-tw"]}')
+            #     #     logger.info()
 
             #     if matcher["string"].count("#%") >= 3:
-            #         pass
+            #         pass    # save_json(en_table, "../data/awakened poe trade/en_stats.json")
 
-    # save_json(en_table, "../data/awakened poe trade/en_stats.json")
-
+    logger.info(
+        f"Created matcher structure with {len(en_table)} entries, processed {matcher_count} matchers total"
+    )
     return en_table
 
 
 def sort_matcher_structure():
+    logger.info("Starting matcher structure sorting...")
     en_table = {}
 
     en_matcher_structure = en_make_matcher_structure()
+    logger.info(f"Processing {len(en_matcher_structure)} matcher entries for sorting")
     for key, value in en_matcher_structure.items():
         kl = key.strip().split(" ")
         if len(kl) >= 2:
@@ -254,22 +269,26 @@ def sort_matcher_structure():
 
     max_key = ""
     max_len_value = 0
+
     for key, value in en_table.items():
         en_table[key] = sorted(value, key=lambda x: x["matcher"])
-        print(f"key {key} 有 {len(value)} 項")
+        logger.info(f"key {key} 有 {len(value)} 項")
 
         if max_len_value < len(value):
             max_key = key
             max_len_value = len(value)
-    print(f"{max_key} 數量最多，有 {max_len_value} 項")
+
+    logger.info(f"{max_key} 數量最多，有 {max_len_value} 項")
 
     save_json(en_table, "../data/awakened poe trade/en_stats.json")
     save_json(en_table, "../data/awakened poe trade/en_stats.min.json", minify=True)
+    logger.info("Matcher structure sorting completed and saved!")
 
 
 if __name__ == "__main__":
-    pass
+    logger.info("Starting APT stats processing...")
     # calculate_apt_stats()
     # en_make_matcher_structure()
     # tw_make_matching_dict()
     sort_matcher_structure()
+    logger.info("APT stats processing completed!")
