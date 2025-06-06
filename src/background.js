@@ -536,8 +536,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @param {string} mod_string 要翻譯的英文詞墜
      * @returns {string} 翻譯成中文的詞墜
      */
-    function mod_to_lang(mod_string) {
-        dbg_log(`mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
+    function translate_mod(mod_string) {
+        dbg_log(`[Tippy Item] mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
         if (lang_matching[mod_string]) return lang_matching[mod_string];
         else return mod_string;
     }
@@ -551,8 +551,43 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     dbg_log(mods_mapping_target_query);
     dbg_log("=============================");
 
+    // [Tippy Observers]
     var tippy_mods_record = {};
-    let observer = new MutationObserver(async mutationRecords => {
+    var finished_items = {
+        "flasks": new Set(),
+        "jewels": new Set(),
+    }
+
+    function create_flasks_jewels_observer(equipment_type) {
+        let observer = new MutationObserver(mutationRecords => {
+            var target = mutationRecords[0]["target"];
+            var tippy_id = mutationRecords[0]["oldValue"];
+
+            if (!tippy_id) return;
+            if (finished_items[equipment_type].has(tippy_id)) {
+                dbg_log(`[ALREADY ADDED] ${equipment_type} with tippy_id=${tippy_id}`);
+            }
+
+            var equipment_mod = tippy_mods_record[tippy_id];
+
+            if (!equipment_mod) {
+                dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
+                setTimeout(() => { }, 300); // 等待 tippy 資料更新
+
+                add_btn_flasks_jewels(target, equipment_type, equipment_mod);
+                finished_items[equipment_type].add(tippy_id);
+                dbg_log(`finished_items[${equipment_type}].size = ${finished_items[equipment_type].size}, equipment_data[${equipment_type}].length = ${equipment_data[equipment_type].length}`);
+                if (finished_items[equipment_type].size === equipment_data[equipment_type].length) {
+                    observer.disconnect();
+                    console.log(`[OBSERVER CLOSED] ${equipment_type}`);
+                }
+            }
+        });
+
+        return observer;
+    }
+
+    let observer = new MutationObserver(mutationRecords => {
         for (var mutationRecord of mutationRecords) {
             var addedNode = mutationRecord["addedNodes"][0];
             // 未新增 Node
@@ -588,7 +623,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             if (now_lang !== "en" && enchant) {
                 var all_mod_elements = enchant.querySelectorAll("div");
                 for (var ele of all_mod_elements) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
+                    var lang_mod_string = translate_mod(ele.innerText);
 
                     if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
                     else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
@@ -596,7 +631,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             }
             if (now_lang !== "en" && implicit) {
                 for (var ele of implicit_all) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
+                    var lang_mod_string = translate_mod(ele.innerText);
 
                     if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
                     else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
@@ -604,7 +639,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             }
             if (now_lang !== "en" && explicit) {
                 for (var ele of explicit_all) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
+                    var lang_mod_string = translate_mod(ele.innerText);
 
                     if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
                     else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
@@ -622,33 +657,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         childList: true
     });
 
-    var flasks_finished = [];
-    let flasks_observer = new MutationObserver(mutationRecords => {
-        var target = mutationRecords[0]["target"];
-        var tippy_id = mutationRecords[0]["oldValue"];
-
-        if (!tippy_id) return;
-        var mod = tippy_mods_record[tippy_id];
-        if (!mod) {
-            dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
-        } else if (flasks_finished.includes(tippy_id)) {
-            dbg_log("[ALREADY ADDED] flasks with tippy_id=" + tippy_id);
-        } else {
-            add_btn_flasks_jewels(target, "flasks", mod);
-
-            flasks_finished.push(tippy_id);
-            if (flasks_finished.length == equipment_data["flasks"].length) {
-                flasks_observer.disconnect();
-                console.log("[OBSERVER CLOSED] flasks");
-            }
-
-            // 配合詞墜中文化先移除
-            // if (flasks_finished.length == equipment_data["flasks"].length && jewels_finished.length == equipment_data["jewels"].length) {
-            //     observer.disconnect();
-            //     console.log("[OBSERVER CLOSED] all");
-            // }
-        }
-    });
+    let flasks_observer = create_flasks_jewels_observer("flasks");
     var flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
     // observe each flasks slot
     for (var flasks_node of flasks_nodes) {
@@ -658,33 +667,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         });
     }
 
-    var jewels_finished = [];
-    let jewels_observer = new MutationObserver(mutationRecords => {
-        var target = mutationRecords[0]["target"];
-        var tippy_id = mutationRecords[0]["oldValue"];
-
-        if (!tippy_id) return;
-        var mod = tippy_mods_record[tippy_id];
-        if (!mod) {
-            dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
-        } else if (jewels_finished.includes(tippy_id)) {
-            dbg_log("[ALREADY ADDED] jewels with tippy_id=" + tippy_id);
-        } else {
-            add_btn_flasks_jewels(target, "jewels", mod);
-
-            jewels_finished.push(tippy_id);
-            if (jewels_finished.length == equipment_data["jewels"].length) {
-                jewels_observer.disconnect();
-                console.log("[OBSERVER CLOSED] jewels");
-            }
-
-            // 配合詞墜中文化先移除
-            // if (flasks_finished.length == equipment_data["flasks"].length && jewels_finished.length == equipment_data["jewels"].length) {
-            //     observer.disconnect();
-            //     console.log("[OBSERVER CLOSED] all");
-            // }
-        }
-    });
+    let jewels_observer = create_flasks_jewels_observer("jewels");
     var jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
     // observe each jewels slot
     for (var jewels_node of jewels_nodes) {
