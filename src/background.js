@@ -1,40 +1,9 @@
+import { LocalDataLoader, OnlineDataLoader } from "./modules/dataloader.js";
+import { get_status, set_status } from "./modules/storage_utils.js";
+
 const FILTER = {
-    urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
+    urls: ["https://poe.ninja/api/data/*/getcharacter?*", "https://poe2.ninja/api/builds/*/character?*"]
 };
-const FETCH_ONLINE_URL_INTERVAL = 5 * 60 * 1000;    // ms, 5 min * 60 sec/min * 1000 ms/sec
-// const FETCH_ONLINE_URL_INTERVAL = 10 * 1000;    // ms, 10 sec * 1000 ms/sec
-
-const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.min.json";
-const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
-const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
-const QUERY_PATH = "./data/query.json";
-const GEMS_QUERY_PATH = "./data/query_gems.json";
-
-const ONLINE_STATS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/awakened%20poe%20trade/en_stats.json";
-const ONLINE_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/com_preprocessed_gems_data.json";
-const ONLINE_TW_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/tw_preprocessed_gems_data.json";
-
-const STATS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/awakened%20poe%20trade/en_stats.min.json";
-const GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/com_preprocessed_gems_data.json";
-const TW_GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/tw_preprocessed_gems_data.json";
-
-var equipment_data = {};
-var trigger_tab_id = 0;
-var local_stats_data;
-fetch(STATS_DATA_PATH).then((response) => response.json()).then((json) => local_stats_data = json);
-var local_gems_data;
-fetch(GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_gems_data = json);
-var local_tw_gems_data;
-fetch(TW_GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_tw_gems_data = json);
-
-var online_stats_data;
-var online_gems_data;
-var online_tw_gems_data;
-
-var query_data;
-fetch(QUERY_PATH).then((response) => response.json()).then((json) => query_data = json);
-var gems_query_data;
-fetch(GEMS_QUERY_PATH).then((response) => response.json()).then((json) => gems_query_data = json);
 
 
 /**
@@ -51,26 +20,6 @@ async function init_status() {
             else if (slot === "debug") chrome.storage.local.set({ [slot]: "off" });
         }
     }
-};
-
-/**
- * 用 key 取得 chrome.storage.local 的 value
- * @param {string} slot 要取得的 key
- * @returns {string} 用 key 取得的 value 
- */
-async function get_status(slot) {
-    var val = (await chrome.storage.local.get([slot]))[slot];
-
-    return val;
-};
-
-/**
- * 設定 chrome.storage.local 的 key: value pair
- * @param {string} slot 要設定的 key
- * @param {string} value 要設定的 value
- */
-async function set_status(slot, value) {
-    chrome.storage.local.set({ [slot]: value });
 };
 
 /**
@@ -100,60 +49,6 @@ async function fetch_url(target_url) {
 };
 
 /**
- * 每經過 FETCH_ONLINE_URL_INTERVAL 才能再次確認 GitHub 狀態，避免 429 Too Many Requests
- * @returns {Boolean} 是否可以再次傳送請求了
- */
-async function can_fetch_again() {
-    var now_time = Date.now();
-    var last_fetch_time = await get_status("last-fetch-time");
-
-    if (!last_fetch_time || ((now_time - Number(last_fetch_time)) >= FETCH_ONLINE_URL_INTERVAL)) {
-        await set_status("last-fetch-time", now_time);
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * 確認上次 fetch 的 online 詞綴表的 sha 和 online 的是否一致
- * @returns {Boolean} 線上詞綴表是否有更新
- */
-async function has_newer_data_version() {
-    var local_stats_data_sha = await get_status("stats-data-sha");
-    var local_gems_data_sha = await get_status("gems-data-sha");
-    var local_tw_gems_data_sha = await get_status("tw-gems-data-sha");
-
-    var github_stats_data_sha = (await fetch_url(ONLINE_STATS_DATA_VER_CHECK_URL)).sha;
-    var github_gems_data_sha = (await fetch_url(ONLINE_GEMS_DATA_VER_CHECK_URL)).sha;
-    var github_tw_gems_data_sha = (await fetch_url(ONLINE_TW_GEMS_DATA_VER_CHECK_URL)).sha;
-
-    var local_shas = [local_stats_data_sha, local_gems_data_sha, local_tw_gems_data_sha];
-    var github_shas = [github_stats_data_sha, github_gems_data_sha, github_tw_gems_data_sha];
-    var slot_keys = ["stats-data-sha", "gems-data-sha", "tw-gems-data-sha"];
-
-    var flag = false;
-    for (var i = 0; i < 3; i++) {
-        if (!local_shas[i] || local_shas[i] !== github_shas[i]) {
-            flag = true;
-            await set_status(slot_keys[i], github_shas[i]);
-        }
-    }
-
-    return flag;
-};
-
-/**
- * 更新線上詞綴表的資料
- * @returns {None}
- */
-async function update_online_data() {
-    fetch(STATS_DATA_URL).then((response) => response.json()).then((json) => online_stats_data = json);
-    fetch(GEMS_DATA_URL).then((response) => response.json()).then((json) => online_gems_data = json);
-    fetch(TW_GEMS_DATA_URL).then((response) => response.json()).then((json) => online_tw_gems_data = json);
-}
-
-/**
  * 利用取得的角色資訊，內含本專案所需之裝備資料
  * @param {any} details 詳見 google extension webRequest api
  * @return {None}
@@ -162,35 +57,62 @@ async function fetch_character_data(details) {
     if (details.tabId === -1) return;
 
     var api_url = details.url;
+    var equipment_data = await fetch_url(api_url);
 
-    equipment_data = await fetch_url(api_url);
-
-    if (await get_status("mods-file-mode") === "online" && await can_fetch_again()) {
-        if (has_newer_data_version()) {
-            update_online_data();
-        }
+    var local_loader = new LocalDataLoader();
+    var online_loader = new OnlineDataLoader();
+    if (await get_status("mods-file-mode") === "online") {
+        console.log("Using online data.");
+        await online_loader.update_data();
+    } else {
+        console.log("Using local data.");
     }
+    await local_loader.update_data();
+
+    var query_data = await local_loader.get_data("local_query_data");
+    var gems_query_data = await local_loader.get_data("local_gems_query_data");
 
     if (await get_status("mods-file-mode") === "online") {
         try {
             chrome.scripting.executeScript({
                 target: { tabId: details.tabId },
                 function: inject_script,
-                args: [online_stats_data, online_gems_data, online_tw_gems_data, query_data, gems_query_data, equipment_data],
+                args: [
+                    await online_loader.get_data("online_stats_data"),
+                    await online_loader.get_data("online_gems_data"),
+                    await online_loader.get_data("online_tw_gems_data"),
+                    query_data,
+                    gems_query_data,
+                    equipment_data
+                ],
             });
         } catch (e) {
             console.warn(e);
             chrome.scripting.executeScript({
                 target: { tabId: details.tabId },
                 function: inject_script,
-                args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+                args: [
+                    await local_loader.get_data("local_stats_data"),
+                    await local_loader.get_data("local_gems_data"),
+                    await local_loader.get_data("local_tw_gems_data"),
+                    query_data,
+                    gems_query_data,
+                    equipment_data
+                ],
             });
         }
     } else {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
             function: inject_script,
-            args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+            args: [
+                await local_loader.get_data("local_stats_data"),
+                await local_loader.get_data("local_gems_data"),
+                await local_loader.get_data("local_tw_gems_data"),
+                query_data,
+                gems_query_data,
+                equipment_data
+            ],
         });
     }
 }
@@ -206,11 +128,25 @@ async function fetch_character_data(details) {
  * @return {None}
  */
 async function inject_script(stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data) {
+    function dbg_log(msg) { if (is_debugging) console.log(msg); }
+    function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
 
     var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
     var redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
     var now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
     var now_lang_for_lang_matching = now_lang.replace("en-", "");
+
+    dbg_log("[Status] 'PoE Ninja Redirect to Trade' start!")
+    dbg_log("[Status] stats_data = ");
+    dbg_log(stats_data);
+    dbg_log("[Status] gems_data = ");
+    dbg_log(gems_data);
+    dbg_log("[Status] tw_gems_data = ");
+    dbg_log(tw_gems_data);
+    dbg_log("[Status] query_data = ");
+    dbg_log(query_data);
+    dbg_log("[Status] gems_query_data = ");
+    dbg_log(gems_query_data);
 
     const POE_TRADE_URL = `https://www.pathofexile.${redirect_to}/trade/search`;
     const BALANCE_ICON = `<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -222,9 +158,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     </g>`;
 
     var lang_matching = {};
-
-    function dbg_log(msg) { if (is_debugging) console.log(msg); };
-    function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
 
     /**
      * 從 STATS_DATA_PATH 尋找 mod_string 對應的 stats id。
