@@ -375,17 +375,20 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     /**
      * 將 藥劑、珠寶 的重導向按鈕加入頁面
      * @param {HTMLButtonElement} target_btn copy pob button，重導向按鈕會加在它後面
-     * @param {string} equipment_type 裝備類型： Literal["flasks", "jewels"]
      * @param {string} equipment_mod 物品詞墜
      * @returns {None}
      */
-    async function add_btn_flasks_jewels(target_btn, equipment_type, equipment_mod) {
-        var target_query = mods_mapping_target_query[equipment_type][equipment_mod];
+    async function add_btn_flasks_jewels(target_btn, equipment_mod) {
+        var target_query =
+            mods_mapping_target_query["flasks"][equipment_mod] ??
+            mods_mapping_target_query["jewels"][equipment_mod];
 
         var new_node = gen_btn_trade_element(target_query, "buttom");
 
-        if (equipment_type === "flasks") target_btn.appendChild(new_node);
-        else target_btn.querySelector("div").appendChild(new_node);
+        // jewels 的按鈕要加在 target_btn 的 div 裡面
+        var sub_div = target_btn.querySelector("div");
+        var target_append_div = sub_div ? sub_div : target_btn;
+        target_append_div.appendChild(new_node);
     };
 
     /**
@@ -484,140 +487,119 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     dbg_log(mods_mapping_target_query);
     dbg_log("=============================");
 
-    // [Tippy Observers]
-    var tippy_mods_record = {};
-    var finished_items = {
-        "flasks": new Set(),
-        "jewels": new Set(),
+    // 將所有物品的重導向按鈕加入頁面
+    try {
+        await add_btn_items();
+        await add_btn_skills();
+    } catch (e) {
+        dbg_warn(e);
     }
 
-    function create_flasks_jewels_observer(equipment_type) {
-        let observer = new MutationObserver(mutationRecords => {
+    dbg_log(lang_matching);
+
+    // [Tippy Observers]
+    var tippy_mods_record = {};
+    var translated_tippy_id = new Set();
+
+    function adding_button(target, tippy_id) {
+        if (!tippy_id) return;
+
+        var equipment_mod = tippy_mods_record[tippy_id];
+
+        if (!equipment_mod) {
+            add_btn_flasks_jewels(target, equipment_mod);
+        }
+    }
+
+    function create_flasks_jewels_observer() {
+        let observer = new MutationObserver((mutationRecords, observer) => {
             var target = mutationRecords[0]["target"];
-            var tippy_id = mutationRecords[0]["oldValue"];
+            var tippy_id = target.attributes["aria-describedby"].value;
 
-            if (!tippy_id) return;
-            if (finished_items[equipment_type].has(tippy_id)) {
-                dbg_log(`[ALREADY ADDED] ${equipment_type} with tippy_id=${tippy_id}`);
-            }
-
-            var equipment_mod = tippy_mods_record[tippy_id];
-
-            if (!equipment_mod) {
-                dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
-                setTimeout(() => { }, 300); // 等待 tippy 資料更新
-
-                add_btn_flasks_jewels(target, equipment_type, equipment_mod);
-                finished_items[equipment_type].add(tippy_id);
-                dbg_log(`finished_items[${equipment_type}].size = ${finished_items[equipment_type].size}, equipment_data[${equipment_type}].length = ${equipment_data[equipment_type].length}`);
-                if (finished_items[equipment_type].size === equipment_data[equipment_type].length) {
-                    observer.disconnect();
-                    console.log(`[OBSERVER CLOSED] ${equipment_type}`);
-                }
-            }
+            observer.disconnect();
+            queueMicrotask(() => { adding_button(target, tippy_id); });
         });
 
         return observer;
     }
 
-    let observer = new MutationObserver(mutationRecords => {
+    function translate_node(node) {
+        var tippy_id = node.id;
+        if (translated_tippy_id.has(tippy_id)) return;
+
+        var section = node.querySelectorAll("div._item-body_1tb3h_1 section");
+        if (section.length < 5) return;  // 此 Node 不是裝備的 tippy
+
+        var enchant = section[2]?.querySelectorAll("div div")[0];
+        var enchant_all = enchant?.querySelectorAll("div") || [];
+        var implicit = section[3]?.querySelectorAll("div#implicit")[0];
+        var implicit_all = section[3]?.querySelectorAll("div > div") || [];
+        var explicit = section[4]?.querySelectorAll("div#explicit")[0];
+        var explicit_all = section[4]?.querySelectorAll("div > div") || [];
+
+        var mod_text = "";
+        for (var mod_type of [enchant, implicit, explicit]) {
+            if (mod_type !== undefined) mod_text += mod_type["textContent"];
+        }
+        tippy_mods_record[tippy_id] = mod_text;
+
+        var translated = false;
+        if (now_lang === "en") return;
+        for (var ele of [...enchant_all, ...implicit_all, ...explicit_all]) {
+            var translated = true;
+
+            var lang_mod_string = translate_mod(ele.innerText);
+
+            if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
+            else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
+        }
+
+        if (translated)
+            translated_tippy_id.add(tippy_id);
+    }
+
+    function waiting_tippy_data(node) {
+        const content_element = node.querySelector(".tippy-content");
+        if (!content_element) {
+            dbg_warn("[TIPPY DATA NOT RECEIVED] content_element is null");
+            return;
+        }
+
+        const content_observer = new MutationObserver((mutationRecords, observer) => {
+            // XXX: 現在還是會觀察到兩次這個 node 的變化，不太確定是什麼原因
+            // dbg_log(node.innerHTML);
+            dbg_log("triggered tippy content observer");
+            observer.disconnect();
+            queueMicrotask(() => { translate_node(node); });  // 放到下一次的微任務中，確保 observer 已經斷開連線
+        });
+
+        content_observer.observe(content_element, {
+            childList: true,
+            subtree: true,
+        });
+    }
+
+    const observer = new MutationObserver(mutationRecords => {
         for (var mutationRecord of mutationRecords) {
-            var addedNode = mutationRecord["addedNodes"][0];
-            // 未新增 Node
-            if (addedNode === undefined) continue;
-
-            var tippy_id = addedNode.id;
-            // 此 Node 已經紀錄過
-            if (tippy_mods_record[tippy_id] !== undefined) continue;
-
-            var section = addedNode.querySelectorAll("div._item-body_1tb3h_1 section");
-            // 此 Node 不是裝備的 tippy
-            if (section === undefined || section.length < 5) continue;
-
-            var enchant = section[2].querySelectorAll("div div")[0];
-            var implicit = section[3].querySelectorAll("div#implicit")[0];
-            var implicit_all = section[3].querySelectorAll("div > div");
-            var explicit = section[4].querySelectorAll("div#explicit")[0];
-            var explicit_all = section[4].querySelectorAll("div > div");
-
-            // 此 Node 不是裝備的 tippy
-            if (enchant === undefined && implicit === undefined && explicit === undefined) {
-                tippy_mods_record[tippy_id] = undefined;
-                continue;
+            for (var addedNode of mutationRecord["addedNodes"]) {
+                waiting_tippy_data(addedNode);
             }
-
-            var mod_text = "";
-            for (var mod_type of [enchant, implicit, explicit]) {
-                if (mod_type !== undefined) mod_text += mod_type["textContent"];
-            }
-            tippy_mods_record[tippy_id] = mod_text;
-
-            // 中文化區塊 start
-            if (now_lang !== "en" && enchant) {
-                var all_mod_elements = enchant.querySelectorAll("div");
-                for (var ele of all_mod_elements) {
-                    var lang_mod_string = translate_mod(ele.innerText);
-
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
-            }
-            if (now_lang !== "en" && implicit) {
-                for (var ele of implicit_all) {
-                    var lang_mod_string = translate_mod(ele.innerText);
-
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
-            }
-            if (now_lang !== "en" && explicit) {
-                for (var ele of explicit_all) {
-                    var lang_mod_string = translate_mod(ele.innerText);
-
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
-            }
-            // 中文化區塊 end
-
-            // 顯示 tippy element
-            // var tmp = mutationRecord.target.querySelector("div[data-tippy-root]");
-            // tmp.setAttribute("data-state", "");
-            // dbg_log(tmp.outerHTML);
         }
     });
     observer.observe(document.body, {
         childList: true
     });
 
-    let flasks_observer = create_flasks_jewels_observer("flasks");
-    var flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
-    // observe each flasks slot
-    for (var flasks_node of flasks_nodes) {
-        flasks_observer.observe(flasks_node, {
+    // observe each flasks and jewels slots
+    const flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
+    const jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
+    for (var node of [...flasks_nodes, ...jewels_nodes]) {
+        const node_observer = create_flasks_jewels_observer();
+        node_observer.observe(node, {
             attributes: true,
             attributeOldValue: true
         });
     }
-
-    let jewels_observer = create_flasks_jewels_observer("jewels");
-    var jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
-    // observe each jewels slot
-    for (var jewels_node of jewels_nodes) {
-        jewels_observer.observe(jewels_node, {
-            attributes: true,
-            attributeOldValue: true
-        });
-    }
-
-    try {
-        add_btn_items();
-        add_btn_skills();
-    } catch (e) {
-        dbg_warn(e);
-    }
-
-    dbg_log(lang_matching);
 };
 
 // 初始化所需設定
