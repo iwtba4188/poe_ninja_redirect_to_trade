@@ -506,7 +506,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
         var equipment_mod = tippy_mods_record[tippy_id];
 
-        if (!equipment_mod) {
+        if (equipment_mod) {
             add_btn_flasks_jewels(target, equipment_mod);
             observer.disconnect();
         }
