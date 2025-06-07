@@ -1,7 +1,7 @@
 import { LocalDataLoader, OnlineDataLoader } from "./modules/dataloader.js";
 import { get_status, set_status } from "./modules/storage_utils.js";
 
-const FILTER = {
+const API_URLS_FILTER = {
     urls: ["https://poe.ninja/api/data/*/getcharacter?*", "https://poe2.ninja/api/builds/*/character?*"]
 };
 
@@ -606,4 +606,4 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 chrome.runtime.onInstalled.addListener(init_status)
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
-chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, FILTER));
+chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, API_URLS_FILTER));
