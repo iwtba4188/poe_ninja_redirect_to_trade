@@ -498,12 +498,24 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     dbg_log(lang_matching);
 
     // [Tippy Observers]
-    var tippy_mods_record = {};
+    const tippy_mods_record_callbacks = new Map();
+    const tippy_mods_record = new Proxy({}, {
+        set(target, prop, value) {
+            target[prop] = value;
+
+            // 如果有人在等這個 key，就觸發 callback
+            if (tippy_mods_record_callbacks.has(prop)) {
+                const callbacks = tippy_mods_record_callbacks.get(prop);
+                callbacks();
+                tippy_mods_record_callbacks.delete(prop);
+            }
+
+            return true;
+        }
+    });
     var translated_tippy_id = new Set();
 
     function adding_button(target, tippy_id, observer) {
-        if (!tippy_id) return;
-
         var equipment_mod = tippy_mods_record[tippy_id];
 
         if (equipment_mod) {
@@ -511,21 +523,32 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             observer.disconnect();
         }
     }
-    
-    function create_flasks_jewels_observer() {
-        let observer = new MutationObserver((mutationRecords, observer) => {
-            var target = mutationRecords[0]["target"];
-            var tippy_id = target?.attributes["aria-describedby"]?.value;
 
-            queueMicrotask(() => { adding_button(target, tippy_id, observer); });
-            dbg_log("[TIPPY OBSERVER] triggered, tippy_id = " + tippy_id);
+    function wait_for_tippy_record(tippy_id, callback) {
+        if (tippy_mods_record[tippy_id]) {
+            callback();
+        } else {
+            tippy_mods_record_callbacks.set(tippy_id, callback);
+        }
+    }
+
+    function create_flasks_jewels_observer() {
+        const observer = new MutationObserver((mutationRecords, observer) => {
+            const target = mutationRecords[0]["target"];
+            const tippy_id = target.getAttribute("aria-describedby");
+
+            if (tippy_id) {
+                wait_for_tippy_record(tippy_id, () => {
+                    adding_button(target, tippy_id, observer);
+                });
+            }
         });
 
         return observer;
     }
 
     function translate_node(node) {
-        var tippy_id = node.id;
+        const tippy_id = node.id;
         if (translated_tippy_id.has(tippy_id)) return;
 
         var section = node.querySelectorAll("div._item-body_1tb3h_1 section");
@@ -587,8 +610,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     }
 
     const observer = new MutationObserver(mutationRecords => {
-        for (var mutationRecord of mutationRecords) {
-            for (var addedNode of mutationRecord["addedNodes"]) {
+        for (const mutationRecord of mutationRecords) {
+            for (const addedNode of mutationRecord["addedNodes"]) {
                 waiting_tippy_data(addedNode);
             }
         }
@@ -600,7 +623,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     // observe each flasks and jewels slots
     const flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
     const jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
-    for (var node of [...flasks_nodes, ...jewels_nodes]) {
+    for (const node of [...flasks_nodes, ...jewels_nodes]) {
         const node_observer = create_flasks_jewels_observer();
         node_observer.observe(node, {
             attributes: true,
