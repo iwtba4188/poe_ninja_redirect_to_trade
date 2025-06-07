@@ -565,6 +565,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             return;
         }
 
+        if (node.innerText !== "") {
+            dbg_log("tippy data already received, translate now");
+            translate_node(node);
+            return;
+        }
+
         const content_observer = new MutationObserver((mutationRecords, observer) => {
             // XXX: 現在還是會觀察到兩次這個 node 的變化，不太確定是什麼原因
             // dbg_log(node.innerHTML);
