@@ -501,23 +501,24 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     var tippy_mods_record = {};
     var translated_tippy_id = new Set();
 
-    function adding_button(target, tippy_id) {
+    function adding_button(target, tippy_id, observer) {
         if (!tippy_id) return;
 
         var equipment_mod = tippy_mods_record[tippy_id];
 
         if (!equipment_mod) {
             add_btn_flasks_jewels(target, equipment_mod);
+            observer.disconnect();
         }
     }
-
+    
     function create_flasks_jewels_observer() {
         let observer = new MutationObserver((mutationRecords, observer) => {
             var target = mutationRecords[0]["target"];
-            var tippy_id = target.attributes["aria-describedby"].value;
+            var tippy_id = target?.attributes["aria-describedby"]?.value;
 
-            observer.disconnect();
-            queueMicrotask(() => { adding_button(target, tippy_id); });
+            queueMicrotask(() => { adding_button(target, tippy_id, observer); });
+            dbg_log("[TIPPY OBSERVER] triggered, tippy_id = " + tippy_id);
         });
 
         return observer;
