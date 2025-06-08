@@ -11,13 +11,13 @@ const API_URLS_FILTER = {
  * @returns {None}
  */
 async function init_status() {
-    const val = (await chrome.storage.local.get());
     for (const slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
-        if (!(slot in val)) {
-            if (slot === "redirect-to") chrome.storage.local.set({ [slot]: "com" });
-            else if (slot === "lang") chrome.storage.local.set({ [slot]: "en" });
-            else if (slot === "mods-file-mode") chrome.storage.local.set({ [slot]: "build-in" });
-            else if (slot === "debug") chrome.storage.local.set({ [slot]: "off" });
+        const val = await get_status(slot);
+        if (val === undefined || val === null) {
+            if (slot === "redirect-to") await set_status(slot, "com");
+            else if (slot === "lang") await set_status(slot, "en");
+            else if (slot === "mods-file-mode") await set_status(slot, "build-in");
+            else if (slot === "debug") await set_status(slot, "off");
         }
     }
 };
@@ -635,7 +635,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 };
 
 // 初始化所需設定
-chrome.runtime.onInstalled.addListener(init_status)
+chrome.runtime.onInstalled.addListener(init_status);
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
 chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, API_URLS_FILTER));
