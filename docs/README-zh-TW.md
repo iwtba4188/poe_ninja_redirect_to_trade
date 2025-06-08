@@ -4,6 +4,8 @@
 
 [![extension badge](../image/icon/extension_badge.png)](https://chromewebstore.google.com/detail/poe-ninja-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E4%BA%A4%E6%98%93%E5%B8%82%E9%9B%86/booomkjelcadmolknnllecpgfiehiddm)
 
+<https://github.com/user-attachments/assets/26498680-cfa1-4897-997e-38ccb25e45ce>
+
 ## Introduction
 這是一個簡易的 Chrome 擴充功能（Chrome extension），用來自動生成 [poe ninja](https://poe.ninja/builds) 中各角色所有裝備（含藥劑、珠寶及寶石）導向至官方交易網站的按鈕，並內建提供詞綴中文化功能（可關閉）。
 
