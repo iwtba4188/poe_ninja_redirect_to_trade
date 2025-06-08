@@ -11,8 +11,8 @@ const API_URLS_FILTER = {
  * @returns {None}
  */
 async function init_status() {
-    var val = (await chrome.storage.local.get());
-    for (var slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
+    const val = (await chrome.storage.local.get());
+    for (const slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
         if (!(slot in val)) {
             if (slot === "redirect-to") chrome.storage.local.set({ [slot]: "com" });
             else if (slot === "lang") chrome.storage.local.set({ [slot]: "en" });
@@ -28,7 +28,7 @@ async function init_status() {
  * @returns {string} @param target_url 轉換為 JSON 的結果
  */
 async function fetch_url(target_url) {
-    var res;
+    let res;
 
     await fetch(target_url).then(
         function (response) {
@@ -56,11 +56,11 @@ async function fetch_url(target_url) {
 async function fetch_character_data(details) {
     if (details.tabId === -1) return;
 
-    var api_url = details.url;
-    var equipment_data = await fetch_url(api_url);
+    const api_url = details.url;
+    const equipment_data = await fetch_url(api_url);
 
-    var local_loader = new LocalDataLoader();
-    var online_loader = new OnlineDataLoader();
+    const local_loader = new LocalDataLoader();
+    const online_loader = new OnlineDataLoader();
     if (await get_status("mods-file-mode") === "online") {
         console.log("Using online data.");
         await online_loader.update_data();
@@ -69,8 +69,8 @@ async function fetch_character_data(details) {
     }
     await local_loader.update_data();
 
-    var query_data = await local_loader.get_data("local_query_data");
-    var gems_query_data = await local_loader.get_data("local_gems_query_data");
+    const query_data = await local_loader.get_data("local_query_data");
+    const gems_query_data = await local_loader.get_data("local_gems_query_data");
 
     if (await get_status("mods-file-mode") === "online") {
         try {
@@ -131,10 +131,10 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     function dbg_log(msg) { if (is_debugging) console.log(msg); }
     function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
 
-    var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
-    var redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
-    var now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
-    var now_lang_for_lang_matching = now_lang.replace("en-", "");
+    const is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
+    const redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+    const now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
+    const now_lang_for_lang_matching = now_lang.replace("en-", "");
 
     dbg_log("[Status] 'PoE Ninja Redirect to Trade' start!")
     dbg_log("[Status] stats_data = ");
@@ -157,7 +157,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             fill="#ffffff"></path>
     </g>`;
 
-    var lang_matching = {};
+    let lang_matching = {};
 
     /**
      * 從 STATS_DATA_PATH 尋找 mod_string 對應的 stats id。
@@ -165,25 +165,25 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @return {object} 查詢到的 stats res。如果沒有查詢到的話，則為 null
      */
     function find_mod_id(mod_string) {
-        var last_two_char = mod_string.trim().split(" ");
+        let last_two_char = mod_string.trim().split(" ");
         // replace regex 和 ./scripts/transform_apt_stats.py sort_matcher_structure() 的 k.sub() 一致
         if (last_two_char.length >= 2) last_two_char = last_two_char[last_two_char.length - 2].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "") + last_two_char[last_two_char.length - 1].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "");
         else last_two_char = last_two_char[last_two_char.length - 1].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "");
 
-        var matchers = stats_data[last_two_char.toLowerCase()];
+        const matchers = stats_data[last_two_char.toLowerCase()];
 
         if (!matchers) return null;
 
-        for (var matcher of matchers) {
-            var match_string = matcher["matcher"];
-            var match_regex = RegExp(match_string, "g");
+        for (const matcher of matchers) {
+            const match_string = matcher["matcher"];
+            const match_regex = RegExp(match_string, "g");
 
             if (match_regex.test(mod_string)) {
                 if (!matcher["res"][now_lang_for_lang_matching]) {
                     return matcher["res"];
                 }
 
-                var lang_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"][now_lang_for_lang_matching])).replaceAll("/", "").replaceAll("\\n", "\n");
+                const lang_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"][now_lang_for_lang_matching])).replaceAll("/", "").replaceAll("\\n", "\n");
 
                 // 珠寶換行的詞綴在 tippy 中是用空格分開，ex: "Added Small Passive Skills grant: 12% increased Trap Damage Added Small Passive Skills grant: 12% increased Mine Damage"
                 if (mod_string.indexOf("\n") !== -1) lang_matching[mod_string.replace("\n", " ")] = lang_mod_string;
@@ -227,8 +227,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
                     dbg_add_msg_to_page_top("[MOD NOT FOUND] mod_type=" + type_name + ", item_inventoryId=" + item_inventoryId + ", origin mod='" + mod + "'");
                     continue;
                 }
-                var mod_ids = res[type_name];
-                var value = res["value"];
+                const mod_ids = res[type_name];
+                const value = res["value"];
 
                 if (!mod_ids) {
                     dbg_warn(item_inventoryId);
@@ -241,8 +241,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
                 // duplicate mods
                 if (mod_ids.length > 1) {
-                    var filters = [];
-                    for (var mod_id of mod_ids) {
+                    const filters = [];
+                    for (const mod_id of mod_ids) {
                         if (!value) filters.push({ "id": mod_id });
                         else filters.push({ "id": mod_id, "value": { "min": value } });
                     }
@@ -279,7 +279,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      */
     function gen_skills_target_query_str(name, level, quality, server_type) {
         const target_query = JSON.parse(JSON.stringify(gems_query_data));
-        var gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
+        const gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
 
         if (!gems_info) return;
 
@@ -351,12 +351,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      */
     async function add_btn_items() {
         // var items = document.body.getElementsByClassName("_item-hover_8bh10_26");
-        var buttons = document.body.querySelectorAll("div.content.p-6:nth-child(2) button[title~=Copy]");
+        const buttons = document.body.querySelectorAll("div.content.p-6:nth-child(2) button[title~=Copy]");
         console.log(buttons);
 
         // buttons
-        for (var i = 0; i < equipment_data["items"].length; i++) {
-            var slot_num = 0;
+        for (let i = 0; i < equipment_data["items"].length; i++) {
+            let slot_num = 0;
             if (i < equipment_data["items"].length) { //items
                 slot_num = equipment_data["items"][i]["itemSlot"];
             }
@@ -369,7 +369,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
             buttons[i].insertAdjacentElement("afterend", new_node);
         }
-
     };
 
     /**
@@ -379,15 +378,15 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {None}
      */
     async function add_btn_flasks_jewels(target_btn, equipment_mod) {
-        var target_query =
+        const target_query =
             mods_mapping_target_query["flasks"][equipment_mod] ??
             mods_mapping_target_query["jewels"][equipment_mod];
 
-        var new_node = gen_btn_trade_element(target_query, "buttom");
+        const new_node = gen_btn_trade_element(target_query, "buttom");
 
         // jewels 的按鈕要加在 target_btn 的 div 裡面
-        var sub_div = target_btn.querySelector("div");
-        var target_append_div = sub_div ? sub_div : target_btn;
+        const sub_div = target_btn.querySelector("div");
+        const target_append_div = sub_div ? sub_div : target_btn;
         target_append_div.appendChild(new_node);
     };
 
@@ -396,12 +395,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {None}
      */
     async function add_btn_skills() {
-        var btns = document.body.querySelectorAll("article._item-border_17v42_1 div[style='flex: 1 1 auto;']");
+        const btns = document.body.querySelectorAll("article._item-border_17v42_1 div[style='flex: 1 1 auto;']");
 
-        for (var i = 0; i < btns.length; i++) {
-            var target_query = mods_mapping_target_query["skills"][i];
-            var btn = gen_btn_trade_element(target_query, "skills");
-            var btn_span = gen_btn_span_element();
+        for (let i = 0; i < btns.length; i++) {
+            const target_query = mods_mapping_target_query["skills"][i];
+            const btn = gen_btn_trade_element(target_query, "skills");
+            const btn_span = gen_btn_span_element();
 
             btns[i].prepend(btn_span);
             btns[i].prepend(btn);
@@ -415,7 +414,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {string} 串聯後的詞墜
      */
     function combine_item_mods(item_type, item_index) {
-        var mod = "";
+        let mod = "";
         mod += equipment_data[item_type][item_index]["itemData"]["enchantMods"].join("");
         mod += equipment_data[item_type][item_index]["itemData"]["implicitMods"].join("");
         mod += equipment_data[item_type][item_index]["itemData"]["explicitMods"].join("");
@@ -428,23 +427,23 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {object} 所有物品的 mods mapping query string
      */
     async function gen_all_target_query_mapping() {
-        var mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
-        var item_types = ["items", "flasks", "jewels"];
+        const mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
+        const item_types = ["items", "flasks", "jewels"];
 
         // gen item types
-        for (var type of item_types) {
-            for (var i = 0; i < equipment_data[type].length; i++) {
-                var mod = combine_item_mods(type, i);
-                var target_query = gen_item_target_query_str(type, i);
+        for (const type of item_types) {
+            for (let i = 0; i < equipment_data[type].length; i++) {
+                const mod = combine_item_mods(type, i);
+                const target_query = gen_item_target_query_str(type, i);
                 mapping[type][mod] = target_query;
             }
         }
 
-        var server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+        const server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
         // gen skills type
-        for (var skill_section of equipment_data["skills"]) {
-            for (var gem of skill_section["allGems"]) {
-                var target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
+        for (const skill_section of equipment_data["skills"]) {
+            for (const gem of skill_section["allGems"]) {
+                const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
                 mapping["skills"].push(target_query);
             }
         }
@@ -460,7 +459,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     function dbg_add_msg_to_page_top(msg) {
         if (!is_debugging) return;
 
-        var new_node = document.createElement("p");
+        const new_node = document.createElement("p");
         new_node.setAttribute("style", "width: max-content; max-width: none;");
         new_node.innerHTML = msg;
 
@@ -482,7 +481,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     dbg_add_msg_to_page_top("[DEBUGGING]");
 
-    var mods_mapping_target_query = await gen_all_target_query_mapping();
+    const mods_mapping_target_query = await gen_all_target_query_mapping();
     dbg_log("=============================");
     dbg_log(mods_mapping_target_query);
     dbg_log("=============================");
@@ -500,23 +499,22 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     // [Tippy Observers]
     const tippy_mods_record_callbacks = new Map();
     const tippy_mods_record = new Proxy({}, {
-        set(target, prop, value) {
-            target[prop] = value;
+        set(target, key, value, receiver) {
+            dbg_log(`[TIPPY MODS RECORD] key = ${key}, value = ${value}`);
+            target[key] = value;
 
             // 如果有人在等這個 key，就觸發 callback
-            if (tippy_mods_record_callbacks.has(prop)) {
-                const callbacks = tippy_mods_record_callbacks.get(prop);
+            if (tippy_mods_record_callbacks.has(key)) {
+                const callbacks = tippy_mods_record_callbacks.get(key);
                 callbacks();
-                tippy_mods_record_callbacks.delete(prop);
+                tippy_mods_record_callbacks.delete(key);
             }
-
-            return true;
         }
     });
-    var translated_tippy_id = new Set();
+    const translated_tippy_id = new Set();
 
     function adding_button(target, tippy_id, observer) {
-        var equipment_mod = tippy_mods_record[tippy_id];
+        const equipment_mod = tippy_mods_record[tippy_id];
 
         if (equipment_mod) {
             add_btn_flasks_jewels(target, equipment_mod);
@@ -551,31 +549,35 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const tippy_id = node.id;
         if (translated_tippy_id.has(tippy_id)) return;
 
-        var section = node.querySelectorAll("div._item-body_1tb3h_1 section");
+        const section = node.querySelectorAll("div._item-body_1tb3h_1 section");
         if (section.length < 5) return;  // 此 Node 不是裝備的 tippy
 
-        var enchant = section[2]?.querySelectorAll("div div")[0];
-        var enchant_all = enchant?.querySelectorAll("div") || [];
-        var implicit = section[3]?.querySelectorAll("div#implicit")[0];
-        var implicit_all = section[3]?.querySelectorAll("div > div") || [];
-        var explicit = section[4]?.querySelectorAll("div#explicit")[0];
-        var explicit_all = section[4]?.querySelectorAll("div > div") || [];
+        const enchant = section[2]?.querySelectorAll("div div")[0];
+        const enchant_all = enchant?.querySelectorAll("div") || [];
+        const implicit = section[3]?.querySelectorAll("div#implicit")[0];
+        const implicit_all = section[3]?.querySelectorAll("div > div") || [];
+        const explicit = section[4]?.querySelectorAll("div#explicit")[0];
+        const explicit_all = section[4]?.querySelectorAll("div > div") || [];
 
-        var mod_text = "";
-        for (var mod_type of [enchant, implicit, explicit]) {
+        let mod_text = "";
+        for (const mod_type of [enchant, implicit, explicit]) {
             if (mod_type !== undefined) mod_text += mod_type["textContent"];
         }
         tippy_mods_record[tippy_id] = mod_text;
 
-        var translated = false;
+        let translated = false;
         if (now_lang === "en") return;
-        for (var ele of [...enchant_all, ...implicit_all, ...explicit_all]) {
-            var translated = true;
+        for (const ele of [...enchant_all, ...implicit_all, ...explicit_all]) {
+            translated = true;
 
-            var lang_mod_string = translate_mod(ele.innerText);
+            const lang_mod_string = translate_mod(ele.innerText);
 
-            if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-            else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
+            if (["zh-tw", "ko", "ru"].includes(now_lang)) {
+                ele.innerText = lang_mod_string;
+            }
+            else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) {
+                ele.innerText += "\n" + lang_mod_string;
+            }
         }
 
         if (translated)
