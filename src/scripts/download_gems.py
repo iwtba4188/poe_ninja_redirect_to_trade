@@ -1,7 +1,11 @@
-import requests
-import json
-from json_loader import load_json, save_json
 import datetime
+import json
+
+import requests
+from json_loader import save_json
+from logger import get_logger
+
+logger = get_logger("download_gems")
 
 defualt_headers = {
     # ":authority:": "www.pathofexile.com",
@@ -29,41 +33,44 @@ defualt_headers = {
 def download_stats(domain) -> None:
     """Download stats data from pathofexile.com."""
 
+    logger.info(f"Downloading stats data from pathofexile.{domain}")
     res = requests.get(
         f"https://www.pathofexile.{domain}/api/trade/data/stats",
         headers=defualt_headers,
     )
     stats = json.loads(res.text)
-    save_json(
-        stats,
-        f"../data/{domain}_stats_data.json",
-    )
+    save_path = f"../data/{domain}_stats_data.json"
+    save_json(stats, save_path)
+    logger.info(f"Saved stats data to: {save_path}")
 
 
 def download_gems(domain) -> None:
     """Download gems data from pathofexile.com."""
 
+    logger.info(f"Downloading gems data from pathofexile.{domain}")
     res = requests.get(
         f"https://www.pathofexile.{domain}/api/trade/data/items",
         headers=defualt_headers,
     )
     gems = json.loads(res.text)
-    save_json(
-        gems,
-        f"../data/{domain}_gems_data.json",
-    )
+    save_path = f"../data/{domain}_gems_data.json"
+    save_json(gems, save_path)
+    logger.info(f"Saved gems data to: {save_path}")
 
 
 def download_cof_data() -> None:
+    logger.info("Downloading CoF data from craftofexile.com")
     res = requests.get("https://www.craftofexile.com/json/data/main/poec_data.json")
-    save_json(
-        res.text,
-        f"../data/cof_data_{datetime.datetime.now().strftime('%y%m%d')}.json",
-    )
+    save_path = f"../data/cof_data_{datetime.datetime.now().strftime('%y%m%d')}.json"
+    save_json(res.text, save_path)
+    logger.info(f"Saved CoF data to: {save_path}")
 
 
 if __name__ == "__main__":
+    logger.info("Starting gems and stats download process...")
     # download_stats()
     download_gems("tw")
+    download_gems("com")
     # download_cof_data()
+    logger.info("Download process completed!")
     pass

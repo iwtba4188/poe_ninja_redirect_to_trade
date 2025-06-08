@@ -1,40 +1,9 @@
-const FILTER = {
-    urls: ["https://poe.ninja/api/data/*/getcharacter?*"]
+import { LocalDataLoader, OnlineDataLoader } from "./modules/dataloader.js";
+import { get_status, set_status } from "./modules/storage_utils.js";
+
+const API_URLS_FILTER = {
+    urls: ["https://poe.ninja/api/data/*/getcharacter?*", "https://poe2.ninja/api/builds/*/character?*"]
 };
-const FETCH_ONLINE_URL_INTERVAL = 5 * 60 * 1000;    // ms, 5 min * 60 sec/min * 1000 ms/sec
-// const FETCH_ONLINE_URL_INTERVAL = 10 * 1000;    // ms, 10 sec * 1000 ms/sec
-
-const STATS_DATA_PATH = "./data/awakened poe trade/en_stats.min.json";
-const GEMS_DATA_PATH = "./data/com_preprocessed_gems_data.json";
-const TW_GEMS_DATA_PATH = "./data/tw_preprocessed_gems_data.json";
-const QUERY_PATH = "./data/query.json";
-const GEMS_QUERY_PATH = "./data/query_gems.json";
-
-const ONLINE_STATS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/awakened%20poe%20trade/en_stats.json";
-const ONLINE_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/com_preprocessed_gems_data.json";
-const ONLINE_TW_GEMS_DATA_VER_CHECK_URL = "https://api.github.com/repos/iwtba4188/poe_ninja_redirect_to_trade/contents/src/data/tw_preprocessed_gems_data.json";
-
-const STATS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/awakened%20poe%20trade/en_stats.min.json";
-const GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/com_preprocessed_gems_data.json";
-const TW_GEMS_DATA_URL = "https://raw.githubusercontent.com/iwtba4188/poe_ninja_redirect_to_trade/main/src/data/tw_preprocessed_gems_data.json";
-
-var equipment_data = {};
-var trigger_tab_id = 0;
-var local_stats_data;
-fetch(STATS_DATA_PATH).then((response) => response.json()).then((json) => local_stats_data = json);
-var local_gems_data;
-fetch(GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_gems_data = json);
-var local_tw_gems_data;
-fetch(TW_GEMS_DATA_PATH).then((response) => response.json()).then((json) => local_tw_gems_data = json);
-
-var online_stats_data;
-var online_gems_data;
-var online_tw_gems_data;
-
-var query_data;
-fetch(QUERY_PATH).then((response) => response.json()).then((json) => query_data = json);
-var gems_query_data;
-fetch(GEMS_QUERY_PATH).then((response) => response.json()).then((json) => gems_query_data = json);
 
 
 /**
@@ -42,35 +11,15 @@ fetch(GEMS_QUERY_PATH).then((response) => response.json()).then((json) => gems_q
  * @returns {None}
  */
 async function init_status() {
-    var val = (await chrome.storage.local.get());
-    for (var slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
-        if (!(slot in val)) {
-            if (slot === "redirect-to") chrome.storage.local.set({ [slot]: "com" });
-            else if (slot === "lang") chrome.storage.local.set({ [slot]: "en" });
-            else if (slot === "mods-file-mode") chrome.storage.local.set({ [slot]: "build-in" });
-            else if (slot === "debug") chrome.storage.local.set({ [slot]: "off" });
+    for (const slot of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
+        const val = await get_status(slot);
+        if (val === undefined || val === null) {
+            if (slot === "redirect-to") await set_status(slot, "com");
+            else if (slot === "lang") await set_status(slot, "en");
+            else if (slot === "mods-file-mode") await set_status(slot, "build-in");
+            else if (slot === "debug") await set_status(slot, "off");
         }
     }
-};
-
-/**
- * 用 key 取得 chrome.storage.local 的 value
- * @param {string} slot 要取得的 key
- * @returns {string} 用 key 取得的 value 
- */
-async function get_status(slot) {
-    var val = (await chrome.storage.local.get([slot]))[slot];
-
-    return val;
-};
-
-/**
- * 設定 chrome.storage.local 的 key: value pair
- * @param {string} slot 要設定的 key
- * @param {string} value 要設定的 value
- */
-async function set_status(slot, value) {
-    chrome.storage.local.set({ [slot]: value });
 };
 
 /**
@@ -79,7 +28,7 @@ async function set_status(slot, value) {
  * @returns {string} @param target_url 轉換為 JSON 的結果
  */
 async function fetch_url(target_url) {
-    var res;
+    let res;
 
     await fetch(target_url).then(
         function (response) {
@@ -100,60 +49,6 @@ async function fetch_url(target_url) {
 };
 
 /**
- * 每經過 FETCH_ONLINE_URL_INTERVAL 才能再次確認 GitHub 狀態，避免 429 Too Many Requests
- * @returns {Boolean} 是否可以再次傳送請求了
- */
-async function can_fetch_again() {
-    var now_time = Date.now();
-    var last_fetch_time = await get_status("last-fetch-time");
-
-    if (!last_fetch_time || ((now_time - Number(last_fetch_time)) >= FETCH_ONLINE_URL_INTERVAL)) {
-        await set_status("last-fetch-time", now_time);
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * 確認上次 fetch 的 online 詞綴表的 sha 和 online 的是否一致
- * @returns {Boolean} 線上詞綴表是否有更新
- */
-async function has_newer_data_version() {
-    var local_stats_data_sha = await get_status("stats-data-sha");
-    var local_gems_data_sha = await get_status("gems-data-sha");
-    var local_tw_gems_data_sha = await get_status("tw-gems-data-sha");
-
-    var github_stats_data_sha = (await fetch_url(ONLINE_STATS_DATA_VER_CHECK_URL)).sha;
-    var github_gems_data_sha = (await fetch_url(ONLINE_GEMS_DATA_VER_CHECK_URL)).sha;
-    var github_tw_gems_data_sha = (await fetch_url(ONLINE_TW_GEMS_DATA_VER_CHECK_URL)).sha;
-
-    var local_shas = [local_stats_data_sha, local_gems_data_sha, local_tw_gems_data_sha];
-    var github_shas = [github_stats_data_sha, github_gems_data_sha, github_tw_gems_data_sha];
-    var slot_keys = ["stats-data-sha", "gems-data-sha", "tw-gems-data-sha"];
-
-    var flag = false;
-    for (var i = 0; i < 3; i++) {
-        if (!local_shas[i] || local_shas[i] !== github_shas[i]) {
-            flag = true;
-            await set_status(slot_keys[i], github_shas[i]);
-        }
-    }
-
-    return flag;
-};
-
-/**
- * 更新線上詞綴表的資料
- * @returns {None}
- */
-async function update_online_data() {
-    fetch(STATS_DATA_URL).then((response) => response.json()).then((json) => online_stats_data = json);
-    fetch(GEMS_DATA_URL).then((response) => response.json()).then((json) => online_gems_data = json);
-    fetch(TW_GEMS_DATA_URL).then((response) => response.json()).then((json) => online_tw_gems_data = json);
-}
-
-/**
  * 利用取得的角色資訊，內含本專案所需之裝備資料
  * @param {any} details 詳見 google extension webRequest api
  * @return {None}
@@ -161,36 +56,63 @@ async function update_online_data() {
 async function fetch_character_data(details) {
     if (details.tabId === -1) return;
 
-    var api_url = details.url;
+    const api_url = details.url;
+    const equipment_data = await fetch_url(api_url);
 
-    equipment_data = await fetch_url(api_url);
-
-    if (await get_status("mods-file-mode") === "online" && await can_fetch_again()) {
-        if (has_newer_data_version()) {
-            update_online_data();
-        }
+    const local_loader = new LocalDataLoader();
+    const online_loader = new OnlineDataLoader();
+    if (await get_status("mods-file-mode") === "online") {
+        console.log("Using online data.");
+        await online_loader.update_data();
+    } else {
+        console.log("Using local data.");
     }
+    await local_loader.update_data();
+
+    const query_data = await local_loader.get_data("local_query_data");
+    const gems_query_data = await local_loader.get_data("local_gems_query_data");
 
     if (await get_status("mods-file-mode") === "online") {
         try {
             chrome.scripting.executeScript({
                 target: { tabId: details.tabId },
                 function: inject_script,
-                args: [online_stats_data, online_gems_data, online_tw_gems_data, query_data, gems_query_data, equipment_data],
+                args: [
+                    await online_loader.get_data("online_stats_data"),
+                    await online_loader.get_data("online_gems_data"),
+                    await online_loader.get_data("online_tw_gems_data"),
+                    query_data,
+                    gems_query_data,
+                    equipment_data
+                ],
             });
         } catch (e) {
             console.warn(e);
             chrome.scripting.executeScript({
                 target: { tabId: details.tabId },
                 function: inject_script,
-                args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+                args: [
+                    await local_loader.get_data("local_stats_data"),
+                    await local_loader.get_data("local_gems_data"),
+                    await local_loader.get_data("local_tw_gems_data"),
+                    query_data,
+                    gems_query_data,
+                    equipment_data
+                ],
             });
         }
     } else {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
             function: inject_script,
-            args: [local_stats_data, local_gems_data, local_tw_gems_data, query_data, gems_query_data, equipment_data],
+            args: [
+                await local_loader.get_data("local_stats_data"),
+                await local_loader.get_data("local_gems_data"),
+                await local_loader.get_data("local_tw_gems_data"),
+                query_data,
+                gems_query_data,
+                equipment_data
+            ],
         });
     }
 }
@@ -206,11 +128,25 @@ async function fetch_character_data(details) {
  * @return {None}
  */
 async function inject_script(stats_data, gems_data, tw_gems_data, query_data, gems_query_data, equipment_data) {
+    function dbg_log(msg) { if (is_debugging) console.log(msg); }
+    function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
 
-    var is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
-    var redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
-    var now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
-    var now_lang_for_lang_matching = now_lang.replace("en-", "");
+    const is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
+    const redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+    const now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
+    const now_lang_for_lang_matching = now_lang.replace("en-", "");
+
+    dbg_log("[Status] 'PoE Ninja Redirect to Trade' start!")
+    dbg_log("[Status] stats_data = ");
+    dbg_log(stats_data);
+    dbg_log("[Status] gems_data = ");
+    dbg_log(gems_data);
+    dbg_log("[Status] tw_gems_data = ");
+    dbg_log(tw_gems_data);
+    dbg_log("[Status] query_data = ");
+    dbg_log(query_data);
+    dbg_log("[Status] gems_query_data = ");
+    dbg_log(gems_query_data);
 
     const POE_TRADE_URL = `https://www.pathofexile.${redirect_to}/trade/search`;
     const BALANCE_ICON = `<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -221,10 +157,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             fill="#ffffff"></path>
     </g>`;
 
-    var lang_matching = {};
-
-    function dbg_log(msg) { if (is_debugging) console.log(msg); };
-    function dbg_warn(msg) { if (is_debugging) console.warn(msg); }
+    let lang_matching = {};
 
     /**
      * 從 STATS_DATA_PATH 尋找 mod_string 對應的 stats id。
@@ -232,25 +165,25 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @return {object} 查詢到的 stats res。如果沒有查詢到的話，則為 null
      */
     function find_mod_id(mod_string) {
-        var last_two_char = mod_string.trim().split(" ");
+        let last_two_char = mod_string.trim().split(" ");
         // replace regex 和 ./scripts/transform_apt_stats.py sort_matcher_structure() 的 k.sub() 一致
         if (last_two_char.length >= 2) last_two_char = last_two_char[last_two_char.length - 2].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "") + last_two_char[last_two_char.length - 1].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "");
         else last_two_char = last_two_char[last_two_char.length - 1].replace(/(([\+-]?[\d\.]+%?)|(#%)|(#))/, "");
 
-        var matchers = stats_data[last_two_char.toLowerCase()];
+        const matchers = stats_data[last_two_char.toLowerCase()];
 
         if (!matchers) return null;
 
-        for (var matcher of matchers) {
-            var match_string = matcher["matcher"];
-            var match_regex = RegExp(match_string, "g");
+        for (const matcher of matchers) {
+            const match_string = matcher["matcher"];
+            const match_regex = RegExp(match_string, "g");
 
             if (match_regex.test(mod_string)) {
                 if (!matcher["res"][now_lang_for_lang_matching]) {
                     return matcher["res"];
                 }
 
-                var lang_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"][now_lang_for_lang_matching])).replaceAll("/", "").replaceAll("\\n", "\n");
+                const lang_mod_string = mod_string.replace(match_regex, RegExp(matcher["res"][now_lang_for_lang_matching])).replaceAll("/", "").replaceAll("\\n", "\n");
 
                 // 珠寶換行的詞綴在 tippy 中是用空格分開，ex: "Added Small Passive Skills grant: 12% increased Trap Damage Added Small Passive Skills grant: 12% increased Mine Damage"
                 if (mod_string.indexOf("\n") !== -1) lang_matching[mod_string.replace("\n", " ")] = lang_mod_string;
@@ -294,8 +227,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
                     dbg_add_msg_to_page_top("[MOD NOT FOUND] mod_type=" + type_name + ", item_inventoryId=" + item_inventoryId + ", origin mod='" + mod + "'");
                     continue;
                 }
-                var mod_ids = res[type_name];
-                var value = res["value"];
+                const mod_ids = res[type_name];
+                const value = res["value"];
 
                 if (!mod_ids) {
                     dbg_warn(item_inventoryId);
@@ -308,8 +241,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
                 // duplicate mods
                 if (mod_ids.length > 1) {
-                    var filters = [];
-                    for (var mod_id of mod_ids) {
+                    const filters = [];
+                    for (const mod_id of mod_ids) {
                         if (!value) filters.push({ "id": mod_id });
                         else filters.push({ "id": mod_id, "value": { "min": value } });
                     }
@@ -346,7 +279,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      */
     function gen_skills_target_query_str(name, level, quality, server_type) {
         const target_query = JSON.parse(JSON.stringify(gems_query_data));
-        var gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
+        const gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
 
         if (!gems_info) return;
 
@@ -418,12 +351,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      */
     async function add_btn_items() {
         // var items = document.body.getElementsByClassName("_item-hover_8bh10_26");
-        var buttons = document.body.querySelectorAll("div.content.p-6:nth-child(2) button[title~=Copy]");
+        const buttons = document.body.querySelectorAll("div.content.p-6:nth-child(2) button[title~=Copy]");
         console.log(buttons);
 
         // buttons
-        for (var i = 0; i < equipment_data["items"].length; i++) {
-            var slot_num = 0;
+        for (let i = 0; i < equipment_data["items"].length; i++) {
+            let slot_num = 0;
             if (i < equipment_data["items"].length) { //items
                 slot_num = equipment_data["items"][i]["itemSlot"];
             }
@@ -436,23 +369,25 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
             buttons[i].insertAdjacentElement("afterend", new_node);
         }
-
     };
 
     /**
      * 將 藥劑、珠寶 的重導向按鈕加入頁面
      * @param {HTMLButtonElement} target_btn copy pob button，重導向按鈕會加在它後面
-     * @param {string} equipment_type 裝備類型： Literal["flasks", "jewels"]
      * @param {string} equipment_mod 物品詞墜
      * @returns {None}
      */
-    async function add_btn_flasks_jewels(target_btn, equipment_type, equipment_mod) {
-        var target_query = mods_mapping_target_query[equipment_type][equipment_mod];
+    async function add_btn_flasks_jewels(target_btn, equipment_mod) {
+        const target_query =
+            mods_mapping_target_query["flasks"][equipment_mod] ??
+            mods_mapping_target_query["jewels"][equipment_mod];
 
-        var new_node = gen_btn_trade_element(target_query, "buttom");
+        const new_node = gen_btn_trade_element(target_query, "buttom");
 
-        if (equipment_type === "flasks") target_btn.appendChild(new_node);
-        else target_btn.querySelector("div").appendChild(new_node);
+        // jewels 的按鈕要加在 target_btn 的 div 裡面
+        const sub_div = target_btn.querySelector("div");
+        const target_append_div = sub_div ? sub_div : target_btn;
+        target_append_div.appendChild(new_node);
     };
 
     /**
@@ -460,12 +395,12 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {None}
      */
     async function add_btn_skills() {
-        var btns = document.body.querySelectorAll("article._item-border_17v42_1 div[style='flex: 1 1 auto;']");
+        const btns = document.body.querySelectorAll("article._item-border_17v42_1 div[style='flex: 1 1 auto;']");
 
-        for (var i = 0; i < btns.length; i++) {
-            var target_query = mods_mapping_target_query["skills"][i];
-            var btn = gen_btn_trade_element(target_query, "skills");
-            var btn_span = gen_btn_span_element();
+        for (let i = 0; i < btns.length; i++) {
+            const target_query = mods_mapping_target_query["skills"][i];
+            const btn = gen_btn_trade_element(target_query, "skills");
+            const btn_span = gen_btn_span_element();
 
             btns[i].prepend(btn_span);
             btns[i].prepend(btn);
@@ -479,7 +414,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {string} 串聯後的詞墜
      */
     function combine_item_mods(item_type, item_index) {
-        var mod = "";
+        let mod = "";
         mod += equipment_data[item_type][item_index]["itemData"]["enchantMods"].join("");
         mod += equipment_data[item_type][item_index]["itemData"]["implicitMods"].join("");
         mod += equipment_data[item_type][item_index]["itemData"]["explicitMods"].join("");
@@ -492,23 +427,23 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {object} 所有物品的 mods mapping query string
      */
     async function gen_all_target_query_mapping() {
-        var mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
-        var item_types = ["items", "flasks", "jewels"];
+        const mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
+        const item_types = ["items", "flasks", "jewels"];
 
         // gen item types
-        for (var type of item_types) {
-            for (var i = 0; i < equipment_data[type].length; i++) {
-                var mod = combine_item_mods(type, i);
-                var target_query = gen_item_target_query_str(type, i);
+        for (const type of item_types) {
+            for (let i = 0; i < equipment_data[type].length; i++) {
+                const mod = combine_item_mods(type, i);
+                const target_query = gen_item_target_query_str(type, i);
                 mapping[type][mod] = target_query;
             }
         }
 
-        var server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+        const server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
         // gen skills type
-        for (var skill_section of equipment_data["skills"]) {
-            for (var gem of skill_section["allGems"]) {
-                var target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
+        for (const skill_section of equipment_data["skills"]) {
+            for (const gem of skill_section["allGems"]) {
+                const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
                 mapping["skills"].push(target_query);
             }
         }
@@ -524,7 +459,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     function dbg_add_msg_to_page_top(msg) {
         if (!is_debugging) return;
 
-        var new_node = document.createElement("p");
+        const new_node = document.createElement("p");
         new_node.setAttribute("style", "width: max-content; max-width: none;");
         new_node.innerHTML = msg;
 
@@ -536,8 +471,8 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @param {string} mod_string 要翻譯的英文詞墜
      * @returns {string} 翻譯成中文的詞墜
      */
-    function mod_to_lang(mod_string) {
-        dbg_log(`mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
+    function translate_mod(mod_string) {
+        dbg_log(`[Tippy Item] mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
         if (lang_matching[mod_string]) return lang_matching[mod_string];
         else return mod_string;
     }
@@ -546,166 +481,161 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     dbg_add_msg_to_page_top("[DEBUGGING]");
 
-    var mods_mapping_target_query = await gen_all_target_query_mapping();
+    const mods_mapping_target_query = await gen_all_target_query_mapping();
     dbg_log("=============================");
     dbg_log(mods_mapping_target_query);
     dbg_log("=============================");
 
-    var tippy_mods_record = {};
-    let observer = new MutationObserver(async mutationRecords => {
-        for (var mutationRecord of mutationRecords) {
-            var addedNode = mutationRecord["addedNodes"][0];
-            // 未新增 Node
-            if (addedNode === undefined) continue;
+    // 將所有物品的重導向按鈕加入頁面
+    try {
+        await add_btn_items();
+        await add_btn_skills();
+    } catch (e) {
+        dbg_warn(e);
+    }
 
-            var tippy_id = addedNode.id;
-            // 此 Node 已經紀錄過
-            if (tippy_mods_record[tippy_id] !== undefined) continue;
+    dbg_log(lang_matching);
 
-            var section = addedNode.querySelectorAll("div._item-body_1tb3h_1 section");
-            // 此 Node 不是裝備的 tippy
-            if (section === undefined || section.length < 5) continue;
+    // [Tippy Observers]
+    const tippy_mods_record_callbacks = new Map();
+    const tippy_mods_record = new Proxy({}, {
+        set(target, key, value, receiver) {
+            dbg_log(`[TIPPY MODS RECORD] key = ${key}, value = ${value}`);
+            target[key] = value;
 
-            var enchant = section[2].querySelectorAll("div div")[0];
-            var implicit = section[3].querySelectorAll("div#implicit")[0];
-            var implicit_all = section[3].querySelectorAll("div > div");
-            var explicit = section[4].querySelectorAll("div#explicit")[0];
-            var explicit_all = section[4].querySelectorAll("div > div");
-
-            // 此 Node 不是裝備的 tippy
-            if (enchant === undefined && implicit === undefined && explicit === undefined) {
-                tippy_mods_record[tippy_id] = undefined;
-                continue;
+            // 如果有人在等這個 key，就觸發 callback
+            if (tippy_mods_record_callbacks.has(key)) {
+                const callbacks = tippy_mods_record_callbacks.get(key);
+                callbacks();
+                tippy_mods_record_callbacks.delete(key);
             }
+        }
+    });
+    const translated_tippy_id = new Set();
 
-            var mod_text = "";
-            for (var mod_type of [enchant, implicit, explicit]) {
-                if (mod_type !== undefined) mod_text += mod_type["textContent"];
+    function adding_button(target, tippy_id, observer) {
+        const equipment_mod = tippy_mods_record[tippy_id];
+
+        if (equipment_mod) {
+            add_btn_flasks_jewels(target, equipment_mod);
+            observer.disconnect();
+        }
+    }
+
+    function wait_for_tippy_record(tippy_id, callback) {
+        if (tippy_mods_record[tippy_id]) {
+            callback();
+        } else {
+            tippy_mods_record_callbacks.set(tippy_id, callback);
+        }
+    }
+
+    function create_flasks_jewels_observer() {
+        const observer = new MutationObserver((mutationRecords, observer) => {
+            const target = mutationRecords[0]["target"];
+            const tippy_id = target.getAttribute("aria-describedby");
+
+            if (tippy_id) {
+                wait_for_tippy_record(tippy_id, () => {
+                    adding_button(target, tippy_id, observer);
+                });
             }
-            tippy_mods_record[tippy_id] = mod_text;
+        });
 
-            // 中文化區塊 start
-            if (now_lang !== "en" && enchant) {
-                var all_mod_elements = enchant.querySelectorAll("div");
-                for (var ele of all_mod_elements) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
+        return observer;
+    }
 
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
+    function translate_node(node) {
+        const tippy_id = node.id;
+        if (translated_tippy_id.has(tippy_id)) return;
+
+        const section = node.querySelectorAll("div._item-body_1tb3h_1 section");
+        if (section.length < 5) return;  // 此 Node 不是裝備的 tippy
+
+        const enchant = section[2]?.querySelectorAll("div div")[0];
+        const enchant_all = enchant?.querySelectorAll("div") || [];
+        const implicit = section[3]?.querySelectorAll("div#implicit")[0];
+        const implicit_all = section[3]?.querySelectorAll("div > div") || [];
+        const explicit = section[4]?.querySelectorAll("div#explicit")[0];
+        const explicit_all = section[4]?.querySelectorAll("div > div") || [];
+
+        let mod_text = "";
+        for (const mod_type of [enchant, implicit, explicit]) {
+            if (mod_type !== undefined) mod_text += mod_type["textContent"];
+        }
+        tippy_mods_record[tippy_id] = mod_text;
+
+        let translated = false;
+        if (now_lang === "en") return;
+        for (const ele of [...enchant_all, ...implicit_all, ...explicit_all]) {
+            translated = true;
+
+            const lang_mod_string = translate_mod(ele.innerText);
+
+            if (["zh-tw", "ko", "ru"].includes(now_lang)) {
+                ele.innerText = lang_mod_string;
             }
-            if (now_lang !== "en" && implicit) {
-                for (var ele of implicit_all) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
-
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
+            else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) {
+                ele.innerText += "\n" + lang_mod_string;
             }
-            if (now_lang !== "en" && explicit) {
-                for (var ele of explicit_all) {
-                    var lang_mod_string = mod_to_lang(ele.innerText);
+        }
 
-                    if (["zh-tw", "ko", "ru"].includes(now_lang)) ele.innerText = lang_mod_string;
-                    else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) ele.innerText += "\n" + lang_mod_string;
-                }
+        if (translated)
+            translated_tippy_id.add(tippy_id);
+    }
+
+    function waiting_tippy_data(node) {
+        const content_element = node.querySelector(".tippy-content");
+        if (!content_element) {
+            dbg_warn("[TIPPY DATA NOT RECEIVED] content_element is null");
+            return;
+        }
+
+        if (node.innerText !== "") {
+            dbg_log("tippy data already received, translate now");
+            translate_node(node);
+            return;
+        }
+
+        const content_observer = new MutationObserver((mutationRecords, observer) => {
+            // XXX: 現在還是會觀察到兩次這個 node 的變化，不太確定是什麼原因
+            // dbg_log(node.innerHTML);
+            dbg_log("triggered tippy content observer");
+            observer.disconnect();
+            queueMicrotask(() => { translate_node(node); });  // 放到下一次的微任務中，確保 observer 已經斷開連線
+        });
+
+        content_observer.observe(content_element, {
+            childList: true,
+            subtree: true,
+        });
+    }
+
+    const observer = new MutationObserver(mutationRecords => {
+        for (const mutationRecord of mutationRecords) {
+            for (const addedNode of mutationRecord["addedNodes"]) {
+                waiting_tippy_data(addedNode);
             }
-            // 中文化區塊 end
-
-            // 顯示 tippy element
-            // var tmp = mutationRecord.target.querySelector("div[data-tippy-root]");
-            // tmp.setAttribute("data-state", "");
-            // dbg_log(tmp.outerHTML);
         }
     });
     observer.observe(document.body, {
         childList: true
     });
 
-    var flasks_finished = [];
-    let flasks_observer = new MutationObserver(mutationRecords => {
-        var target = mutationRecords[0]["target"];
-        var tippy_id = mutationRecords[0]["oldValue"];
-
-        if (!tippy_id) return;
-        var mod = tippy_mods_record[tippy_id];
-        if (!mod) {
-            dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
-        } else if (flasks_finished.includes(tippy_id)) {
-            dbg_log("[ALREADY ADDED] flasks with tippy_id=" + tippy_id);
-        } else {
-            add_btn_flasks_jewels(target, "flasks", mod);
-
-            flasks_finished.push(tippy_id);
-            if (flasks_finished.length == equipment_data["flasks"].length) {
-                flasks_observer.disconnect();
-                console.log("[OBSERVER CLOSED] flasks");
-            }
-
-            // 配合詞墜中文化先移除
-            // if (flasks_finished.length == equipment_data["flasks"].length && jewels_finished.length == equipment_data["jewels"].length) {
-            //     observer.disconnect();
-            //     console.log("[OBSERVER CLOSED] all");
-            // }
-        }
-    });
-    var flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
-    // observe each flasks slot
-    for (var flasks_node of flasks_nodes) {
-        flasks_observer.observe(flasks_node, {
+    // observe each flasks and jewels slots
+    const flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
+    const jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
+    for (const node of [...flasks_nodes, ...jewels_nodes]) {
+        const node_observer = create_flasks_jewels_observer();
+        node_observer.observe(node, {
             attributes: true,
             attributeOldValue: true
         });
     }
-
-    var jewels_finished = [];
-    let jewels_observer = new MutationObserver(mutationRecords => {
-        var target = mutationRecords[0]["target"];
-        var tippy_id = mutationRecords[0]["oldValue"];
-
-        if (!tippy_id) return;
-        var mod = tippy_mods_record[tippy_id];
-        if (!mod) {
-            dbg_warn("[TIPPY DATA NOT RECEIVED] tippy_id=" + tippy_id);
-        } else if (jewels_finished.includes(tippy_id)) {
-            dbg_log("[ALREADY ADDED] jewels with tippy_id=" + tippy_id);
-        } else {
-            add_btn_flasks_jewels(target, "jewels", mod);
-
-            jewels_finished.push(tippy_id);
-            if (jewels_finished.length == equipment_data["jewels"].length) {
-                jewels_observer.disconnect();
-                console.log("[OBSERVER CLOSED] jewels");
-            }
-
-            // 配合詞墜中文化先移除
-            // if (flasks_finished.length == equipment_data["flasks"].length && jewels_finished.length == equipment_data["jewels"].length) {
-            //     observer.disconnect();
-            //     console.log("[OBSERVER CLOSED] all");
-            // }
-        }
-    });
-    var jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
-    // observe each jewels slot
-    for (var jewels_node of jewels_nodes) {
-        jewels_observer.observe(jewels_node, {
-            attributes: true,
-            attributeOldValue: true
-        });
-    }
-
-    try {
-        add_btn_items();
-        add_btn_skills();
-    } catch (e) {
-        dbg_warn(e);
-    }
-
-    dbg_log(lang_matching);
 };
 
 // 初始化所需設定
-chrome.runtime.onInstalled.addListener(init_status)
+chrome.runtime.onInstalled.addListener(init_status);
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
-chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, FILTER));
+chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, API_URLS_FILTER));

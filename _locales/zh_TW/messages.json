@@ -12,11 +12,11 @@
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "國際服",
+        "message": "國際服 (.com)",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "台服",
+        "message": "台服 (.tw)",
         "description": "redirect to tw"
     },
     "description_lang": {
@@ -66,5 +66,17 @@
     "opt_mods_file_online": {
         "message": "線上版本 (建議)",
         "description": "using online mods file"
+    },
+    "whats_new": {
+        "message": "🆕 新功能！",
+        "description": "whats new"
+    },
+    "report_bug": {
+        "message": "🐞 回報問題",
+        "description": "report bug"
+    },
+    "version_label": {
+        "message": "版本",
+        "description": "version label"
     }
 }

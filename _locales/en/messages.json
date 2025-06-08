@@ -12,11 +12,11 @@
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "International Server",
+        "message": "International Server (.com)",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "Taiwan Server",
+        "message": "Taiwan Server (.tw)",
         "description": "redirect to tw"
     },
     "description_lang": {
@@ -66,5 +66,37 @@
     "opt_mods_file_online": {
         "message": "Online version (Recommended)",
         "description": "using online mods file"
+    },
+    "description_utilities": {
+        "message": "Utilities",
+        "description": "utilities section"
+    },
+    "description_search_item_in_clipboard": {
+        "message": "Search Item in clipboard",
+        "description": "search item in clipboard"
+    },
+    "description_search_not_yet": {
+        "message": "Not yet search",
+        "description": "default message before click the search button"
+    },
+    "description_search_success": {
+        "message": "Successfully!",
+        "description": "parse succesfully message after click the search button"
+    },
+    "description_search_fail": {
+        "message": "Failed, pls try again.",
+        "description": "parse succesfully message after click the search button"
+    },
+    "whats_new": {
+        "message": "🆕 What's New?",
+        "description": "whats new"
+    },
+    "report_bug": {
+        "message": "🐞 Report Bug",
+        "description": "report bug"
+    },
+    "version_label": {
+        "message": "Version",
+        "description": "version label"
     }
 }

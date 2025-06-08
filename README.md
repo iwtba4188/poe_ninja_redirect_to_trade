@@ -4,6 +4,8 @@ English | [繁體中文](./docs/README-zh-TW.md)
 
 [![extension badge](./image/icon/extension_badge.png)](https://chromewebstore.google.com/detail/poe-ninja-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E4%BA%A4%E6%98%93%E5%B8%82%E9%9B%86/booomkjelcadmolknnllecpgfiehiddm)
 
+<https://github.com/user-attachments/assets/26498680-cfa1-4897-997e-38ccb25e45ce>
+
 ## Introduction
 This is a simple Chrome extension designed to automatically generate buttons that link to the official trading site for all equipment (including flasks, jewels, and gems) of each character listed on [poe ninja](https://poe.ninja/builds), and it includes a built-in feature for Chinese, Korean language and Russian localization of modifiers (which can be disabled)..
 
