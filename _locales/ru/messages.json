@@ -12,11 +12,11 @@
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "Международный сервер",
+        "message": "Международный сервер (.com)",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "Тайваньский сервер",
+        "message": "Тайваньский сервер (.tw)",
         "description": "redirect to tw"
     },
     "description_lang": {
@@ -56,7 +56,7 @@
         "description": "explain the diff between mods file using build-in and online version"
     },
     "description_mods_file_mode": {
-        "message": "Использование таблицы суффиксов",
+        "message": "Источник аффикса",
         "description": "version of online mods file"
     },
     "opt_mods_file_build_in": {

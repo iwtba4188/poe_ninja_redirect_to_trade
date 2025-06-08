@@ -12,11 +12,11 @@
         "description": "redirect domain"
     },
     "opt_redirect_to_com": {
-        "message": "국제 서버",
+        "message": "국제 서버 (.com)",
         "description": "redirect to com"
     },
     "opt_redirect_to_tw": {
-        "message": "대만 서버",
+        "message": "대만 서버 (.tw)",
         "description": "redirect to tw"
     },
     "description_lang": {
