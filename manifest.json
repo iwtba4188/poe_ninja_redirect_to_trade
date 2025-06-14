@@ -6,13 +6,13 @@
     "minimum_chrome_version": "93",
     "default_locale": "en",
     "icons": {
-        "128": "./image/icon/icon.png"
+        "128": "image/icon/icon.png"
     },
     "action": {
-        "default_popup": "./src/popup.html"
+        "default_popup": "src/popup.html"
     },
     "background": {
-        "service_worker": "./src/background.js",
+        "service_worker": "src/background.js",
         "type": "module"
     },
     "permissions": [
