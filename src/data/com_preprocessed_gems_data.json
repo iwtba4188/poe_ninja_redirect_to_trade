@@ -113,8 +113,8 @@
     "Burning Arrow": {
         "type": "Burning Arrow"
     },
-    "Call to Arms": {
-        "type": "Call to Arms"
+    "Autoexertion": {
+        "type": "Autoexertion"
     },
     "Chain Hook": {
         "type": "Chain Hook"
@@ -218,6 +218,9 @@
     "Discipline": {
         "type": "Discipline"
     },
+    "Divine Retribution": {
+        "type": "Divine Retribution"
+    },
     "Divine Ire": {
         "type": "Divine Ire"
     },
@@ -262,6 +265,9 @@
     },
     "Ethereal Knives": {
         "type": "Ethereal Knives"
+    },
+    "Eviscerate": {
+        "type": "Eviscerate"
     },
     "Explosive Arrow": {
         "type": "Explosive Arrow"
@@ -593,8 +599,8 @@
     "Brand Recall": {
         "type": "Brand Recall"
     },
-    "Reckoning": {
-        "type": "Reckoning"
+    "Swordstorm": {
+        "type": "Swordstorm"
     },
     "Rejuvenation Totem": {
         "type": "Rejuvenation Totem"
@@ -602,8 +608,8 @@
     "Righteous Fire": {
         "type": "Righteous Fire"
     },
-    "Riposte": {
-        "type": "Riposte"
+    "Glacial Shield Swipe": {
+        "type": "Glacial Shield Swipe"
     },
     "Purifying Flame": {
         "type": "Purifying Flame"
@@ -932,8 +938,11 @@
     "Vampiric Link": {
         "type": "Vampiric Link"
     },
-    "Vengeance": {
-        "type": "Vengeance"
+    "Crushing Fist": {
+        "type": "Crushing Fist"
+    },
+    "Vengeful Cry": {
+        "type": "Vengeful Cry"
     },
     "Venom Gyre": {
         "type": "Venom Gyre"
@@ -1226,6 +1235,9 @@
     "Eternal Blessing Support": {
         "type": "Eternal Blessing Support"
     },
+    "Expert Retaliation Support": {
+        "type": "Expert Retaliation Support"
+    },
     "Faster Attacks Support": {
         "type": "Faster Attacks Support"
     },
@@ -1252,6 +1264,9 @@
     },
     "Focused Ballista Support": {
         "type": "Focused Ballista Support"
+    },
+    "Focused Channelling Support": {
+        "type": "Focused Channelling Support"
     },
     "Fork Support": {
         "type": "Fork Support"
@@ -1331,8 +1346,8 @@
     "Increased Critical Strikes Support": {
         "type": "Increased Critical Strikes Support"
     },
-    "Increased Duration Support": {
-        "type": "Increased Duration Support"
+    "More Duration Support": {
+        "type": "More Duration Support"
     },
     "Infernal Legion Support": {
         "type": "Infernal Legion Support"
@@ -1451,6 +1466,9 @@
     "Overcharge Support": {
         "type": "Overcharge Support"
     },
+    "Overexertion Support": {
+        "type": "Overexertion Support"
+    },
     "Volley Support": {
         "type": "Volley Support"
     },
@@ -1501,6 +1519,9 @@
     },
     "Returning Projectiles Support": {
         "type": "Returning Projectiles Support"
+    },
+    "Rupture Support": {
+        "type": "Rupture Support"
     },
     "Ruthless Support": {
         "type": "Ruthless Support"
@@ -1665,6 +1686,11 @@
         "text": "Boneshatter of Carnage",
         "disc": "alt_y"
     },
+    "Chain Hook of Trarthus": {
+        "type": "Chain Hook",
+        "text": "Chain Hook of Trarthus",
+        "disc": "alt_y"
+    },
     "Contagion of Transference": {
         "type": "Contagion",
         "text": "Contagion of Transference",
@@ -1740,6 +1766,11 @@
         "text": "Frost Bomb of Forthcoming",
         "disc": "alt_y"
     },
+    "Heavy Strike of Trarthus": {
+        "type": "Heavy Strike",
+        "text": "Heavy Strike of Trarthus",
+        "disc": "alt_y"
+    },
     "Hexblast of Havoc": {
         "type": "Hexblast",
         "text": "Hexblast of Havoc",
@@ -1785,6 +1816,11 @@
         "text": "Perforate of Bloodshed",
         "disc": "alt_y"
     },
+    "Wave of Conviction of Trarthus": {
+        "type": "Wave of Conviction",
+        "text": "Wave of Conviction of Trarthus",
+        "disc": "alt_y"
+    },
     "Rain of Arrows of Saturation": {
         "type": "Rain of Arrows",
         "text": "Rain of Arrows of Saturation",
@@ -1805,6 +1841,11 @@
         "text": "Explosive Trap of Magnitude",
         "disc": "alt_y"
     },
+    "Siege Ballista of Trarthus": {
+        "type": "Siege Ballista",
+        "text": "Siege Ballista of Trarthus",
+        "disc": "alt_y"
+    },
     "Soulrend of the Spiral": {
         "type": "Soulrend",
         "text": "Soulrend of the Spiral",
@@ -1813,6 +1854,11 @@
     "Spark of Unpredictability": {
         "type": "Spark",
         "text": "Spark of Unpredictability",
+        "disc": "alt_y"
+    },
+    "Spectral Helix of Trarthus": {
+        "type": "Spectral Helix",
+        "text": "Spectral Helix of Trarthus",
         "disc": "alt_y"
     },
     "Storm Rain of the Fence": {
@@ -1853,6 +1899,21 @@
     "Summon Skeletons of Mages": {
         "type": "Summon Skeletons",
         "text": "Summon Skeletons of Mages",
+        "disc": "alt_y"
+    },
+    "Sunder of Trarthus": {
+        "type": "Sunder",
+        "text": "Sunder of Trarthus",
+        "disc": "alt_y"
+    },
+    "Spectral Shield Throw of Trarthus": {
+        "type": "Spectral Shield Throw",
+        "text": "Spectral Shield Throw of Trarthus",
+        "disc": "alt_y"
+    },
+    "Spectral Throw of Trarthus": {
+        "type": "Spectral Throw",
+        "text": "Spectral Throw of Trarthus",
         "disc": "alt_y"
     },
     "Tornado of Elemental Turbulence": {
@@ -1995,6 +2056,11 @@
         "text": "Blade Vortex of the Scythe",
         "disc": "alt_x"
     },
+    "Blast Rain of Trarthus": {
+        "type": "Blast Rain",
+        "text": "Blast Rain of Trarthus",
+        "disc": "alt_x"
+    },
     "Blight of Contagion": {
         "type": "Blight",
         "text": "Blight of Contagion",
@@ -2058,6 +2124,11 @@
     "Cyclone of Tumult": {
         "type": "Cyclone",
         "text": "Cyclone of Tumult",
+        "disc": "alt_x"
+    },
+    "Dark Pact of Trarthus": {
+        "type": "Dark Pact",
+        "text": "Dark Pact of Trarthus",
         "disc": "alt_x"
     },
     "Bane of Condemnation": {
@@ -2370,6 +2441,11 @@
         "text": "Power Siphon of the Archmage",
         "disc": "alt_x"
     },
+    "Puncture of Shanking": {
+        "type": "Puncture",
+        "text": "Puncture of Shanking",
+        "disc": "alt_x"
+    },
     "Rage Vortex of Berserking": {
         "type": "Rage Vortex",
         "text": "Rage Vortex of Berserking",
@@ -2473,6 +2549,11 @@
     "Storm Brand of Indecision": {
         "type": "Storm Brand",
         "text": "Storm Brand of Indecision",
+        "disc": "alt_x"
+    },
+    "Storm Call of Trarthus": {
+        "type": "Storm Call",
+        "text": "Storm Call of Trarthus",
         "disc": "alt_x"
     },
     "Storm Rain of the Conduit": {

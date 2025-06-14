@@ -113,8 +113,8 @@
     "Burning Arrow": {
         "type": "燃燒箭矢"
     },
-    "Call to Arms": {
-        "type": "武裝召喚"
+    "Autoexertion": {
+        "type": "自動竭盡"
     },
     "Chain Hook": {
         "type": "奪魂勾索"
@@ -218,6 +218,9 @@
     "Discipline": {
         "type": "紀律"
     },
+    "Divine Retribution": {
+        "type": "神聖制裁"
+    },
     "Divine Ire": {
         "type": "聖怒"
     },
@@ -262,6 +265,9 @@
     },
     "Ethereal Knives": {
         "type": "虛空匕首"
+    },
+    "Eviscerate": {
+        "type": "剔骨"
     },
     "Explosive Arrow": {
         "type": "爆炸箭矢"
@@ -593,8 +599,8 @@
     "Brand Recall": {
         "type": "烙印呼喚"
     },
-    "Reckoning": {
-        "type": "清算"
+    "Swordstorm": {
+        "type": "劍刃風暴"
     },
     "Rejuvenation Totem": {
         "type": "回春圖騰"
@@ -602,8 +608,8 @@
     "Righteous Fire": {
         "type": "正義之火"
     },
-    "Riposte": {
-        "type": "擊刃"
+    "Glacial Shield Swipe": {
+        "type": "冰川盾擊"
     },
     "Purifying Flame": {
         "type": "淨化烈焰"
@@ -932,8 +938,11 @@
     "Vampiric Link": {
         "type": "連結：吸血"
     },
-    "Vengeance": {
-        "type": "復仇"
+    "Crushing Fist": {
+        "type": "粉碎之拳"
+    },
+    "Vengeful Cry": {
+        "type": "復仇之嚎"
     },
     "Venom Gyre": {
         "type": "猛毒迴旋"
@@ -1226,6 +1235,9 @@
     "Eternal Blessing Support": {
         "type": "永恆祝福輔助"
     },
+    "Expert Retaliation Support": {
+        "type": "專家復仇輔助"
+    },
     "Faster Attacks Support": {
         "type": "快速攻擊輔助"
     },
@@ -1252,6 +1264,9 @@
     },
     "Focused Ballista Support": {
         "type": "專注砲塔輔助"
+    },
+    "Focused Channelling Support": {
+        "type": "專注引導輔助"
     },
     "Fork Support": {
         "type": "分裂輔助"
@@ -1331,7 +1346,7 @@
     "Increased Critical Strikes Support": {
         "type": "增加暴擊率輔助"
     },
-    "Increased Duration Support": {
+    "More Duration Support": {
         "type": "持續時間延長輔助"
     },
     "Infernal Legion Support": {
@@ -1451,6 +1466,9 @@
     "Overcharge Support": {
         "type": "超負荷輔助"
     },
+    "Overexertion Support": {
+        "type": "竭盡全力輔助"
+    },
     "Volley Support": {
         "type": "齊射輔助"
     },
@@ -1501,6 +1519,9 @@
     },
     "Returning Projectiles Support": {
         "type": "投射物返回輔助"
+    },
+    "Rupture Support": {
+        "type": "殘破輔助"
     },
     "Ruthless Support": {
         "type": "殘暴輔助"
@@ -1665,6 +1686,11 @@
         "text": "碎骨．屠殺",
         "disc": "alt_y"
     },
+    "Chain Hook of Trarthus": {
+        "type": "奪魂勾索",
+        "text": "特拉特斯奪魂勾索",
+        "disc": "alt_y"
+    },
     "Contagion of Transference": {
         "type": "瘟疫",
         "text": "瘟疫．移轉",
@@ -1740,6 +1766,11 @@
         "text": "寒霜爆．來臨",
         "disc": "alt_y"
     },
+    "Heavy Strike of Trarthus": {
+        "type": "沉重之擊",
+        "text": "特拉特斯沉重之擊",
+        "disc": "alt_y"
+    },
     "Hexblast of Havoc": {
         "type": "咒術枯萎",
         "text": "咒術枯萎．浩劫",
@@ -1785,6 +1816,11 @@
         "text": "裂地刺穿．流血",
         "disc": "alt_y"
     },
+    "Wave of Conviction of Trarthus": {
+        "type": "信念浪湧",
+        "text": "特拉特斯信念浪湧",
+        "disc": "alt_y"
+    },
     "Rain of Arrows of Saturation": {
         "type": "箭雨",
         "text": "箭雨．飽和",
@@ -1805,6 +1841,11 @@
         "text": "爆裂陷阱．量級",
         "disc": "alt_y"
     },
+    "Siege Ballista of Trarthus": {
+        "type": "攻城炮台",
+        "text": "特拉特斯攻城炮台",
+        "disc": "alt_y"
+    },
     "Soulrend of the Spiral": {
         "type": "靈體撕裂",
         "text": "靈體撕裂．螺旋",
@@ -1813,6 +1854,11 @@
     "Spark of Unpredictability": {
         "type": "電球",
         "text": "電球．未知",
+        "disc": "alt_y"
+    },
+    "Spectral Helix of Trarthus": {
+        "type": "靈體旋武",
+        "text": "特拉特斯靈體旋武",
         "disc": "alt_y"
     },
     "Storm Rain of the Fence": {
@@ -1853,6 +1899,21 @@
     "Summon Skeletons of Mages": {
         "type": "召喚骷髏",
         "text": "召喚骷髏．巫術",
+        "disc": "alt_y"
+    },
+    "Sunder of Trarthus": {
+        "type": "大地震擊",
+        "text": "特拉特斯大地震擊",
+        "disc": "alt_y"
+    },
+    "Spectral Shield Throw of Trarthus": {
+        "type": "盾靈投擲",
+        "text": "特拉特斯盾靈投擲",
+        "disc": "alt_y"
+    },
+    "Spectral Throw of Trarthus": {
+        "type": "靈體投擲",
+        "text": "特拉特斯靈體投擲",
         "disc": "alt_y"
     },
     "Tornado of Elemental Turbulence": {
@@ -1995,6 +2056,11 @@
         "text": "飛刃風暴．鐮刀",
         "disc": "alt_x"
     },
+    "Blast Rain of Trarthus": {
+        "type": "爆裂箭雨",
+        "text": "特拉特斯爆裂箭雨",
+        "disc": "alt_x"
+    },
     "Blight of Contagion": {
         "type": "萎滅",
         "text": "萎滅．瘟疫",
@@ -2058,6 +2124,11 @@
     "Cyclone of Tumult": {
         "type": "旋風斬",
         "text": "旋風斬．騷動",
+        "disc": "alt_x"
+    },
+    "Dark Pact of Trarthus": {
+        "type": "暗夜血契",
+        "text": "特拉特斯暗夜血契",
         "disc": "alt_x"
     },
     "Bane of Condemnation": {
@@ -2370,6 +2441,11 @@
         "text": "力量抽取．大法師",
         "disc": "alt_x"
     },
+    "Puncture of Shanking": {
+        "type": "放血",
+        "text": "腿脛放血",
+        "disc": "alt_x"
+    },
     "Rage Vortex of Berserking": {
         "type": "盛怒漩渦",
         "text": "盛怒漩渦．狂暴",
@@ -2473,6 +2549,11 @@
     "Storm Brand of Indecision": {
         "type": "風暴烙印",
         "text": "風暴烙印．躊躇",
+        "disc": "alt_x"
+    },
+    "Storm Call of Trarthus": {
+        "type": "風暴呼喚",
+        "text": "特拉特斯風暴呼喚",
         "disc": "alt_x"
     },
     "Storm Rain of the Conduit": {
