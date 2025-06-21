@@ -302,7 +302,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     /**
      * 生成重導向按鈕
      * @param {string} target_query 按下按鈕後會前往的網址
-     * @param {string} btn_position Literal["top", "buttom"] 按鈕放在上方或下方
+     * @param {string} btn_position Literal["top", "bottom"] 按鈕放在上方或下方
      * @returns {HTMLButtonElement} 重導向至 target_url 的按鈕
      */
     function gen_btn_trade_element(target_query, btn_position) {
@@ -316,16 +316,16 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         balance_icon_node.setAttribute("height", "1em");
         balance_icon_node.innerHTML = BALANCE_ICON;
 
-        new_node.setAttribute("class", "button");
+        new_node.setAttribute("class", "button absolute opacity-0 group-hover:opacity-100");
         new_node.setAttribute("title", "Redirect to trade website");
         new_node.setAttribute("role", "button");
         new_node.setAttribute("data-variant", "plain");
         new_node.setAttribute("data-size", "xsmall");
         new_node.setAttribute("onclick", `window.open('${POE_TRADE_URL}?q=${target_query}', '_blank');`);
 
-        if (btn_position === "top") new_node.setAttribute("style", "opacity: 0; position: absolute; top: 0px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
-        else if (btn_position === "buttom") new_node.setAttribute("style", "opacity: 0; position: absolute; bottom: -15px; left: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
-        else if (btn_position === "skills") new_node.setAttribute("style", "position: relative; background-color: hsla(var(--emerald-800),var(--opacity-100));");
+        if (btn_position === "top") new_node.setAttribute("style", "position: absolute; top: 0px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
+        else if (btn_position === "bottom") new_node.setAttribute("style", "position: absolute; bottom: -15px; left: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
+        else if (btn_position === "skills") new_node.setAttribute("style", "opacity: 1; position: relative; background-color: hsla(var(--emerald-800),var(--opacity-100));");
         // new_node.setAttribute("style", "opacity: 0; position: absolute; bottom: -15px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
 
         new_node.appendChild(balance_icon_node);
@@ -346,7 +346,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     }
 
     /**
-     * 將 物品 的重導向按鈕加入頁面
+     * 將 物品,藥劑,珠寶 的重導向按鈕加入頁面
      * @returns {None}
      */
     async function add_btn_items() {
@@ -354,40 +354,50 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const buttons = document.body.querySelectorAll("div.content.p-6:nth-child(2) button[title~=Copy]");
         console.log(buttons);
 
-        // buttons
+        let offset = 0;
+
+        // items buttons
         for (let i = 0; i < equipment_data["items"].length; i++) {
-            let slot_num = 0;
-            if (i < equipment_data["items"].length) { //items
-                slot_num = equipment_data["items"][i]["itemSlot"];
-            }
+            let slot_num = equipment_data["items"][i]["itemSlot"];
 
-            if (i < equipment_data["items"].length) var target_query = await gen_item_target_query_str("items", i);
-            else continue;
-
+            var target_query = gen_item_target_query_str("items", i);
             if ([1, 2, 3, 5, 6, 7, 10].includes(slot_num)) var new_node = gen_btn_trade_element(target_query, "top");
-            else var new_node = gen_btn_trade_element(target_query, "buttom");
+            else var new_node = gen_btn_trade_element(target_query, "bottom");
 
             buttons[i].insertAdjacentElement("afterend", new_node);
         }
-    };
 
-    /**
-     * 將 藥劑、珠寶 的重導向按鈕加入頁面
-     * @param {HTMLButtonElement} target_btn copy pob button，重導向按鈕會加在它後面
-     * @param {string} equipment_mod 物品詞墜
-     * @returns {None}
-     */
-    async function add_btn_flasks_jewels(target_btn, equipment_mod) {
-        const target_query =
-            mods_mapping_target_query["flasks"][equipment_mod] ??
-            mods_mapping_target_query["jewels"][equipment_mod];
+        offset += equipment_data["items"].length;
 
-        const new_node = gen_btn_trade_element(target_query, "buttom");
+        // flasks buttons
+        for (let i = 0; i < equipment_data["flasks"].length; i++) {
+            var target_query = gen_item_target_query_str("flasks", i);
+            var new_node = gen_btn_trade_element(target_query, "bottom");
 
-        // jewels 的按鈕要加在 target_btn 的 div 裡面
-        const sub_div = target_btn.querySelector("div");
-        const target_append_div = sub_div ? sub_div : target_btn;
-        target_append_div.appendChild(new_node);
+            buttons[offset + equipment_data["flasks"][i]["itemData"]["x"]].insertAdjacentElement("afterend", new_node);
+        }
+
+        offset += equipment_data["flasks"].length;
+
+        // jewels buttons
+        let jewels_names = [];
+        let jewels_nodes = document.body.querySelectorAll("div.content.p-6:nth-child(2) > div:nth-child(2) > div > div > div > div > div > div:nth-child(2)");
+        for (let node of jewels_nodes) {
+            const jewel_name = node.innerText.trim();
+            jewels_names.push(jewel_name);
+        }
+        dbg_log(jewels_names);
+
+        for (let i = 0; i < equipment_data["jewels"].length; i++) {
+            const jewel_name = equipment_data["jewels"][i]["itemData"]["name"] + " " + equipment_data["jewels"][i]["itemData"]["baseType"];
+
+            var target_query = gen_item_target_query_str("jewels", i);
+            var new_node = gen_btn_trade_element(target_query, "bottom");
+
+            buttons[offset + jewels_names.indexOf(jewel_name)].insertAdjacentElement("afterend", new_node);
+
+            jewels_names[jewels_names.indexOf(jewel_name)] = ""; 
+        }
     };
 
     /**
@@ -397,58 +407,18 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     async function add_btn_skills() {
         const btns = document.body.querySelectorAll("article._item-border_17v42_1 div[style='flex: 1 1 auto;']");
 
-        for (let i = 0; i < btns.length; i++) {
-            const target_query = mods_mapping_target_query["skills"][i];
-            const btn = gen_btn_trade_element(target_query, "skills");
-            const btn_span = gen_btn_span_element();
-
-            btns[i].prepend(btn_span);
-            btns[i].prepend(btn);
-        }
-    };
-
-    /**
-     * 將物品的 enchant, implicit and explicit mods 直接串在一起，用來當作 mods_mapping_target_query 的 key
-     * @param {string} item_type Literal["items", "flasks", "jewels"]
-     * @param {int} item_index 物品在該類別的 idx
-     * @returns {string} 串聯後的詞墜
-     */
-    function combine_item_mods(item_type, item_index) {
-        let mod = "";
-        mod += equipment_data[item_type][item_index]["itemData"]["enchantMods"].join("");
-        mod += equipment_data[item_type][item_index]["itemData"]["implicitMods"].join("");
-        mod += equipment_data[item_type][item_index]["itemData"]["explicitMods"].join("");
-
-        return mod;
-    };
-
-    /**
-     * 建立所有物品 mods 和 query string 的 mapping
-     * @returns {object} 所有物品的 mods mapping query string
-     */
-    async function gen_all_target_query_mapping() {
-        const mapping = { "items": {}, "flasks": {}, "jewels": {}, "skills": [] };
-        const item_types = ["items", "flasks", "jewels"];
-
-        // gen item types
-        for (const type of item_types) {
-            for (let i = 0; i < equipment_data[type].length; i++) {
-                const mod = combine_item_mods(type, i);
-                const target_query = gen_item_target_query_str(type, i);
-                mapping[type][mod] = target_query;
-            }
-        }
-
-        const server_type = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
-        // gen skills type
+        let btns_count = 0;
         for (const skill_section of equipment_data["skills"]) {
             for (const gem of skill_section["allGems"]) {
-                const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, server_type);
-                mapping["skills"].push(target_query);
+                const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, redirect_to);
+                const btn = gen_btn_trade_element(target_query, "skills");
+                const btn_span = gen_btn_span_element();
+        
+                btns[btns_count].prepend(btn_span);
+                btns[btns_count].prepend(btn);
+                btns_count += 1;
             }
         }
-
-        return mapping;
     };
 
     /**
@@ -481,11 +451,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     dbg_add_msg_to_page_top("[DEBUGGING]");
 
-    const mods_mapping_target_query = await gen_all_target_query_mapping();
-    dbg_log("=============================");
-    dbg_log(mods_mapping_target_query);
-    dbg_log("=============================");
-
     // 將所有物品的重導向按鈕加入頁面
     try {
         await add_btn_items();
@@ -512,38 +477,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         }
     });
     const translated_tippy_id = new Set();
-
-    function adding_button(target, tippy_id, observer) {
-        const equipment_mod = tippy_mods_record[tippy_id];
-
-        if (equipment_mod) {
-            add_btn_flasks_jewels(target, equipment_mod);
-            observer.disconnect();
-        }
-    }
-
-    function wait_for_tippy_record(tippy_id, callback) {
-        if (tippy_mods_record[tippy_id]) {
-            callback();
-        } else {
-            tippy_mods_record_callbacks.set(tippy_id, callback);
-        }
-    }
-
-    function create_flasks_jewels_observer() {
-        const observer = new MutationObserver((mutationRecords, observer) => {
-            const target = mutationRecords[0]["target"];
-            const tippy_id = target.getAttribute("aria-describedby");
-
-            if (tippy_id) {
-                wait_for_tippy_record(tippy_id, () => {
-                    adding_button(target, tippy_id, observer);
-                });
-            }
-        });
-
-        return observer;
-    }
 
     function translate_node(node) {
         const tippy_id = node.id;
@@ -585,12 +518,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     }
 
     function waiting_tippy_data(node) {
-        const content_element = node.querySelector(".tippy-content");
-        if (!content_element) {
-            dbg_warn("[TIPPY DATA NOT RECEIVED] content_element is null");
-            return;
-        }
-
+        dbg_log(node.innerHTML);
         if (node.innerText !== "") {
             dbg_log("tippy data already received, translate now");
             translate_node(node);
@@ -605,7 +533,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             queueMicrotask(() => { translate_node(node); });  // 放到下一次的微任務中，確保 observer 已經斷開連線
         });
 
-        content_observer.observe(content_element, {
+        content_observer.observe(node, {
             childList: true,
             subtree: true,
         });
@@ -622,16 +550,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         childList: true
     });
 
-    // observe each flasks and jewels slots
-    const flasks_nodes = document.body.querySelectorAll("div._equipment_8bh10_1 div div._item-hover_8bh10_26");
-    const jewels_nodes = document.body.querySelectorAll("div._layout-cluster_hedo7_1 div.layout-stack div._layout-cluster_hedo7_1 > div");
-    for (const node of [...flasks_nodes, ...jewels_nodes]) {
-        const node_observer = create_flasks_jewels_observer();
-        node_observer.observe(node, {
-            attributes: true,
-            attributeOldValue: true
-        });
-    }
 };
 
 // 初始化所需設定
