@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extension_name__",
     "description": "__MSG_extension_description__",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "manifest_version": 3,
     "minimum_chrome_version": "93",
     "default_locale": "en",
@@ -21,6 +21,7 @@
         "storage"
     ],
     "host_permissions": [
-        "https://poe.ninja/builds/*"
+        "https://poe.ninja/builds/*",
+        "https://poe2.ninja/builds/*"
     ]
 }
