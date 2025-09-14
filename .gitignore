@@ -2,5 +2,7 @@ temp*
 tmp*
 test*
 release*
+logs*
+uv.lock
 
 __pycache__
