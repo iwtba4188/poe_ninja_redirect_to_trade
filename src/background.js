@@ -2,7 +2,7 @@ import { LocalDataLoader, OnlineDataLoader } from "./modules/dataloader.js";
 import { get_status, set_status } from "./modules/storage_utils.js";
 
 const API_URLS_FILTER = {
-    urls: ["https://poe.ninja/api/data/*/getcharacter?*", "https://poe2.ninja/api/builds/*/character?*"]
+    urls: ["https://poe.ninja/poe1/api/builds/*/character?*", "https://poe.ninja/poe2/api/builds/*/character?*"]
 };
 
 
