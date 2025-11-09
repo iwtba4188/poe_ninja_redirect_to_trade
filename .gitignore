@@ -4,5 +4,7 @@ test*
 release*
 logs*
 uv.lock
+*.ignore
+*.ignore.*
 
 __pycache__
