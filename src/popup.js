@@ -3,7 +3,7 @@ import { get_status, set_status } from "./modules/storage_utils.js";
 
 function refresh_page() {
     // refresh current focus ninja page
-    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/builds/*" }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/poe1/builds/*" }, function (tabs) {
         if (tabs.length > 0) chrome.tabs.update(tabs[0].id, { url: tabs[0].url });
     });
 }
