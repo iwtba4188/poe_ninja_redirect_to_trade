@@ -21,6 +21,6 @@
         "storage"
     ],
     "host_permissions": [
-        "https://poe.ninja/poe1/builds/*"
+        "https://poe.ninja/*"
     ]
 }
