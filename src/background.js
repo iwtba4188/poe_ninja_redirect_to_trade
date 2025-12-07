@@ -3,7 +3,7 @@ import { get_status, set_status } from "./modules/storage_utils.js";
 
 const API_URLS_FILTER = {
     urls: [
-        "https://poe.ninja/poe1/api/builds/*/character?*", 
+        "https://poe.ninja/poe1/api/builds/*/character?*",
         "https://poe.ninja/poe1/api/profile/characters/*",
         "https://poe.ninja/poe2/api/builds/*/character?*",
         "https://poe.ninja/poe2/api/profile/characters/*"
@@ -212,7 +212,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const target_query = JSON.parse(JSON.stringify(query_data));
         const equipment = equipment_data[item_type][item_index];
         const mod_type_names = ["enchantMods", "implicitMods", "fracturedMods", "explicitMods", "craftedMods"];
-        
+
         // Set search type
         target_query.query.status.option = trade_type;
 
@@ -401,7 +401,13 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         dbg_log(jewels_names);
 
         for (let i = 0; i < equipment_data["jewels"].length; i++) {
-            const jewel_name = equipment_data["jewels"][i]["itemData"]["name"] + " " + equipment_data["jewels"][i]["itemData"]["baseType"];
+            let jewel_name = "";
+            if (equipment_data["jewels"][i]["itemData"]["synthesised"]) {
+                jewel_name = equipment_data["jewels"][i]["itemData"]["name"] + " " + equipment_data["jewels"][i]["itemData"]["typeLine"];
+            } else {
+                jewel_name = equipment_data["jewels"][i]["itemData"]["name"] + " " + equipment_data["jewels"][i]["itemData"]["baseType"];
+            }
+            jewel_name = jewel_name.trim()
 
             var target_query = gen_item_target_query_str("jewels", i);
             var new_node = gen_btn_trade_element(target_query, "bottom");
