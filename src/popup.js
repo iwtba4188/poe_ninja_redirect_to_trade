@@ -1,15 +1,17 @@
 // import * as bootstrap from "./modules/bootstrap.bundle.min.js";
 import { get_status, set_status } from "./modules/storage_utils.js";
 
+let setting_ids = ["redirect-to", "lang", "mods-file-mode", "trade-type", "debug"];
+
 function refresh_page() {
     // refresh current focus ninja page
-    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/poe1/builds/*" }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/*/builds/*" }, function (tabs) {
         if (tabs.length > 0) chrome.tabs.update(tabs[0].id, { url: tabs[0].url });
     });
 }
 
 async function on_change_event() {
-    for (var id of ["redirect-to", "lang", "mods-file-mode", "debug"]) {
+    for (var id of setting_ids) {
         if (await get_status(id) !== document.getElementById(id).value) {
             await set_status(id, document.getElementById(id).value);
             refresh_page();
@@ -37,11 +39,12 @@ function init_chrome_i18n() {
 };
 
 async function update_select_elements() {
-    const statuses = await chrome.storage.local.get(["redirect-to", "lang", "mods-file-mode", "debug"]);
+    const statuses = await chrome.storage.local.get(setting_ids);
 
     document.getElementById("redirect-to").value = statuses["redirect-to"] || "com";
     document.getElementById("lang").value = statuses["lang"] || "en";
     document.getElementById("mods-file-mode").value = statuses["mods-file-mode"] || "build-in";
+    document.getElementById("trade-type").value = statuses["trade-type"] || "available";
     document.getElementById("debug").value = statuses["debug"] || "off";
 };
 
@@ -65,7 +68,6 @@ async function init() {
 // chrome.storage.local.clear();
 await init();
 
-document.getElementById("redirect-to").addEventListener("change", on_change_event);
-document.getElementById("lang").addEventListener("change", on_change_event);
-document.getElementById("mods-file-mode").addEventListener("change", on_change_event);
-document.getElementById("debug").addEventListener("change", on_change_event);
+for (var id of setting_ids) {
+    document.getElementById(id).addEventListener("change", on_change_event);
+}

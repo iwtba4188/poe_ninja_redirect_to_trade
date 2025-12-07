@@ -78,5 +78,25 @@
     "version_label": {
         "message": "版本",
         "description": "version label"
+    },
+    "description_trade_type": {
+        "message": "交易類型",
+        "description": "Choose trading type: instant buyout, in person, both, any"
+    },
+    "opt_trade_type_instant_buyout_and_in_person": {
+        "message": "即刻購買以及面交",
+        "description": "instant buyout & in person"
+    },
+    "opt_trade_type_instant_buyout": {
+        "message": "僅限即刻購買",
+        "description": "instant buyout only"
+    },
+    "opt_trade_type_in_person": {
+        "message": "僅限面交",
+        "description": "in person only"
+    },
+    "opt_trade_type_any": {
+        "message": "任何",
+        "description": "any"
     }
 }

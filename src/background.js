@@ -2,7 +2,12 @@ import { LocalDataLoader, OnlineDataLoader } from "./modules/dataloader.js";
 import { get_status, set_status } from "./modules/storage_utils.js";
 
 const API_URLS_FILTER = {
-    urls: ["https://poe.ninja/poe1/api/builds/*/character?*", "https://poe.ninja/poe2/api/builds/*/character?*"]
+    urls: [
+        "https://poe.ninja/poe1/api/builds/*/character?*", 
+        "https://poe.ninja/poe1/api/profile/characters/*",
+        "https://poe.ninja/poe2/api/builds/*/character?*",
+        "https://poe.ninja/poe2/api/profile/characters/*"
+    ]
 };
 
 
@@ -133,6 +138,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     const is_debugging = (await chrome.storage.local.get(["debug"]))["debug"] === "on";
     const redirect_to = (await chrome.storage.local.get(["redirect-to"]))["redirect-to"];
+    const trade_type = (await chrome.storage.local.get(["trade-type"]))["trade-type"];
     const now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
     const now_lang_for_lang_matching = now_lang.replace("en-", "");
 
@@ -206,6 +212,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const target_query = JSON.parse(JSON.stringify(query_data));
         const equipment = equipment_data[item_type][item_index];
         const mod_type_names = ["enchantMods", "implicitMods", "fracturedMods", "explicitMods", "craftedMods"];
+        
+        // Set search type
+        target_query.query.status.option = trade_type;
 
         for (const type_name of mod_type_names) {
             const item_mods = equipment.itemData[type_name];
@@ -396,7 +405,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
             buttons[offset + jewels_names.indexOf(jewel_name)].insertAdjacentElement("afterend", new_node);
 
-            jewels_names[jewels_names.indexOf(jewel_name)] = ""; 
+            jewels_names[jewels_names.indexOf(jewel_name)] = "";
         }
     };
 
@@ -413,7 +422,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
                 const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, redirect_to);
                 const btn = gen_btn_trade_element(target_query, "skills");
                 const btn_span = gen_btn_span_element();
-        
+
                 btns[btns_count].prepend(btn_span);
                 btns[btns_count].prepend(btn);
                 btns_count += 1;

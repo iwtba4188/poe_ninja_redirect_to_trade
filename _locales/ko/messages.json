@@ -66,5 +66,25 @@
     "opt_mods_file_online": {
         "message": "온라인 버전 (권장)",
         "description": "using online mods file"
+    },
+    "description_trade_type": {
+        "message": "거래 유형",
+        "description": "Choose trading type: instant buyout, in person, both, any"
+    },
+    "opt_trade_type_instant_buyout_and_in_person": {
+        "message": "족시 구입 및 직접 거래",
+        "description": "instant buyout & in person"
+    },
+    "opt_trade_type_instant_buyout": {
+        "message": "족시 구입만 가능",
+        "description": "instant buyout only"
+    },
+    "opt_trade_type_in_person": {
+        "message": "직접 거래만 가능",
+        "description": "in person only"
+    },
+    "opt_trade_type_any": {
+        "message": "모두",
+        "description": "any"
     }
 }

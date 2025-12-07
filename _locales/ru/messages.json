@@ -66,5 +66,25 @@
     "opt_mods_file_online": {
         "message": "Онлайн-версия (рекомендуется)",
         "description": "using online mods file"
+    },
+    "description_trade_type": {
+        "message": "Тип сделки",
+        "description": "Choose trading type: instant buyout, in person, both, any"
+    },
+    "opt_trade_type_instant_buyout_and_in_person": {
+        "message": "Мгновенный выкупи и личный обмен",
+        "description": "instant buyout & in person"
+    },
+    "opt_trade_type_instant_buyout": {
+        "message": "Только мгновенный выкуп",
+        "description": "instant buyout only"
+    },
+    "opt_trade_type_in_person": {
+        "message": "Только личный обмен",
+        "description": "in person only"
+    },
+    "opt_trade_type_any": {
+        "message": "Все",
+        "description": "any"
     }
 }

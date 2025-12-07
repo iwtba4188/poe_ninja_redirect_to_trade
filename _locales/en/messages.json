@@ -98,5 +98,25 @@
     "version_label": {
         "message": "Version",
         "description": "version label"
+    },
+    "description_trade_type": {
+        "message": "Trade Type",
+        "description": "Choose trading type: instant buyout, in person, both, any"
+    },
+    "opt_trade_type_instant_buyout_and_in_person": {
+        "message": "Instant Buyout and In Person Trade",
+        "description": "instant buyout & in person"
+    },
+    "opt_trade_type_instant_buyout": {
+        "message": "Instant Buyout Only",
+        "description": "instant buyout only"
+    },
+    "opt_trade_type_in_person": {
+        "message": "In Person Trade Only",
+        "description": "in person only"
+    },
+    "opt_trade_type_any": {
+        "message": "Any",
+        "description": "any"
     }
 }
