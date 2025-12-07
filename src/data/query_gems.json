@@ -1,7 +1,7 @@
 {
     "query": {
         "status": {
-            "option": "online"
+            "option": "any"
         },
         "type": {
             "option": "Lancing Steel",

@@ -290,6 +290,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const target_query = JSON.parse(JSON.stringify(gems_query_data));
         const gems_info = server_type === "com" ? gems_data[name] : tw_gems_data[name];
 
+        // Set search type
+        target_query.query.status.option = trade_type;
+
         if (!gems_info) return;
 
         // alter version gems
@@ -414,11 +417,16 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      * @returns {None}
      */
     async function add_btn_skills() {
-        const btns = document.body.querySelectorAll("article.p-1 div[style='flex: 1 1 auto;']");
+        const btns = document.body.querySelectorAll("div[style='flex: 1 1 auto;']");
 
         let btns_count = 0;
         for (const skill_section of equipment_data["skills"]) {
             for (const gem of skill_section["allGems"]) {
+                if (!("itemData" in gem)) {
+                    btns_count += 1;
+                    continue
+                }
+
                 const target_query = gen_skills_target_query_str(gem.name, gem.level, gem.quality, redirect_to);
                 const btn = gen_btn_trade_element(target_query, "skills");
                 const btn_span = gen_btn_span_element();
