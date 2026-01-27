@@ -328,15 +328,16 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         balance_icon_node.setAttribute("height", "1em");
         balance_icon_node.innerHTML = BALANCE_ICON;
 
-        new_node.setAttribute("class", "button absolute opacity-0 group-hover:opacity-100");
+        new_node.setAttribute("class", "button absolute");
         new_node.setAttribute("title", "Redirect to trade website");
         new_node.setAttribute("role", "button");
         new_node.setAttribute("data-variant", "plain");
         new_node.setAttribute("data-size", "xsmall");
         new_node.setAttribute("onclick", `window.open('${POE_TRADE_URL}?q=${target_query}', '_blank');`);
 
-        if (btn_position === "top") new_node.setAttribute("style", "position: absolute; top: 0px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
-        else if (btn_position === "bottom") new_node.setAttribute("style", "position: absolute; bottom: -15px; left: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
+        if (btn_position === "top") new_node.setAttribute("style", "margin-left: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); border-radius: var(--rounded-sm); z-index: 100;");
+        else if (btn_position === "bottom") new_node.setAttribute("style", "position: absolute; top: 230%; right: 5px; background-color: hsla(var(--emerald-800),var(--opacity-100)); border-radius: var(--rounded-sm); z-index: 100;");
+        else if (btn_position === "bottom-flask") new_node.setAttribute("style", "position: absolute; top: 550%; right: 5px; background-color: hsla(var(--emerald-800),var(--opacity-100)); border-radius: var(--rounded-sm); z-index: 100;");
         else if (btn_position === "skills") new_node.setAttribute("style", "opacity: 1; position: relative; background-color: hsla(var(--emerald-800),var(--opacity-100));");
         // new_node.setAttribute("style", "opacity: 0; position: absolute; bottom: -15px; right: var(--s1); background-color: hsla(var(--emerald-800),var(--opacity-100)); transform: translateY(-66%); border-radius: var(--rounded-sm); z-index: 100;");
 
@@ -384,7 +385,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         // flasks buttons
         for (let i = 0; i < equipment_data["flasks"].length; i++) {
             var target_query = gen_item_target_query_str("flasks", i);
-            var new_node = gen_btn_trade_element(target_query, "bottom");
+            var new_node = gen_btn_trade_element(target_query, "bottom-flask");
 
             buttons[offset + equipment_data["flasks"][i]["itemData"]["x"]].insertAdjacentElement("afterend", new_node);
         }
