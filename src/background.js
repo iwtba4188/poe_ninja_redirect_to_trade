@@ -394,7 +394,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
         // jewels buttons
         let jewels_names = [];
-        let jewels_nodes = document.body.querySelectorAll("div.p-6:nth-child(2) > div:nth-child(2) > div > div > div > div > div > div:nth-child(2)");
+        let jewels_nodes = document.body.querySelectorAll("div.p-6:nth-child(2) > div:nth-child(2) > div > div > div > div > div > div > div:nth-child(2)");
         for (let node of jewels_nodes) {
             const jewel_name = node.innerText.trim();
             jewels_names.push(jewel_name);
