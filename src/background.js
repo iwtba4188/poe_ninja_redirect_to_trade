@@ -384,11 +384,19 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
         block_other_click_event_for_button(new_node);
 
-        new_node.addEventListener("click", () => {
+new_node.addEventListener("click", () => {
             update_mask_list(node, mask_list);
             let url = "";
             if (is_gem) {
-                const gem_name = item_data.typeLine || item_data.name;
+                let gem_name = "";
+                if (item_data.name) gem_name += item_data.name + " ";
+                if (item_data.typeLine) gem_name += item_data.typeLine;
+                gem_name = gem_name.trim();
+
+                if (item_data.hybrid && item_data.hybrid.baseTypeName) {
+                    gem_name += ` (${item_data.hybrid.baseTypeName})`;
+                }
+
                 url = `${POE_TRADE_URL}?q=${gen_gem_query(mask_list, gem_name, level, quality, redirect_to)}`;
             } else {
                 url = `${POE_TRADE_URL}?q=${gen_query(mask_list, item_data, is_gem)}`;
@@ -768,29 +776,36 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         }
 
         function get_item_data_by_node(node, name, node_level) {
-            function construct_name(iData) {
-                let n = "";
-                if (iData["name"]) n += iData["name"] + " ";
-                if (iData["typeLine"]) n += iData["typeLine"];
-                return n.trim();
+            function get_possible_names(iData) {
+                let base = "";
+                if (iData["name"]) base += iData["name"] + " ";
+                if (iData["typeLine"]) base += iData["typeLine"];
+                base = base.trim();
+
+                let names = [base];
+
+                if (iData["hybrid"] && iData["hybrid"]["baseTypeName"]) {
+                    names.push(`${base} (${iData["hybrid"]["baseTypeName"]})`);
+                }
+                return names;
             }
 
             let candidates = [];
 
             try {
                 for (var item of equipment_data["items"] || []) {
-                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
+                    if (get_possible_names(item["itemData"]).includes(name)) candidates.push({ data: item["itemData"], is_gem: false });
                 }
                 for (var item of equipment_data["jewels"] || []) {
-                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
+                    if (get_possible_names(item["itemData"]).includes(name)) candidates.push({ data: item["itemData"], is_gem: false });
                 }
                 for (var item of equipment_data["flasks"] || []) {
-                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
+                    if (get_possible_names(item["itemData"]).includes(name)) candidates.push({ data: item["itemData"], is_gem: false });
                 }
                 for (var skill_group of equipment_data["skills"] || []) {
                     for (var item of skill_group["allGems"] || []) {
                         if (!item["itemData"]) continue;
-                        if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: true });
+                        if (get_possible_names(item["itemData"]).includes(name)) candidates.push({ data: item["itemData"], is_gem: true });
                     }
                 }
             } catch (e) {
