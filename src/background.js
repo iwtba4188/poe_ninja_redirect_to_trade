@@ -767,7 +767,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             return res;
         }
 
-        function get_item_data_by_name(name) {
+        function get_item_data_by_node(node, name, node_level) {
             function construct_name(iData) {
                 let n = "";
                 if (iData["name"]) n += iData["name"] + " ";
@@ -775,30 +775,71 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
                 return n.trim();
             }
 
+            let candidates = [];
+
             try {
-                for (var item of equipment_data["items"]) {
-                    if (construct_name(item["itemData"]) === name) return { data: item["itemData"], is_gem: false };
+                for (var item of equipment_data["items"] || []) {
+                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
                 }
-
-                for (var item of equipment_data["jewels"]) {
-                    if (construct_name(item["itemData"]) === name) return { data: item["itemData"], is_gem: false };
+                for (var item of equipment_data["jewels"] || []) {
+                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
                 }
-
-                for (var item of equipment_data["flasks"]) {
-                    if (construct_name(item["itemData"]) === name) return { data: item["itemData"], is_gem: false };
+                for (var item of equipment_data["flasks"] || []) {
+                    if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: false });
                 }
-
-                for (var skill_group of equipment_data["skills"]) {
-                    for (var item of skill_group["allGems"]) {
+                for (var skill_group of equipment_data["skills"] || []) {
+                    for (var item of skill_group["allGems"] || []) {
                         if (!item["itemData"]) continue;
-                        if (construct_name(item["itemData"]) === name) return { data: item["itemData"], is_gem: true };
+                        if (construct_name(item["itemData"]) === name) candidates.push({ data: item["itemData"], is_gem: true });
                     }
                 }
             } catch (e) {
                 return undefined;
             }
 
-            return undefined;
+            if (candidates.length === 0) return undefined;
+            if (candidates.length === 1) return candidates[0];
+
+            let best_match = candidates[0];
+            let max_score = -1;
+            const node_text = node.innerText.toLowerCase().replace(/\n/g, " ");
+
+            for (let cand of candidates) {
+                let score = 0;
+                let data = cand.data;
+
+                if (cand.is_gem) {
+                    let gem_lvl;
+                    if (data.properties) {
+                        for (let p of data.properties) {
+                            if (p.type === 5 && p.values && p.values[0]) gem_lvl = parseInt(p.values[0][0]);
+                        }
+                    }
+                    if (gem_lvl === node_level) score += 10;
+                } else {
+                    if (data.ilvl === node_level) score += 10;
+                }
+
+                const check_mods = (mod_array) => {
+                    if (!mod_array) return;
+                    for (let m of mod_array) {
+                        // 移除數值僅比對詞彙本身
+                        let clean_m = m.replace(/[0-9+\-.%]/g, "").trim().toLowerCase();
+                        if (node_text.includes(clean_m)) score += 5;
+                    }
+                };
+
+                check_mods(data.fracturedMods);
+                check_mods(data.explicitMods);
+                check_mods(data.implicitMods);
+
+                if (score > max_score) {
+                    max_score = score;
+                    best_match = cand;
+                }
+            }
+
+            return best_match;
         }
 
         function get_all_deepest_div(node) {
@@ -812,13 +853,18 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         if (item_name === undefined) return;
         dbg_log(item_name);
 
-        const item_info = get_item_data_by_name(item_name);
+        const level = get_item_level(tippy_node);
+        const quality = get_item_quality(tippy_node);
+
+        const item_info = get_item_data_by_node(tippy_node, item_name, level);
         if (item_info === undefined) return;
 
         const item_data = item_info.data;
         const is_gem = item_info.is_gem;
 
-        const cache_key = (is_gem ? "gem_" : "item_") + item_name;
+        // 使用官方資料庫的唯一 id，若無則降級為組合屬性
+        const cache_key = item_data.id ? item_data.id : (item_name + "_" + (item_data.ilvl || "") + "_" + JSON.stringify(item_data.explicitMods || []));
+
         let mask_list;
         if (global_mask_cache.has(cache_key)) {
             mask_list = global_mask_cache.get(cache_key);
@@ -840,8 +886,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             }
         }
 
-        const level = get_item_level(tippy_node);
-        const quality = get_item_quality(tippy_node);
         var trade_button = gen_trade_botton(tippy_node, mask_list, item_data, is_gem, level, quality);
 
         const last_div = tippy_node.querySelector("article > div:last-child");
