@@ -5,8 +5,8 @@ const API_URLS_FILTER = {
     urls: [
         "https://poe.ninja/poe1/api/builds/*/character?*",
         "https://poe.ninja/poe1/api/profile/characters/*",
-        "https://poe.ninja/poe2/api/builds/*/character?*",
-        "https://poe.ninja/poe2/api/profile/characters/*"
+        // "https://poe.ninja/poe2/api/builds/*/character?*",
+        // "https://poe.ninja/poe2/api/profile/characters/*"
     ]
 };
 
