@@ -141,6 +141,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     const trade_type = (await chrome.storage.local.get(["trade-type"]))["trade-type"];
     const now_lang = (await chrome.storage.local.get(["lang"]))["lang"];
     const now_lang_for_lang_matching = now_lang.replace("en-", "");
+    const global_mask_cache = new Map();
 
     dbg_log("[Status] 'PoE Ninja Redirect to Trade' start!")
     dbg_log("[Status] stats_data = ");
@@ -271,7 +272,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         });
     }
 
-    function gen_toggle_botton(data_key, button_type) {
+    function gen_toggle_botton(data_key, button_type, mask_list) {
         let current_state = button_type;
 
         function select_icon(state) {
@@ -336,6 +337,10 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             icon_node.innerHTML = select_icon(current_state);
             new_node.setAttribute("title", select_hover_title(current_state));
             button_node.dataset.state = current_state;
+
+            if (mask_list) {
+                mask_list.set(String(data_key), current_state);
+            }
         });
 
         return new_node;
@@ -812,7 +817,15 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
         const item_data = item_info.data;
         const is_gem = item_info.is_gem;
-        let mask_list = gen_mask_list(item_data, is_gem);
+
+        const cache_key = (is_gem ? "gem_" : "item_") + item_name;
+        let mask_list;
+        if (global_mask_cache.has(cache_key)) {
+            mask_list = global_mask_cache.get(cache_key);
+        } else {
+            mask_list = gen_mask_list(item_data, is_gem);
+            global_mask_cache.set(cache_key, mask_list);
+        }
 
         const article_div = tippy_node.querySelector("article > div");
         if (!article_div) return;
@@ -822,7 +835,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         const button_values = Array.from(mask_list.values());
         for (var i = 0; i < mask_list.size; i++) {
             if (mask_target[i]) {
-                const toggle_btn = gen_toggle_botton(button_keys[i], button_values[i]);
+                const toggle_btn = gen_toggle_botton(button_keys[i], button_values[i], mask_list);
                 mask_target[i].prepend(toggle_btn);
             }
         }
