@@ -162,6 +162,10 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     const BLOCK_ICON = `<path d="M8.00024 1C9.38471 1 10.7381 1.41054 11.8892 2.17971C13.0404 2.94888 13.9376 4.04213 14.4674 5.32122C14.9972 6.6003 15.1358 8.00777 14.8657 9.36563C14.5956 10.7235 13.929 11.9708 12.95 12.9497C11.971 13.9287 10.7237 14.5954 9.36587 14.8655C8.00801 15.1356 6.60054 14.997 5.32146 14.4672C4.04237 13.9373 2.94912 13.0401 2.17995 11.889C1.41078 10.7378 1.00024 9.38447 1.00024 8C1.00236 6.14413 1.74054 4.36489 3.05283 3.05259C4.36513 1.7403 6.14438 1.00212 8.00024 1ZM2.00024 8C1.99946 9.41814 2.50396 10.7902 3.42324 11.87L11.8702 3.423C10.9978 2.68282 9.93164 2.20787 8.79785 2.05426C7.66405 1.90065 6.50998 2.0748 5.47201 2.55614C4.43403 3.03748 3.55554 3.80588 2.94033 4.77056C2.32512 5.73523 1.9989 6.85585 2.00024 8ZM14.0002 8C14.001 6.58186 13.4965 5.20983 12.5772 4.13L4.13024 12.577C5.00272 13.3172 6.06885 13.7921 7.20264 13.9457C8.33643 14.0994 9.4905 13.9252 10.5285 13.4439C11.5664 12.9625 12.4449 12.1941 13.0602 11.2294C13.6754 10.2648 14.0016 9.14415 14.0002 8Z" fill="#424242"/>`;
     const EXTERNAL_LINK_ICON = `<path d="M1.50024 1.00006L6.00024 1V2L2.00024 2.00006V14.0001H14.0002V10.0001H15.0002V14.5001L14.5002 15.0001H1.50024L1.00024 14.5001V1.50006L1.50024 1.00006Z" fill="#424242"/> <path d="M15.0003 1.50006L15.0003 8.00003H14.0003L14.0003 2.70716L7.24293 9.46451L6.53583 8.7574L13.2932 2.00006L8.00028 2.00006V1.00006H14.5003L15.0003 1.50006Z" fill="#424242"/>`;
 
+    if (equipment_data["charModel"]) {
+        equipment_data = equipment_data["charModel"];
+    }
+
     let lang_matching = {};
 
     /**
@@ -698,6 +702,9 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     }
 
     function process_tippy(tippy_node) {
+        if (tippy_node.nodeType !== 1) return;
+        if (tippy_node.querySelector(".trade-btn")) return;
+
         function get_item_name(node) {
             try {
                 let name = node.querySelector("h1").innerText;
@@ -945,6 +952,11 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         tippy_observer.observe(portal, {
             childList: true
         });
+    }
+
+    const existing_tippies = document.querySelectorAll("div[data-floating-ui-portal]");
+    for (const tippy of existing_tippies) {
+        process_tippy(tippy);
     }
 };
 
