@@ -3,6 +3,7 @@
 English | [繁體中文](./docs/README-zh-TW.md) 
 
 [![extension badge](./image/icon/extension_badge.png)](https://chromewebstore.google.com/detail/poe-ninja-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E4%BA%A4%E6%98%93%E5%B8%82%E9%9B%86/booomkjelcadmolknnllecpgfiehiddm)
+<a href="https://www.buymeacoffee.com/iwtba4188" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 <https://github.com/user-attachments/assets/26498680-cfa1-4897-997e-38ccb25e45ce>
 
