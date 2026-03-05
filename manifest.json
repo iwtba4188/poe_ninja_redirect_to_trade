@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extension_name__",
     "description": "__MSG_extension_description__",
-    "version": "1.1.8",
+    "version": "1.2.0",
     "manifest_version": 3,
     "minimum_chrome_version": "93",
     "default_locale": "en",

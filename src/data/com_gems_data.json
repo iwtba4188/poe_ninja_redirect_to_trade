@@ -248,6 +248,24 @@
                     "type": "Iolite Ring"
                 },
                 {
+                    "type": "Cryonic Ring"
+                },
+                {
+                    "type": "Enthalpic Ring"
+                },
+                {
+                    "type": "Synaptic Ring"
+                },
+                {
+                    "type": "Organic Ring"
+                },
+                {
+                    "type": "Fugitive Ring"
+                },
+                {
+                    "type": "Formless Ring"
+                },
+                {
                     "type": "Golden Hoop"
                 },
                 {
@@ -419,8 +437,9 @@
                 },
                 {
                     "type": "Chain Belt",
-                    "text": "Auxium Chain Belt",
+                    "text": "Auxium Chain Belt (Legacy)",
                     "name": "Auxium",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -531,8 +550,9 @@
                 },
                 {
                     "type": "Coral Ring",
-                    "text": "Bloodboil Coral Ring",
+                    "text": "Bloodboil Coral Ring (Legacy)",
                     "name": "Bloodboil",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -547,8 +567,9 @@
                 },
                 {
                     "type": "Coral Amulet",
-                    "text": "Bloodgrip Coral Amulet",
+                    "text": "Bloodgrip Coral Amulet (Legacy)",
                     "name": "Bloodgrip",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -565,6 +586,14 @@
                     "type": "Amber Amulet",
                     "text": "Bloodsoaked Medallion Amber Amulet",
                     "name": "Bloodsoaked Medallion",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Marble Amulet",
+                    "text": "Bonemeld Marble Amulet",
+                    "name": "Bonemeld",
                     "flags": {
                         "unique": true
                     }
@@ -962,6 +991,14 @@
                     }
                 },
                 {
+                    "type": "Turquoise Amulet",
+                    "text": "Haunting Memories Turquoise Amulet",
+                    "name": "Haunting Memories",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Leather Belt",
                     "text": "Headhunter Leather Belt",
                     "name": "Headhunter",
@@ -1133,6 +1170,14 @@
                     "type": "Prismatic Ring",
                     "text": "Lori's Lantern Prismatic Ring",
                     "name": "Lori's Lantern",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Formless Ring",
+                    "text": "Lost Unity Formless Ring",
+                    "name": "Lost Unity",
                     "flags": {
                         "unique": true
                     }
@@ -2074,6 +2119,14 @@
                     }
                 },
                 {
+                    "type": "Fugitive Ring",
+                    "text": "The Sundered Will Fugitive Ring",
+                    "name": "The Sundered Will",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Studded Belt",
                     "text": "The Tactician Studded Belt",
                     "name": "The Tactician",
@@ -2106,6 +2159,14 @@
                     }
                 },
                 {
+                    "type": "Opal Ring",
+                    "text": "The Unseen Hue Opal Ring",
+                    "name": "The Unseen Hue",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Gold Amulet",
                     "text": "The Untouched Soul Gold Amulet",
                     "name": "The Untouched Soul",
@@ -2125,6 +2186,38 @@
                     "type": "Iron Ring",
                     "text": "The Warden's Brand Iron Ring",
                     "name": "The Warden's Brand",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Synaptic Ring",
+                    "text": "The Will of Esh Synaptic Ring",
+                    "name": "The Will of Esh",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Cryonic Ring",
+                    "text": "The Will of Tul Cryonic Ring",
+                    "name": "The Will of Tul",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Organic Ring",
+                    "text": "The Will of Uul-Netol Organic Ring",
+                    "name": "The Will of Uul-Netol",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Enthalpic Ring",
+                    "text": "The Will of Xoph Enthalpic Ring",
+                    "name": "The Will of Xoph",
                     "flags": {
                         "unique": true
                     }
@@ -2341,6 +2434,14 @@
                     "type": "Coral Ring",
                     "text": "Winterweave Coral Ring",
                     "name": "Winterweave",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Steel Ring",
+                    "text": "Woespike Steel Ring",
+                    "name": "Woespike",
                     "flags": {
                         "unique": true
                     }
@@ -3976,17 +4077,18 @@
                     }
                 },
                 {
-                    "type": "Sorcerer Gloves",
-                    "text": "Allelopathy Sorcerer Gloves",
+                    "type": "Satin Gloves",
+                    "text": "Allelopathy Satin Gloves",
                     "name": "Allelopathy",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Satin Gloves",
-                    "text": "Allelopathy Satin Gloves",
+                    "type": "Sorcerer Gloves",
+                    "text": "Allelopathy Sorcerer Gloves (Legacy)",
                     "name": "Allelopathy",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4024,17 +4126,18 @@
                     }
                 },
                 {
-                    "type": "Ancient Spirit Shield",
-                    "text": "Apep's Slumber Ancient Spirit Shield",
+                    "type": "Vaal Spirit Shield",
+                    "text": "Apep's Slumber Vaal Spirit Shield",
                     "name": "Apep's Slumber",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Vaal Spirit Shield",
-                    "text": "Apep's Slumber Vaal Spirit Shield",
+                    "type": "Ancient Spirit Shield",
+                    "text": "Apep's Slumber Ancient Spirit Shield (Legacy)",
                     "name": "Apep's Slumber",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4048,17 +4151,18 @@
                     }
                 },
                 {
-                    "type": "Strapped Mitts",
-                    "text": "Architect's Hand Strapped Mitts",
+                    "type": "Ambush Mitts",
+                    "text": "Architect's Hand Ambush Mitts",
                     "name": "Architect's Hand",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Ambush Mitts",
-                    "text": "Architect's Hand Ambush Mitts",
+                    "type": "Strapped Mitts",
+                    "text": "Architect's Hand Strapped Mitts (Legacy)",
                     "name": "Architect's Hand",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4096,17 +4200,18 @@
                     }
                 },
                 {
-                    "type": "Two-Point Arrow Quiver",
-                    "text": "Asphyxia's Wrath Two-Point Arrow Quiver",
+                    "type": "Feathered Arrow Quiver",
+                    "text": "Asphyxia's Wrath Feathered Arrow Quiver",
                     "name": "Asphyxia's Wrath",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Feathered Arrow Quiver",
-                    "text": "Asphyxia's Wrath Feathered Arrow Quiver",
+                    "type": "Two-Point Arrow Quiver",
+                    "text": "Asphyxia's Wrath Two-Point Arrow Quiver (Legacy)",
                     "name": "Asphyxia's Wrath",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4208,9 +4313,9 @@
                     }
                 },
                 {
-                    "type": "Fire Arrow Quiver",
-                    "text": "Blackgleam Fire Arrow Quiver",
-                    "name": "Blackgleam",
+                    "type": "Spiny Round Shield",
+                    "text": "Bitter Instinct Spiny Round Shield",
+                    "name": "Bitter Instinct",
                     "flags": {
                         "unique": true
                     }
@@ -4227,6 +4332,15 @@
                     "type": "Cured Quiver",
                     "text": "Blackgleam Cured Quiver",
                     "name": "Blackgleam",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Fire Arrow Quiver",
+                    "text": "Blackgleam Fire Arrow Quiver (Legacy)",
+                    "name": "Blackgleam",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4320,17 +4434,18 @@
                     }
                 },
                 {
-                    "type": "Strapped Leather",
-                    "text": "Briskwrap Strapped Leather",
+                    "type": "Sun Leather",
+                    "text": "Briskwrap Sun Leather",
                     "name": "Briskwrap",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Sun Leather",
-                    "text": "Briskwrap Sun Leather",
+                    "type": "Strapped Leather",
+                    "text": "Briskwrap Strapped Leather (Legacy)",
                     "name": "Briskwrap",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4480,6 +4595,14 @@
                     }
                 },
                 {
+                    "type": "Ezomyte Tower Shield",
+                    "text": "Cowards' Wail Ezomyte Tower Shield",
+                    "name": "Cowards' Wail",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Solaris Circlet",
                     "text": "Cowl of the Ceraunophile Solaris Circlet",
                     "name": "Cowl of the Ceraunophile",
@@ -4513,8 +4636,26 @@
                 },
                 {
                     "type": "Serrated Arrow Quiver",
+                    "text": "Cragfall Serrated Arrow Quiver (Legacy)",
+                    "name": "Cragfall",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Serrated Arrow Quiver",
                     "text": "Craghead Serrated Arrow Quiver",
                     "name": "Craghead",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Serrated Arrow Quiver",
+                    "text": "Craghead Serrated Arrow Quiver (Legacy)",
+                    "name": "Craghead",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4633,8 +4774,9 @@
                 },
                 {
                     "type": "Shackled Boots",
-                    "text": "Dance of the Offered Shackled Boots",
+                    "text": "Dance of the Offered Shackled Boots (Legacy)",
                     "name": "Dance of the Offered",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4785,8 +4927,9 @@
                 },
                 {
                     "type": "Steel Gauntlets",
-                    "text": "Deshret's Vise Steel Gauntlets",
+                    "text": "Deshret's Vise Steel Gauntlets (Legacy)",
                     "name": "Deshret's Vise",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4896,6 +5039,15 @@
                     }
                 },
                 {
+                    "type": "Penetrating Arrow Quiver",
+                    "text": "Drillneck Penetrating Arrow Quiver (Legacy)",
+                    "name": "Drillneck",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Ironscale Boots",
                     "text": "Duskblight Ironscale Boots",
                     "name": "Duskblight",
@@ -4905,8 +5057,9 @@
                 },
                 {
                     "type": "Leatherscale Boots",
-                    "text": "Duskblight Leatherscale Boots",
+                    "text": "Duskblight Leatherscale Boots (Legacy)",
                     "name": "Duskblight",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4921,8 +5074,9 @@
                 },
                 {
                     "type": "Leatherscale Boots",
-                    "text": "Dusktoe Leatherscale Boots",
+                    "text": "Dusktoe Leatherscale Boots (Legacy)",
                     "name": "Dusktoe",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -4984,17 +5138,18 @@
                     }
                 },
                 {
-                    "type": "Thorium Spirit Shield",
-                    "text": "Esh's Mirror Thorium Spirit Shield",
+                    "type": "Vaal Spirit Shield",
+                    "text": "Esh's Mirror Vaal Spirit Shield",
                     "name": "Esh's Mirror",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Vaal Spirit Shield",
-                    "text": "Esh's Mirror Vaal Spirit Shield",
+                    "type": "Thorium Spirit Shield",
+                    "text": "Esh's Mirror Thorium Spirit Shield (Legacy)",
                     "name": "Esh's Mirror",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5408,6 +5563,14 @@
                     }
                 },
                 {
+                    "type": "Carnal Mitts",
+                    "text": "Hand of the Lords Carnal Mitts",
+                    "name": "Hand of the Lords",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Crusader Gloves",
                     "text": "Hands of the High Templar Crusader Gloves",
                     "name": "Hands of the High Templar",
@@ -5433,8 +5596,9 @@
                 },
                 {
                     "type": "Conjurer Gloves",
-                    "text": "Hellbringer Conjurer Gloves",
+                    "text": "Hellbringer Conjurer Gloves (Legacy)",
                     "name": "Hellbringer",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5497,8 +5661,26 @@
                 },
                 {
                     "type": "Sharktooth Arrow Quiver",
+                    "text": "Hyrri's Bite Sharktooth Arrow Quiver (Legacy)",
+                    "name": "Hyrri's Bite",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Sharktooth Arrow Quiver",
                     "text": "Hyrri's Demise Sharktooth Arrow Quiver",
                     "name": "Hyrri's Demise",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Sharktooth Arrow Quiver",
+                    "text": "Hyrri's Demise Sharktooth Arrow Quiver (Legacy)",
+                    "name": "Hyrri's Demise",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5553,8 +5735,9 @@
                 },
                 {
                     "type": "Occultist's Vestment",
-                    "text": "Infernal Mantle Occultist's Vestment",
+                    "text": "Infernal Mantle Occultist's Vestment (Legacy)",
                     "name": "Infernal Mantle",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5585,8 +5768,9 @@
                 },
                 {
                     "type": "Crusader Plate",
-                    "text": "Iron Heart Crusader Plate",
+                    "text": "Iron Heart Crusader Plate (Legacy)",
                     "name": "Iron Heart",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5704,17 +5888,18 @@
                     }
                 },
                 {
-                    "type": "Ivory Spirit Shield",
-                    "text": "Kongming's Stratagem Ivory Spirit Shield",
+                    "type": "Ancient Spirit Shield",
+                    "text": "Kongming's Stratagem Ancient Spirit Shield",
                     "name": "Kongming's Stratagem",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Ancient Spirit Shield",
-                    "text": "Kongming's Stratagem Ancient Spirit Shield",
+                    "type": "Ivory Spirit Shield",
+                    "text": "Kongming's Stratagem Ivory Spirit Shield (Legacy)",
                     "name": "Kongming's Stratagem",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5921,16 +6106,9 @@
                 },
                 {
                     "type": "Blunt Arrow Quiver",
-                    "text": "Maloney's Nightfall Blunt Arrow Quiver",
+                    "text": "Maloney's Nightfall Blunt Arrow Quiver (Legacy)",
                     "name": "Maloney's Nightfall",
-                    "flags": {
-                        "unique": true
-                    }
-                },
-                {
-                    "type": "Fossilised Spirit Shield",
-                    "text": "Manastorm Fossilised Spirit Shield",
-                    "name": "Manastorm",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5939,6 +6117,15 @@
                     "type": "Lacewood Spirit Shield",
                     "text": "Manastorm Lacewood Spirit Shield",
                     "name": "Manastorm",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Fossilised Spirit Shield",
+                    "text": "Manastorm Fossilised Spirit Shield (Legacy)",
+                    "name": "Manastorm",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -5977,8 +6164,9 @@
                 },
                 {
                     "type": "Crusader Helmet",
-                    "text": "Mask of the Spirit Drinker Crusader Helmet",
+                    "text": "Mask of the Spirit Drinker Crusader Helmet (Legacy)",
                     "name": "Mask of the Spirit Drinker",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6297,8 +6485,9 @@
                 },
                 {
                     "type": "Broadhead Arrow Quiver",
-                    "text": "Rearguard Broadhead Arrow Quiver",
+                    "text": "Rearguard Broadhead Arrow Quiver (Legacy)",
                     "name": "Rearguard",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6315,6 +6504,14 @@
                     "type": "Ancient Greaves",
                     "text": "Redblade Tramplers Ancient Greaves",
                     "name": "Redblade Tramplers",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Paladin Crown",
+                    "text": "Refuge in Isolation Paladin Crown",
+                    "name": "Refuge in Isolation",
                     "flags": {
                         "unique": true
                     }
@@ -6361,8 +6558,9 @@
                 },
                 {
                     "type": "Sorcerer Gloves",
-                    "text": "Replica Allelopathy Sorcerer Gloves",
+                    "text": "Replica Allelopathy Sorcerer Gloves (Legacy)",
                     "name": "Replica Allelopathy",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6560,6 +6758,15 @@
                     }
                 },
                 {
+                    "type": "Spike-Point Arrow Quiver",
+                    "text": "Replica Soul Strike Spike-Point Arrow Quiver (Legacy)",
+                    "name": "Replica Soul Strike",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Assassin's Boots",
                     "text": "Replica Stampede Assassin's Boots",
                     "name": "Replica Stampede",
@@ -6616,9 +6823,26 @@
                     }
                 },
                 {
+                    "type": "General's Brigandine",
+                    "text": "Rigwald's Hunt General's Brigandine",
+                    "name": "Rigwald's Hunt",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Two-Point Arrow Quiver",
                     "text": "Rigwald's Quills Two-Point Arrow Quiver",
                     "name": "Rigwald's Quills",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Two-Point Arrow Quiver",
+                    "text": "Rigwald's Quills Two-Point Arrow Quiver (Legacy)",
+                    "name": "Rigwald's Quills",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6665,8 +6889,9 @@
                 },
                 {
                     "type": "Spike-Point Arrow Quiver",
-                    "text": "Saemus' Gift Spike-Point Arrow Quiver",
+                    "text": "Saemus' Gift Spike-Point Arrow Quiver (Legacy)",
                     "name": "Saemus' Gift",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6745,8 +6970,9 @@
                 },
                 {
                     "type": "Broadhead Arrow Quiver",
-                    "text": "Scorpion's Call Broadhead Arrow Quiver",
+                    "text": "Scorpion's Call Broadhead Arrow Quiver (Legacy)",
                     "name": "Scorpion's Call",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -6968,6 +7194,15 @@
                     }
                 },
                 {
+                    "type": "Spike-Point Arrow Quiver",
+                    "text": "Soul Strike Spike-Point Arrow Quiver (Legacy)",
+                    "name": "Soul Strike",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Soldier Gloves",
                     "text": "Southbound Soldier Gloves",
                     "name": "Southbound",
@@ -7027,6 +7262,15 @@
                     "type": "Broadhead Arrow Quiver",
                     "text": "Steelworm Broadhead Arrow Quiver",
                     "name": "Steelworm",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Broadhead Arrow Quiver",
+                    "text": "Steelworm Broadhead Arrow Quiver (Legacy)",
+                    "name": "Steelworm",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7208,6 +7452,14 @@
                     }
                 },
                 {
+                    "type": "Antique Gauntlets",
+                    "text": "The Caged Mammoth Antique Gauntlets",
+                    "name": "The Caged Mammoth",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Goliath Gauntlets",
                     "text": "The Celestial Brace Goliath Gauntlets",
                     "name": "The Celestial Brace",
@@ -7304,17 +7556,18 @@
                     }
                 },
                 {
-                    "type": "Siege Helmet",
-                    "text": "The Formless Flame Siege Helmet",
+                    "type": "Royal Burgonet",
+                    "text": "The Formless Flame Royal Burgonet",
                     "name": "The Formless Flame",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Royal Burgonet",
-                    "text": "The Formless Flame Royal Burgonet",
+                    "type": "Siege Helmet",
+                    "text": "The Formless Flame Siege Helmet (Legacy)",
                     "name": "The Formless Flame",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7344,6 +7597,15 @@
                     }
                 },
                 {
+                    "type": "Blunt Arrow Quiver",
+                    "text": "The Fracturing Spinner Blunt Arrow Quiver (Legacy)",
+                    "name": "The Fracturing Spinner",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Teak Round Shield",
                     "text": "The Ghastly Theatre Teak Round Shield",
                     "name": "The Ghastly Theatre",
@@ -7355,6 +7617,14 @@
                     "type": "Raven Mask",
                     "text": "The Gull Raven Mask",
                     "name": "The Gull",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Faithful Helmet",
+                    "text": "The Hallowed Monarch Faithful Helmet",
+                    "name": "The Hallowed Monarch",
                     "flags": {
                         "unique": true
                     }
@@ -7376,17 +7646,18 @@
                     }
                 },
                 {
-                    "type": "Goliath Greaves",
-                    "text": "The Infinite Pursuit Goliath Greaves",
+                    "type": "Titan Greaves",
+                    "text": "The Infinite Pursuit Titan Greaves",
                     "name": "The Infinite Pursuit",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Titan Greaves",
-                    "text": "The Infinite Pursuit Titan Greaves",
+                    "type": "Goliath Greaves",
+                    "text": "The Infinite Pursuit Goliath Greaves (Legacy)",
                     "name": "The Infinite Pursuit",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7496,9 +7767,10 @@
                     }
                 },
                 {
-                    "type": "Fire Arrow Quiver",
-                    "text": "The Signal Fire Fire Arrow Quiver",
-                    "name": "The Signal Fire",
+                    "type": "Blunt Arrow Quiver",
+                    "text": "The Shattered Divinity Blunt Arrow Quiver (Legacy)",
+                    "name": "The Shattered Divinity",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7513,16 +7785,18 @@
                 },
                 {
                     "type": "Cured Quiver",
-                    "text": "The Signal Fire Cured Quiver",
+                    "text": "The Signal Fire Cured Quiver (Legacy)",
                     "name": "The Signal Fire",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Coronal Leather",
-                    "text": "The Snowblind Grace Coronal Leather",
-                    "name": "The Snowblind Grace",
+                    "type": "Fire Arrow Quiver",
+                    "text": "The Signal Fire Fire Arrow Quiver (Legacy)",
+                    "name": "The Signal Fire",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7531,6 +7805,15 @@
                     "type": "Zodiac Leather",
                     "text": "The Snowblind Grace Zodiac Leather",
                     "name": "The Snowblind Grace",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Coronal Leather",
+                    "text": "The Snowblind Grace Coronal Leather (Legacy)",
+                    "name": "The Snowblind Grace",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7689,8 +7972,9 @@
                 },
                 {
                     "type": "Reinforced Tower Shield",
-                    "text": "Titucus Span Reinforced Tower Shield",
+                    "text": "Titucus Span Reinforced Tower Shield (Legacy)",
                     "name": "Titucus Span",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -7848,17 +8132,18 @@
                     }
                 },
                 {
-                    "type": "Penetrating Arrow Quiver",
-                    "text": "Voidfletcher Penetrating Arrow Quiver",
+                    "type": "Primal Arrow Quiver",
+                    "text": "Voidfletcher Primal Arrow Quiver",
                     "name": "Voidfletcher",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Primal Arrow Quiver",
-                    "text": "Voidfletcher Primal Arrow Quiver",
+                    "type": "Penetrating Arrow Quiver",
+                    "text": "Voidfletcher Penetrating Arrow Quiver (Legacy)",
                     "name": "Voidfletcher",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -8181,6 +8466,9 @@
                     "type": "Boon of the First Ones"
                 },
                 {
+                    "type": "Bound by Flame"
+                },
+                {
                     "type": "Boundless Realms"
                 },
                 {
@@ -8448,6 +8736,9 @@
                     "type": "Last Hope"
                 },
                 {
+                    "type": "Last Stand"
+                },
+                {
                     "type": "Left to Fate"
                 },
                 {
@@ -8518,6 +8809,12 @@
                 },
                 {
                     "type": "No Traces"
+                },
+                {
+                    "type": "One Last Score"
+                },
+                {
+                    "type": "Outfoxed"
                 },
                 {
                     "type": "Parasitic Passengers"
@@ -8979,7 +9276,13 @@
                     "type": "The King's Heart"
                 },
                 {
+                    "type": "The Lake"
+                },
+                {
                     "type": "The Landing"
+                },
+                {
+                    "type": "The Last Laugh"
                 },
                 {
                     "type": "The Last One Standing"
@@ -10389,6 +10692,18 @@
                     "type": "Gemcutter's Prism"
                 },
                 {
+                    "type": "Augmentation Implant"
+                },
+                {
+                    "type": "Exalted Implant"
+                },
+                {
+                    "type": "Unstable Implant"
+                },
+                {
+                    "type": "Regal Implant"
+                },
+                {
                     "type": "Time-light Scroll"
                 },
                 {
@@ -10659,6 +10974,15 @@
                     "type": "Orb of Intention"
                 },
                 {
+                    "type": "Foulborn Orb of Augmentation"
+                },
+                {
+                    "type": "Foulborn Exalted Orb"
+                },
+                {
+                    "type": "Foulborn Regal Orb"
+                },
+                {
                     "type": "Orb of Regret"
                 },
                 {
@@ -10827,36 +11151,6 @@
                     "type": "Wild Crystallised Lifeforce"
                 },
                 {
-                    "type": "Sun Rune"
-                },
-                {
-                    "type": "Power Rune"
-                },
-                {
-                    "type": "Bound Rune"
-                },
-                {
-                    "type": "Life Rune"
-                },
-                {
-                    "type": "War Rune"
-                },
-                {
-                    "type": "River Rune"
-                },
-                {
-                    "type": "Bounty Rune"
-                },
-                {
-                    "type": "Journey Rune"
-                },
-                {
-                    "type": "Mountain Rune"
-                },
-                {
-                    "type": "Time Rune"
-                },
-                {
                     "type": "Clear Oil"
                 },
                 {
@@ -10920,7 +11214,7 @@
                     "type": "Runegraft of the Warp"
                 },
                 {
-                    "type": "Runegraft of Recompense"
+                    "type": "Runegraft of Refraction"
                 },
                 {
                     "type": "Runegraft of Time"
@@ -10930,6 +11224,9 @@
                 },
                 {
                     "type": "Runegraft of the Jeweller"
+                },
+                {
+                    "type": "Runegraft of the Angler"
                 },
                 {
                     "type": "Runegraft of the Sinistral"
@@ -10950,10 +11247,19 @@
                     "type": "Runegraft of Blasphemy"
                 },
                 {
+                    "type": "Runegraft of the Soulwick"
+                },
+                {
+                    "type": "Runegraft of the Witchmark"
+                },
+                {
                     "type": "Runegraft of Gemcraft"
                 },
                 {
                     "type": "Runegraft of Treachery"
+                },
+                {
+                    "type": "Runegraft of Stability"
                 },
                 {
                     "type": "Runegraft of Bellows"
@@ -10984,15 +11290,6 @@
                 },
                 {
                     "type": "Singular Scouting Report"
-                },
-                {
-                    "type": "Armour Recombinator"
-                },
-                {
-                    "type": "Jewellery Recombinator"
-                },
-                {
-                    "type": "Weapon Recombinator"
                 },
                 {
                     "type": "Primitive Chaotic Resonator"
@@ -11871,6 +12168,14 @@
                     }
                 },
                 {
+                    "type": "Colossal Mana Flask",
+                    "text": "Wellwater Phylactery Colossal Mana Flask",
+                    "name": "Wellwater Phylactery",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Gold Flask",
                     "text": "Wine of the Prophet Gold Flask",
                     "name": "Wine of the Prophet",
@@ -12046,6 +12351,9 @@
                 },
                 {
                     "type": "Conductivity"
+                },
+                {
+                    "type": "Conflagration"
                 },
                 {
                     "type": "Consecrated Path"
@@ -12360,6 +12668,12 @@
                     "type": "Kinetic Bolt"
                 },
                 {
+                    "type": "Kinetic Fusillade"
+                },
+                {
+                    "type": "Kinetic Rain"
+                },
+                {
                     "type": "Lacerate"
                 },
                 {
@@ -12561,6 +12875,9 @@
                     "type": "Smoke Mine"
                 },
                 {
+                    "type": "Somatic Shell"
+                },
+                {
                     "type": "Soul Link"
                 },
                 {
@@ -12667,6 +12984,9 @@
                 },
                 {
                     "type": "Spectral Throw"
+                },
+                {
+                    "type": "Thunderstorm"
                 },
                 {
                     "type": "Tornado"
@@ -12871,6 +13191,9 @@
                 },
                 {
                     "type": "Despair"
+                },
+                {
+                    "type": "Wall of Force"
                 },
                 {
                     "type": "War Banner"
@@ -13098,9 +13421,6 @@
                     "type": "Devour Support"
                 },
                 {
-                    "type": "Divine Blessing Support"
-                },
-                {
                     "type": "Earthbreaker Support"
                 },
                 {
@@ -13266,6 +13586,9 @@
                     "type": "Item Rarity Support"
                 },
                 {
+                    "type": "Kinetic Instability Support"
+                },
+                {
                     "type": "Knockback Support"
                 },
                 {
@@ -13288,6 +13611,9 @@
                 },
                 {
                     "type": "Awakened Lightning Penetration Support"
+                },
+                {
+                    "type": "Living Lightning Support"
                 },
                 {
                     "type": "Locus Mine Support"
@@ -13531,6 +13857,14 @@
                 },
                 {
                     "type": "Awakened Elemental Damage with Attacks Support"
+                },
+                {
+                    "type": "Windburst Support"
+                },
+                {
+                    "type": "Bladefall",
+                    "text": "Bladefall of Trarthus",
+                    "disc": "alt_z"
                 },
                 {
                     "type": "Animate Weapon",
@@ -13880,6 +14214,11 @@
                 {
                     "type": "Vaal Summon Skeletons",
                     "text": "Vaal Summon Skeletons (Summon Skeletons of Mages)",
+                    "disc": "alt_y"
+                },
+                {
+                    "type": "Vaal Spectral Throw",
+                    "text": "Vaal Spectral Throw (Spectral Throw of Trarthus)",
                     "disc": "alt_y"
                 },
                 {
@@ -14255,6 +14594,11 @@
                 {
                     "type": "Kinetic Bolt",
                     "text": "Kinetic Bolt of Fragmentation",
+                    "disc": "alt_x"
+                },
+                {
+                    "type": "Kinetic Rain",
+                    "text": "Kinetic Rain of Impact",
                     "disc": "alt_x"
                 },
                 {
@@ -14703,6 +15047,11 @@
                     "disc": "alt_x"
                 },
                 {
+                    "type": "Vaal Storm Call",
+                    "text": "Vaal Storm Call (Storm Call of Trarthus)",
+                    "disc": "alt_x"
+                },
+                {
                     "type": "Vaal Summon Skeletons",
                     "text": "Vaal Summon Skeletons (Summon Skeletons of Archers)",
                     "disc": "alt_x"
@@ -14834,8 +15183,9 @@
                 },
                 {
                     "type": "Cobalt Jewel",
-                    "text": "To Dust Cobalt Jewel",
+                    "text": "To Dust Cobalt Jewel (Legacy)",
                     "name": "To Dust",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -16121,6 +16471,14 @@
                     }
                 },
                 {
+                    "type": "Cobalt Jewel",
+                    "text": "To Dust Cobalt Jewel",
+                    "name": "To Dust",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Crimson Jewel",
                     "text": "Transcendent Flesh Crimson Jewel",
                     "name": "Transcendent Flesh",
@@ -16347,6 +16705,9 @@
                     "type": "Uul-Netol's Flawless Breachstone"
                 },
                 {
+                    "type": "Hivebrain Gland"
+                },
+                {
                     "type": "Fragment of Enslavement"
                 },
                 {
@@ -16449,6 +16810,12 @@
                     "type": "Veritania's Crest"
                 },
                 {
+                    "type": "Traumatic Fragment"
+                },
+                {
+                    "type": "Reverent Fragment"
+                },
+                {
                     "type": "Synthesising Fragment"
                 },
                 {
@@ -16456,6 +16823,9 @@
                 },
                 {
                     "type": "Blazing Fragment"
+                },
+                {
+                    "type": "Lonely Fragment"
                 },
                 {
                     "type": "Reality Fragment"
@@ -16542,10 +16912,19 @@
                     "type": "Allflame Ember of Toads"
                 },
                 {
+                    "type": "Reverent Reliquary Key"
+                },
+                {
                     "type": "Visceral Reliquary Key"
                 },
                 {
+                    "type": "Traumatic Reliquary Key"
+                },
+                {
                     "type": "Shiny Reliquary Key"
+                },
+                {
+                    "type": "Lonely Reliquary Key"
                 },
                 {
                     "type": "Archive Reliquary Key"
@@ -20136,6 +20515,11 @@
                     "disc": "uberblighted"
                 },
                 {
+                    "type": "Arachnid Tomb Map",
+                    "text": "Blight-ravaged Arachnid Tomb Map",
+                    "disc": "uberblighted"
+                },
+                {
                     "type": "Arcade Map",
                     "text": "Blight-ravaged Arcade Map",
                     "disc": "uberblighted"
@@ -22036,6 +22420,9 @@
                     "type": "Tiger Hook"
                 },
                 {
+                    "type": "Energy Blade"
+                },
+                {
                     "type": "Rusted Spike"
                 },
                 {
@@ -22169,6 +22556,15 @@
                 },
                 {
                     "type": "Accumulator Wand"
+                },
+                {
+                    "type": "Somatic Wand"
+                },
+                {
+                    "type": "Blasting Wand"
+                },
+                {
+                    "type": "Kinetic Wand"
                 },
                 {
                     "type": "Pagan Wand"
@@ -22607,8 +23003,9 @@
                 },
                 {
                     "type": "Imperial Staff",
-                    "text": "Agnerod Imperial Staff",
+                    "text": "Agnerod Imperial Staff (Legacy)",
                     "name": "Agnerod",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -22678,17 +23075,18 @@
                     }
                 },
                 {
-                    "type": "Opal Wand",
-                    "text": "Apep's Rage Opal Wand",
+                    "type": "Omen Wand",
+                    "text": "Apep's Rage Omen Wand",
                     "name": "Apep's Rage",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Omen Wand",
-                    "text": "Apep's Rage Omen Wand",
+                    "type": "Opal Wand",
+                    "text": "Apep's Rage Opal Wand (Legacy)",
                     "name": "Apep's Rage",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -22710,8 +23108,8 @@
                     }
                 },
                 {
-                    "type": "Quartz Wand",
-                    "text": "Ashcaller Quartz Wand",
+                    "type": "Goat's Horn",
+                    "text": "Ashcaller Goat's Horn",
                     "name": "Ashcaller",
                     "flags": {
                         "unique": true
@@ -22719,8 +23117,18 @@
                 },
                 {
                     "type": "Carved Wand",
-                    "text": "Ashcaller Carved Wand",
+                    "text": "Ashcaller Carved Wand (Legacy)",
                     "name": "Ashcaller",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Quartz Wand",
+                    "text": "Ashcaller Quartz Wand (Legacy)",
+                    "name": "Ashcaller",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -22857,6 +23265,14 @@
                     "type": "Ritual Sceptre",
                     "text": "Brutus' Lead Sprinkler Ritual Sceptre",
                     "name": "Brutus' Lead Sprinkler",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Platinum Sceptre",
+                    "text": "Cadigan's Authority Platinum Sceptre",
+                    "name": "Cadigan's Authority",
                     "flags": {
                         "unique": true
                     }
@@ -23151,8 +23567,9 @@
                 },
                 {
                     "type": "Coiled Staff",
-                    "text": "Dying Breath Coiled Staff",
+                    "text": "Dying Breath Coiled Staff (Legacy)",
                     "name": "Dying Breath",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23174,8 +23591,8 @@
                     }
                 },
                 {
-                    "type": "Crystal Wand",
-                    "text": "Eclipse Solaris Crystal Wand",
+                    "type": "Faun's Horn",
+                    "text": "Eclipse Solaris Faun's Horn",
                     "name": "Eclipse Solaris",
                     "flags": {
                         "unique": true
@@ -23183,8 +23600,18 @@
                 },
                 {
                     "type": "Engraved Wand",
-                    "text": "Eclipse Solaris Engraved Wand",
+                    "text": "Eclipse Solaris Engraved Wand (Legacy)",
                     "name": "Eclipse Solaris",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Crystal Wand",
+                    "text": "Eclipse Solaris Crystal Wand (Legacy)",
+                    "name": "Eclipse Solaris",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23215,8 +23642,9 @@
                 },
                 {
                     "type": "Eye Gouger",
-                    "text": "Essentia Sanguis Eye Gouger",
+                    "text": "Essentia Sanguis Eye Gouger (Legacy)",
                     "name": "Essentia Sanguis",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23249,6 +23677,14 @@
                     "type": "Gnarled Branch",
                     "text": "Fencoil Gnarled Branch",
                     "name": "Fencoil",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Demon Dagger",
+                    "text": "Festering Resentment Demon Dagger",
+                    "name": "Festering Resentment",
                     "flags": {
                         "unique": true
                     }
@@ -23342,17 +23778,18 @@
                     }
                 },
                 {
-                    "type": "Blinder",
-                    "text": "Hand of Thought and Motion Blinder",
+                    "type": "Imperial Claw",
+                    "text": "Hand of Thought and Motion Imperial Claw",
                     "name": "Hand of Thought and Motion",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Imperial Claw",
-                    "text": "Hand of Thought and Motion Imperial Claw",
+                    "type": "Blinder",
+                    "text": "Hand of Thought and Motion Blinder (Legacy)",
                     "name": "Hand of Thought and Motion",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23473,6 +23910,14 @@
                     "type": "Vaal Hatchet",
                     "text": "Jack, the Axe Vaal Hatchet",
                     "name": "Jack, the Axe",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Imperial Staff",
+                    "text": "Jiquani's Potential Imperial Staff",
+                    "name": "Jiquani's Potential",
                     "flags": {
                         "unique": true
                     }
@@ -23622,9 +24067,18 @@
                     }
                 },
                 {
-                    "type": "Engraved Wand",
-                    "text": "Midnight Bargain Engraved Wand",
+                    "type": "Calling Wand",
+                    "text": "Midnight Bargain Calling Wand",
                     "name": "Midnight Bargain",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Engraved Wand",
+                    "text": "Midnight Bargain Engraved Wand (Legacy)",
+                    "name": "Midnight Bargain",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23670,9 +24124,18 @@
                     }
                 },
                 {
-                    "type": "Imbued Wand",
-                    "text": "Moonsorrow Imbued Wand",
+                    "type": "Kinetic Wand",
+                    "text": "Moonsorrow Kinetic Wand",
                     "name": "Moonsorrow",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Imbued Wand",
+                    "text": "Moonsorrow Imbued Wand (Legacy)",
+                    "name": "Moonsorrow",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23750,17 +24213,27 @@
                     }
                 },
                 {
-                    "type": "Demon's Horn",
-                    "text": "Obliteration Demon's Horn",
+                    "type": "Omen Wand",
+                    "text": "Obliteration Omen Wand",
                     "name": "Obliteration",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Imbued Wand",
-                    "text": "Obliteration Imbued Wand",
+                    "type": "Demon's Horn",
+                    "text": "Obliteration Demon's Horn (Legacy)",
                     "name": "Obliteration",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Imbued Wand",
+                    "text": "Obliteration Imbued Wand (Legacy)",
+                    "name": "Obliteration",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23815,15 +24288,16 @@
                 },
                 {
                     "type": "Long Staff",
-                    "text": "Pillar of the Caged God Long Staff",
+                    "text": "Pillar of the Caged God Long Staff (Legacy)",
                     "name": "Pillar of the Caged God",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Tornado Wand",
-                    "text": "Piscator's Vigil Tornado Wand",
+                    "type": "Kinetic Wand",
+                    "text": "Piscator's Vigil Kinetic Wand",
                     "name": "Piscator's Vigil",
                     "flags": {
                         "unique": true
@@ -23831,8 +24305,18 @@
                 },
                 {
                     "type": "Imbued Wand",
-                    "text": "Piscator's Vigil Imbued Wand",
+                    "text": "Piscator's Vigil Imbued Wand (Legacy)",
                     "name": "Piscator's Vigil",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Tornado Wand",
+                    "text": "Piscator's Vigil Tornado Wand (Legacy)",
+                    "name": "Piscator's Vigil",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -23974,17 +24458,18 @@
                     }
                 },
                 {
-                    "type": "Spiraled Wand",
-                    "text": "Relic of the Pact Spiraled Wand",
+                    "type": "Sage Wand",
+                    "text": "Relic of the Pact Sage Wand",
                     "name": "Relic of the Pact",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Sage Wand",
-                    "text": "Relic of the Pact Sage Wand",
+                    "type": "Spiraled Wand",
+                    "text": "Relic of the Pact Spiraled Wand (Legacy)",
                     "name": "Relic of the Pact",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24134,9 +24619,18 @@
                     }
                 },
                 {
-                    "type": "Engraved Wand",
-                    "text": "Replica Midnight Bargain Engraved Wand",
+                    "type": "Calling Wand",
+                    "text": "Replica Midnight Bargain Calling Wand",
                     "name": "Replica Midnight Bargain",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Engraved Wand",
+                    "text": "Replica Midnight Bargain Engraved Wand (Legacy)",
+                    "name": "Replica Midnight Bargain",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24207,16 +24701,26 @@
                 },
                 {
                     "type": "Tornado Wand",
-                    "text": "Replica Tulfall Tornado Wand",
+                    "text": "Replica Tulfall Tornado Wand (Legacy)",
                     "name": "Replica Tulfall",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Blasting Wand",
+                    "text": "Replica Twyzel Blasting Wand",
+                    "name": "Replica Twyzel",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
                     "type": "Sage Wand",
-                    "text": "Replica Twyzel Sage Wand",
+                    "text": "Replica Twyzel Sage Wand (Legacy)",
                     "name": "Replica Twyzel",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24486,17 +24990,18 @@
                     }
                 },
                 {
-                    "type": "Carved Wand",
-                    "text": "Storm Prison Carved Wand",
+                    "type": "Spiraled Wand",
+                    "text": "Storm Prison Spiraled Wand",
                     "name": "Storm Prison",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Spiraled Wand",
-                    "text": "Storm Prison Spiraled Wand",
+                    "type": "Carved Wand",
+                    "text": "Storm Prison Carved Wand (Legacy)",
                     "name": "Storm Prison",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24511,8 +25016,9 @@
                 },
                 {
                     "type": "Variscite Blade",
-                    "text": "Story of the Vaal Variscite Blade",
+                    "text": "Story of the Vaal Variscite Blade (Legacy)",
                     "name": "Story of the Vaal",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24694,9 +25200,25 @@
                     }
                 },
                 {
+                    "type": "Lion Sword",
+                    "text": "The Golden Charlatan Lion Sword",
+                    "name": "The Golden Charlatan",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Judgement Staff",
                     "text": "The Grey Spire Judgement Staff",
                     "name": "The Grey Spire",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Spectral Axe",
+                    "text": "The Grey Wind Spectral Axe",
+                    "name": "The Grey Wind",
                     "flags": {
                         "unique": true
                     }
@@ -24742,9 +25264,26 @@
                     }
                 },
                 {
-                    "type": "Carved Wand",
-                    "text": "The Poet's Pen Carved Wand",
+                    "type": "Dream Mace",
+                    "text": "The Monastery Bell Dream Mace",
+                    "name": "The Monastery Bell",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Somatic Wand",
+                    "text": "The Poet's Pen Somatic Wand",
                     "name": "The Poet's Pen",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Carved Wand",
+                    "text": "The Poet's Pen Carved Wand (Legacy)",
+                    "name": "The Poet's Pen",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24807,8 +25346,9 @@
                 },
                 {
                     "type": "Long Staff",
-                    "text": "The Searing Touch Long Staff",
+                    "text": "The Searing Touch Long Staff (Legacy)",
                     "name": "The Searing Touch",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24911,8 +25451,9 @@
                 },
                 {
                     "type": "Whalebone Rapier",
-                    "text": "Tipua Kaikohuru Whalebone Rapier",
+                    "text": "Tipua Kaikohuru Whalebone Rapier (Legacy)",
                     "name": "Tipua Kaikohuru",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24942,14 +25483,6 @@
                     }
                 },
                 {
-                    "type": "Spiraled Wand",
-                    "text": "Tulborn Spiraled Wand",
-                    "name": "Tulborn",
-                    "flags": {
-                        "unique": true
-                    }
-                },
-                {
                     "type": "Opal Wand",
                     "text": "Tulborn Opal Wand",
                     "name": "Tulborn",
@@ -24958,9 +25491,10 @@
                     }
                 },
                 {
-                    "type": "Tornado Wand",
-                    "text": "Tulfall Tornado Wand",
-                    "name": "Tulfall",
+                    "type": "Spiraled Wand",
+                    "text": "Tulborn Spiraled Wand (Legacy)",
+                    "name": "Tulborn",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24974,9 +25508,27 @@
                     }
                 },
                 {
-                    "type": "Sage Wand",
-                    "text": "Twyzel Sage Wand",
+                    "type": "Tornado Wand",
+                    "text": "Tulfall Tornado Wand (Legacy)",
+                    "name": "Tulfall",
+                    "disc": "legacy",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Blasting Wand",
+                    "text": "Twyzel Blasting Wand",
                     "name": "Twyzel",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Sage Wand",
+                    "text": "Twyzel Sage Wand (Legacy)",
+                    "name": "Twyzel",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -24998,6 +25550,14 @@
                     }
                 },
                 {
+                    "type": "Sage Wand",
+                    "text": "Unlight Extant Sage Wand",
+                    "name": "Unlight Extant",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Vaal Axe",
                     "text": "Uul-Netol's Embrace Vaal Axe",
                     "name": "Uul-Netol's Embrace",
@@ -25006,17 +25566,18 @@
                     }
                 },
                 {
-                    "type": "Labrys",
-                    "text": "Uul-Netol's Kiss Labrys",
+                    "type": "Vaal Axe",
+                    "text": "Uul-Netol's Kiss Vaal Axe",
                     "name": "Uul-Netol's Kiss",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Vaal Axe",
-                    "text": "Uul-Netol's Kiss Vaal Axe",
+                    "type": "Labrys",
+                    "text": "Uul-Netol's Kiss Labrys (Legacy)",
                     "name": "Uul-Netol's Kiss",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -25126,6 +25687,14 @@
                     }
                 },
                 {
+                    "type": "Imperial Bow",
+                    "text": "Wing of the Wyvern Imperial Bow",
+                    "name": "Wing of the Wyvern",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
                     "type": "Ezomyte Axe",
                     "text": "Wings of Entropy Ezomyte Axe",
                     "name": "Wings of Entropy",
@@ -25135,8 +25704,9 @@
                 },
                 {
                     "type": "Sundering Axe",
-                    "text": "Wings of Entropy Sundering Axe",
+                    "text": "Wings of Entropy Sundering Axe (Legacy)",
                     "name": "Wings of Entropy",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -25158,17 +25728,18 @@
                     }
                 },
                 {
-                    "type": "Bone Bow",
-                    "text": "Xoph's Inception Bone Bow",
+                    "type": "Citadel Bow",
+                    "text": "Xoph's Inception Citadel Bow",
                     "name": "Xoph's Inception",
                     "flags": {
                         "unique": true
                     }
                 },
                 {
-                    "type": "Citadel Bow",
-                    "text": "Xoph's Inception Citadel Bow",
+                    "type": "Bone Bow",
+                    "text": "Xoph's Inception Bone Bow (Legacy)",
                     "name": "Xoph's Inception",
+                    "disc": "legacy",
                     "flags": {
                         "unique": true
                     }
@@ -25754,6 +26325,9 @@
                     "type": "Mutated Flamebeast"
                 },
                 {
+                    "type": "Crazed Flamebeast"
+                },
+                {
                     "type": "Dire Wolf"
                 },
                 {
@@ -25869,6 +26443,9 @@
                 },
                 {
                     "type": "Lola, the Fierce"
+                },
+                {
+                    "type": "Rocco, the Bloodthirsty"
                 },
                 {
                     "type": "Rabid Rhoa"
@@ -26120,7 +26697,13 @@
                     "type": "Fathom Screamer"
                 },
                 {
+                    "type": "Siren's Spawn"
+                },
+                {
                     "type": "Slimy Bloodsucker"
+                },
+                {
+                    "type": "Unstable Larva"
                 },
                 {
                     "type": "Slimy Nemesis"
@@ -26716,24 +27299,6 @@
             ]
         },
         {
-            "id": "memoryline",
-            "label": "Atlas Memories",
-            "entries": [
-                {
-                    "type": "Alva's Memory"
-                },
-                {
-                    "type": "Einhar's Memory"
-                },
-                {
-                    "type": "Kirac's Memory"
-                },
-                {
-                    "type": "Niko's Memory"
-                }
-            ]
-        },
-        {
             "id": "tincture",
             "label": "Tincture",
             "entries": [
@@ -27278,6 +27843,14 @@
                 },
                 {
                     "type": "Minor Idol",
+                    "text": "Refiner's Bargain Minor Idol",
+                    "name": "Refiner's Bargain",
+                    "flags": {
+                        "unique": true
+                    }
+                },
+                {
+                    "type": "Minor Idol",
                     "text": "Ruinous Wager Minor Idol",
                     "name": "Ruinous Wager",
                     "flags": {
@@ -27419,6 +27992,84 @@
                     "flags": {
                         "unique": true
                     }
+                }
+            ]
+        },
+        {
+            "id": "graft",
+            "label": "Graft",
+            "entries": [
+                {
+                    "type": "Storming Eshgraft"
+                },
+                {
+                    "type": "Replicating Eshgraft"
+                },
+                {
+                    "type": "Draining Eshgraft"
+                },
+                {
+                    "type": "Jolting Eshgraft"
+                },
+                {
+                    "type": "Squalling Tulgraft"
+                },
+                {
+                    "type": "Freezing Tulgraft"
+                },
+                {
+                    "type": "Summoning Tulgraft"
+                },
+                {
+                    "type": "Aegis Tulgraft"
+                },
+                {
+                    "type": "Fleshgraft"
+                },
+                {
+                    "type": "Battering Uulgraft"
+                },
+                {
+                    "type": "Spiking Uulgraft"
+                },
+                {
+                    "type": "Impaling Uulgraft"
+                },
+                {
+                    "type": "Hardening Uulgraft"
+                },
+                {
+                    "type": "Molten Xophgraft"
+                },
+                {
+                    "type": "Erupting Xophgraft"
+                },
+                {
+                    "type": "Flamecaller Xophgraft"
+                },
+                {
+                    "type": "Stoking Xophgraft"
+                }
+            ]
+        },
+        {
+            "id": "wombgift",
+            "label": "Wombgift",
+            "entries": [
+                {
+                    "type": "Lavish Wombgift"
+                },
+                {
+                    "type": "Provisioning Wombgift"
+                },
+                {
+                    "type": "Growing Wombgift"
+                },
+                {
+                    "type": "Mysterious Wombgift"
+                },
+                {
+                    "type": "Ancient Wombgift"
                 }
             ]
         }
