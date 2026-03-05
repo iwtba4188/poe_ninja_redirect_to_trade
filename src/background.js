@@ -384,7 +384,7 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
         block_other_click_event_for_button(new_node);
 
-new_node.addEventListener("click", () => {
+        new_node.addEventListener("click", () => {
             update_mask_list(node, mask_list);
             let url = "";
             if (is_gem) {
@@ -442,7 +442,9 @@ new_node.addEventListener("click", () => {
                     dbg_add_msg_to_page_top("[MOD NOT FOUND] mod_type=" + mod_type + ", item_inventoryId=" + item_inventoryId + ", origin mod='" + mod + "'");
                     continue;
                 }
-                const mod_ids = res[mod_type_index];
+
+                const target_index = mod_type === "mutated" ? "explicitMods" : mod_type_index;
+                const mod_ids = res[target_index];
                 const value = res["value"];
 
                 if (!mod_ids) {

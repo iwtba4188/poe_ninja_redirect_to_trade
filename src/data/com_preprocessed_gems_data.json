@@ -146,6 +146,9 @@
     "Conductivity": {
         "type": "Conductivity"
     },
+    "Conflagration": {
+        "type": "Conflagration"
+    },
     "Consecrated Path": {
         "type": "Consecrated Path"
     },
@@ -458,6 +461,12 @@
     "Kinetic Bolt": {
         "type": "Kinetic Bolt"
     },
+    "Kinetic Fusillade": {
+        "type": "Kinetic Fusillade"
+    },
+    "Kinetic Rain": {
+        "type": "Kinetic Rain"
+    },
     "Lacerate": {
         "type": "Lacerate"
     },
@@ -659,6 +668,9 @@
     "Smoke Mine": {
         "type": "Smoke Mine"
     },
+    "Somatic Shell": {
+        "type": "Somatic Shell"
+    },
     "Soul Link": {
         "type": "Soul Link"
     },
@@ -766,6 +778,9 @@
     },
     "Spectral Throw": {
         "type": "Spectral Throw"
+    },
+    "Thunderstorm": {
+        "type": "Thunderstorm"
     },
     "Tornado": {
         "type": "Tornado"
@@ -970,6 +985,9 @@
     },
     "Despair": {
         "type": "Despair"
+    },
+    "Wall of Force": {
+        "type": "Wall of Force"
     },
     "War Banner": {
         "type": "War Banner"
@@ -1196,9 +1214,6 @@
     "Devour Support": {
         "type": "Devour Support"
     },
-    "Divine Blessing Support": {
-        "type": "Divine Blessing Support"
-    },
     "Earthbreaker Support": {
         "type": "Earthbreaker Support"
     },
@@ -1364,6 +1379,9 @@
     "Item Rarity Support": {
         "type": "Item Rarity Support"
     },
+    "Kinetic Instability Support": {
+        "type": "Kinetic Instability Support"
+    },
     "Knockback Support": {
         "type": "Knockback Support"
     },
@@ -1387,6 +1405,9 @@
     },
     "Awakened Lightning Penetration Support": {
         "type": "Awakened Lightning Penetration Support"
+    },
+    "Living Lightning Support": {
+        "type": "Living Lightning Support"
     },
     "Locus Mine Support": {
         "type": "Locus Mine Support"
@@ -1630,6 +1651,14 @@
     },
     "Awakened Elemental Damage with Attacks Support": {
         "type": "Awakened Elemental Damage with Attacks Support"
+    },
+    "Windburst Support": {
+        "type": "Windburst Support"
+    },
+    "Bladefall of Trarthus": {
+        "type": "Bladefall",
+        "text": "Bladefall of Trarthus",
+        "disc": "alt_z"
     },
     "Animate Weapon of Ranged Arms": {
         "type": "Animate Weapon",
@@ -1979,6 +2008,11 @@
     "Vaal Summon Skeletons (Summon Skeletons of Mages)": {
         "type": "Vaal Summon Skeletons",
         "text": "Vaal Summon Skeletons (Summon Skeletons of Mages)",
+        "disc": "alt_y"
+    },
+    "Vaal Spectral Throw (Spectral Throw of Trarthus)": {
+        "type": "Vaal Spectral Throw",
+        "text": "Vaal Spectral Throw (Spectral Throw of Trarthus)",
         "disc": "alt_y"
     },
     "Volatile Dead of Seething": {
@@ -2354,6 +2388,11 @@
     "Kinetic Bolt of Fragmentation": {
         "type": "Kinetic Bolt",
         "text": "Kinetic Bolt of Fragmentation",
+        "disc": "alt_x"
+    },
+    "Kinetic Rain of Impact": {
+        "type": "Kinetic Rain",
+        "text": "Kinetic Rain of Impact",
         "disc": "alt_x"
     },
     "Lacerate of Butchering": {
@@ -2799,6 +2838,11 @@
     "Vaal Spark (Spark of the Nova)": {
         "type": "Vaal Spark",
         "text": "Vaal Spark (Spark of the Nova)",
+        "disc": "alt_x"
+    },
+    "Vaal Storm Call (Storm Call of Trarthus)": {
+        "type": "Vaal Storm Call",
+        "text": "Vaal Storm Call (Storm Call of Trarthus)",
         "disc": "alt_x"
     },
     "Vaal Summon Skeletons (Summon Skeletons of Archers)": {

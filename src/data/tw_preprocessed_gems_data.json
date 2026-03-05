@@ -146,6 +146,9 @@
     "Conductivity": {
         "type": "導電"
     },
+    "Conflagration": {
+        "type": "燎原箭矢"
+    },
     "Consecrated Path": {
         "type": "奉獻之路"
     },
@@ -458,6 +461,12 @@
     "Kinetic Bolt": {
         "type": "力量穿引"
     },
+    "Kinetic Fusillade": {
+        "type": "力量猛射"
+    },
+    "Kinetic Rain": {
+        "type": "力量驟雨"
+    },
     "Lacerate": {
         "type": "破空斬"
     },
@@ -659,6 +668,9 @@
     "Smoke Mine": {
         "type": "煙霧地雷"
     },
+    "Somatic Shell": {
+        "type": "心靈壁壘"
+    },
     "Soul Link": {
         "type": "連結：靈魂"
     },
@@ -766,6 +778,9 @@
     },
     "Spectral Throw": {
         "type": "靈體投擲"
+    },
+    "Thunderstorm": {
+        "type": "天雷暴雨"
     },
     "Tornado": {
         "type": "龍捲風"
@@ -970,6 +985,9 @@
     },
     "Despair": {
         "type": "絕望"
+    },
+    "Wall of Force": {
+        "type": "力量之壁"
     },
     "War Banner": {
         "type": "戰爭之旗"
@@ -1196,1649 +1214,1673 @@
     "Devour Support": {
         "type": "吞噬輔助"
     },
-    "Divine Blessing Support": {
+    "Earthbreaker Support": {
         "type": "神聖祝福輔助"
     },
-    "Earthbreaker Support": {
+    "Efficacy Support": {
         "type": "地破輔助"
     },
-    "Efficacy Support": {
+    "Elemental Focus Support": {
         "type": "效能輔助"
     },
-    "Elemental Focus Support": {
+    "Awakened Elemental Focus Support": {
         "type": "元素集中輔助"
     },
-    "Awakened Elemental Focus Support": {
+    "Elemental Penetration Support": {
         "type": "覺醒．元素集中輔助"
     },
-    "Elemental Penetration Support": {
+    "Elemental Proliferation Support": {
         "type": "元素穿透輔助"
     },
-    "Elemental Proliferation Support": {
+    "Awakened Empower Support": {
         "type": "元素擴散輔助"
     },
-    "Awakened Empower Support": {
+    "Endurance Charge on Melee Stun Support": {
         "type": "覺醒．賦予輔助"
     },
-    "Endurance Charge on Melee Stun Support": {
+    "Energy Leech Support": {
         "type": "近戰擊暈獲得耐力球輔助"
     },
-    "Energy Leech Support": {
+    "Awakened Enhance Support": {
         "type": "能量偷取輔助"
     },
-    "Awakened Enhance Support": {
+    "Awakened Enlighten Support": {
         "type": "覺醒．增幅輔助"
     },
-    "Awakened Enlighten Support": {
+    "Eternal Blessing Support": {
         "type": "覺醒．啟蒙輔助"
     },
-    "Eternal Blessing Support": {
+    "Expert Retaliation Support": {
         "type": "永恆祝福輔助"
     },
-    "Expert Retaliation Support": {
+    "Faster Attacks Support": {
         "type": "專家復仇輔助"
     },
-    "Faster Attacks Support": {
+    "Faster Casting Support": {
         "type": "快速攻擊輔助"
     },
-    "Faster Casting Support": {
+    "Faster Projectiles Support": {
         "type": "快速施放輔助"
     },
-    "Faster Projectiles Support": {
+    "Feeding Frenzy Support": {
         "type": "快速投射輔助"
     },
-    "Feeding Frenzy Support": {
+    "Fire Penetration Support": {
         "type": "豢養狂熱輔助"
     },
-    "Fire Penetration Support": {
+    "Awakened Fire Penetration Support": {
         "type": "火焰穿透輔助"
     },
-    "Awakened Fire Penetration Support": {
+    "Fist of War Support": {
         "type": "覺醒．火焰穿透輔助"
     },
-    "Fist of War Support": {
+    "Flamewood Support": {
         "type": "拳霸輔助"
     },
-    "Flamewood Support": {
+    "Focused Ballista Support": {
         "type": "焚木輔助"
     },
-    "Focused Ballista Support": {
+    "Focused Channelling Support": {
         "type": "專注砲塔輔助"
     },
-    "Focused Channelling Support": {
+    "Fork Support": {
         "type": "專注引導輔助"
     },
-    "Fork Support": {
+    "Awakened Fork Support": {
         "type": "分裂輔助"
     },
-    "Awakened Fork Support": {
+    "Fortify Support": {
         "type": "覺醒．分裂輔助"
     },
-    "Fortify Support": {
+    "Ice Bite Support": {
         "type": "護體輔助"
     },
-    "Ice Bite Support": {
+    "Charged Traps Support": {
         "type": "霜咬輔助"
     },
-    "Charged Traps Support": {
+    "Fresh Meat Support": {
         "type": "陷阱充能輔助"
     },
-    "Fresh Meat Support": {
+    "Frigid Bond Support": {
         "type": "鮮肉輔助"
     },
-    "Frigid Bond Support": {
+    "Generosity Support": {
         "type": "冰寒之繫輔助"
     },
-    "Generosity Support": {
+    "Awakened Generosity Support": {
         "type": "和善輔助"
     },
-    "Awakened Generosity Support": {
+    "Greater Multiple Projectiles Support": {
         "type": "覺醒．和善輔助"
     },
-    "Greater Multiple Projectiles Support": {
+    "Awakened Greater Multiple Projectiles Support": {
         "type": "高階多重投射輔助"
     },
-    "Awakened Greater Multiple Projectiles Support": {
+    "Greater Volley Support": {
         "type": "覺醒．高階多重投射輔助"
     },
-    "Greater Volley Support": {
+    "Guardian's Blessing Support": {
         "type": "高階齊射輔助"
     },
-    "Guardian's Blessing Support": {
+    "Unleash Support": {
         "type": "守護者的祝福輔助"
     },
-    "Unleash Support": {
+    "Intensify Support": {
         "type": "釋放輔助"
     },
-    "Intensify Support": {
+    "Hex Bloom Support": {
         "type": "強化輔助"
     },
-    "Hex Bloom Support": {
+    "High-Impact Mine Support": {
         "type": "咒術綻放輔助"
     },
-    "High-Impact Mine Support": {
+    "Ignite Proliferation Support": {
         "type": "高能地雷輔助"
     },
-    "Ignite Proliferation Support": {
+    "Immolate Support": {
         "type": "點燃擴散輔助"
     },
-    "Immolate Support": {
+    "Impale Support": {
         "type": "犧牲輔助"
     },
-    "Impale Support": {
+    "Impending Doom Support": {
         "type": "穿刺輔助"
     },
-    "Impending Doom Support": {
+    "Increased Area of Effect Support": {
         "type": "末日厄運輔助"
     },
-    "Increased Area of Effect Support": {
+    "Awakened Increased Area of Effect Support": {
         "type": "增加範圍輔助"
     },
-    "Awakened Increased Area of Effect Support": {
+    "Burning Damage Support": {
         "type": "覺醒．增加範圍效果輔助"
     },
-    "Burning Damage Support": {
+    "Increased Critical Damage Support": {
         "type": "燃燒傷害輔助"
     },
-    "Increased Critical Damage Support": {
+    "Increased Critical Strikes Support": {
         "type": "增加暴擊傷害輔助"
     },
-    "Increased Critical Strikes Support": {
+    "More Duration Support": {
         "type": "增加暴擊率輔助"
     },
-    "More Duration Support": {
+    "Infernal Legion Support": {
         "type": "持續時間延長輔助"
     },
-    "Infernal Legion Support": {
+    "Iron Grip Support": {
         "type": "煉獄軍團輔助"
     },
-    "Iron Grip Support": {
+    "Iron Will Support": {
         "type": "鋼鐵之握輔助"
     },
-    "Iron Will Support": {
+    "Item Quantity Support": {
         "type": "鋼鐵意志輔助"
     },
-    "Item Quantity Support": {
+    "Item Rarity Support": {
         "type": "物品數量增幅輔助"
     },
-    "Item Rarity Support": {
+    "Kinetic Instability Support": {
         "type": "物品稀有度增幅輔助"
     },
     "Knockback Support": {
-        "type": "擊退輔助"
+        "type": "力量紊亂輔助"
     },
     "Lesser Multiple Projectiles Support": {
-        "type": "低階多重投射輔助"
+        "type": "擊退輔助"
     },
     "Chance to Poison Support": {
-        "type": "機率中毒輔助"
+        "type": "低階多重投射輔助"
     },
     "Life Gain on Hit Support": {
-        "type": "擊中生命回復輔助"
+        "type": "機率中毒輔助"
     },
     "Life Leech Support": {
-        "type": "生命偷取輔助"
+        "type": "擊中生命回復輔助"
     },
     "Lifetap Support": {
-        "type": "活栓輔助"
+        "type": "生命偷取輔助"
     },
     "Lightning Penetration Support": {
-        "type": "閃電穿透輔助"
+        "type": "活栓輔助"
     },
     "Awakened Lightning Penetration Support": {
+        "type": "閃電穿透輔助"
+    },
+    "Living Lightning Support": {
         "type": "覺醒．閃電穿透輔助"
     },
     "Locus Mine Support": {
-        "type": "定位地雷輔助"
+        "type": "活體閃電輔助"
     },
     "Maim Support": {
-        "type": "癱瘓輔助"
+        "type": "定位地雷輔助"
     },
     "Manaforged Arrows Support": {
-        "type": "魔改箭矢輔助"
+        "type": "癱瘓輔助"
     },
     "Mana Leech Support": {
-        "type": "魔力偷取輔助"
+        "type": "魔改箭矢輔助"
     },
     "Mark On Hit Support": {
-        "type": "擊中時印記輔助"
+        "type": "魔力偷取輔助"
     },
     "Meat Shield Support": {
-        "type": "肉盾輔助"
+        "type": "擊中時印記輔助"
     },
     "Damage on Full Life Support": {
-        "type": "滿血傷害輔助"
+        "type": "肉盾輔助"
     },
     "Melee Physical Damage Support": {
-        "type": "近戰物理傷害輔助"
+        "type": "滿血傷害輔助"
     },
     "Awakened Melee Physical Damage Support": {
-        "type": "覺醒．近戰物理傷害輔助"
+        "type": "近戰物理傷害輔助"
     },
     "Melee Splash Support": {
-        "type": "近戰傷害擴散輔助"
+        "type": "覺醒．近戰物理傷害輔助"
     },
     "Awakened Melee Splash Support": {
-        "type": "覺醒．近戰傷害擴散輔助"
+        "type": "近戰傷害擴散輔助"
     },
     "Minefield Support": {
-        "type": "地雷網輔助"
+        "type": "覺醒．近戰傷害擴散輔助"
     },
     "Minion Damage Support": {
-        "type": "召喚物傷害輔助"
+        "type": "地雷網輔助"
     },
     "Awakened Minion Damage Support": {
-        "type": "覺醒．召喚物傷害輔助"
+        "type": "召喚物傷害輔助"
     },
     "Minion Life Support": {
-        "type": "召喚物生命輔助"
+        "type": "覺醒．召喚物傷害輔助"
     },
     "Minion Speed Support": {
-        "type": "召喚物速度輔助"
+        "type": "召喚物生命輔助"
     },
     "Mirage Archer Support": {
-        "type": "幻影射手輔助"
+        "type": "召喚物速度輔助"
     },
     "Spell Echo Support": {
-        "type": "施放迴響輔助"
+        "type": "幻影射手輔助"
     },
     "Multistrike Support": {
-        "type": "多重打擊輔助"
+        "type": "施放迴響輔助"
     },
     "Awakened Multistrike Support": {
-        "type": "覺醒．多重打擊輔助"
+        "type": "多重打擊輔助"
     },
     "Multiple Totems Support": {
-        "type": "多重圖騰輔助"
+        "type": "覺醒．多重打擊輔助"
     },
     "Multiple Traps Support": {
-        "type": "多重陷阱輔助"
+        "type": "多重圖騰輔助"
     },
     "Nightblade Support": {
-        "type": "夜刃輔助"
+        "type": "多重陷阱輔助"
     },
     "Momentum Support": {
-        "type": "氣勢輔助"
+        "type": "夜刃輔助"
     },
     "Innervate Support": {
-        "type": "亢奮輔助"
+        "type": "氣勢輔助"
     },
     "Overcharge Support": {
-        "type": "超負荷輔助"
+        "type": "亢奮輔助"
     },
     "Overexertion Support": {
-        "type": "竭盡全力輔助"
+        "type": "超負荷輔助"
     },
     "Volley Support": {
-        "type": "齊射輔助"
+        "type": "竭盡全力輔助"
     },
     "Vicious Projectiles Support": {
-        "type": "猛毒投射物輔助"
+        "type": "齊射輔助"
     },
     "Physical to Lightning Support": {
-        "type": "物理轉閃電輔助"
+        "type": "猛毒投射物輔助"
     },
     "Pierce Support": {
-        "type": "穿透輔助"
+        "type": "物理轉閃電輔助"
     },
     "Pinpoint Support": {
-        "type": "精確輔助"
+        "type": "穿透輔助"
     },
     "Point Blank Support": {
-        "type": "零點射擊輔助"
+        "type": "精確輔助"
     },
     "Critical Strike Affliction Support": {
-        "type": "暴擊苦痛輔助"
+        "type": "零點射擊輔助"
     },
     "Power Charge On Critical Support": {
-        "type": "暴擊獲得暴擊球輔助"
+        "type": "暴擊苦痛輔助"
     },
     "Prismatic Burst Support": {
-        "type": "三相爆發輔助"
+        "type": "暴擊獲得暴擊球輔助"
     },
     "Pulverise Support": {
-        "type": "磨鍊輔助"
+        "type": "三相爆發輔助"
     },
     "Rage Support": {
-        "type": "盛怒輔助"
+        "type": "磨鍊輔助"
     },
     "Ballista Totem Support": {
-        "type": "砲塔圖騰輔助"
+        "type": "盛怒輔助"
     },
     "Swift Affliction Support": {
-        "type": "極速苦痛輔助"
+        "type": "砲塔圖騰輔助"
     },
     "Less Duration Support": {
-        "type": "持續時間縮短輔助"
+        "type": "極速苦痛輔助"
     },
     "Inspiration Support": {
-        "type": "啟發輔助"
+        "type": "持續時間縮短輔助"
     },
     "Blastchain Mine Support": {
-        "type": "連鎖爆破地雷輔助"
+        "type": "啟發輔助"
     },
     "Returning Projectiles Support": {
-        "type": "投射物返回輔助"
+        "type": "連鎖爆破地雷輔助"
     },
     "Rupture Support": {
-        "type": "殘破輔助"
+        "type": "投射物返回輔助"
     },
     "Ruthless Support": {
-        "type": "殘暴輔助"
+        "type": "殘破輔助"
     },
     "Sacred Wisps Support": {
-        "type": "聖潔妖精輔助"
+        "type": "殘暴輔助"
     },
     "Sacrifice Support": {
-        "type": "獻祭輔助"
+        "type": "聖潔妖精輔助"
     },
     "Sadism Support": {
-        "type": "虐待輔助"
+        "type": "獻祭輔助"
     },
     "Second Wind Support": {
-        "type": "恢復輔助"
+        "type": "虐待輔助"
     },
     "Shockwave Support": {
-        "type": "震波輔助"
+        "type": "恢復輔助"
     },
     "Slower Projectiles Support": {
-        "type": "投射物減速輔助"
+        "type": "震波輔助"
     },
     "Spellblade Support": {
-        "type": "魔刃輔助"
+        "type": "投射物減速輔助"
     },
     "Spell Cascade Support": {
-        "type": "秘能爆發輔助"
+        "type": "魔刃輔助"
     },
     "Awakened Spell Cascade Support": {
-        "type": "覺醒．秘能爆發輔助"
+        "type": "秘能爆發輔助"
     },
     "Awakened Spell Echo Support": {
-        "type": "覺醒．施放迴響輔助"
+        "type": "覺醒．秘能爆發輔助"
     },
     "Spell Totem Support": {
-        "type": "法術圖騰輔助"
+        "type": "覺醒．施放迴響輔助"
     },
     "Ancestral Call Support": {
-        "type": "先祖怒嚎輔助"
+        "type": "法術圖騰輔助"
     },
     "Infused Channelling Support": {
-        "type": "注入引導輔助"
+        "type": "先祖怒嚎輔助"
     },
     "Stun Support": {
-        "type": "擊暈輔助"
+        "type": "注入引導輔助"
     },
     "Elemental Army Support": {
-        "type": "元素軍隊輔助"
+        "type": "擊暈輔助"
     },
     "Summon Phantasm Support": {
-        "type": "召喚幻影輔助"
+        "type": "元素軍隊輔助"
     },
     "Awakened Swift Affliction Support": {
-        "type": "覺醒．極速苦痛輔助"
+        "type": "召喚幻影輔助"
     },
     "Swift Assembly Support": {
-        "type": "迅速組裝輔助"
+        "type": "覺醒．極速苦痛輔助"
     },
     "Swiftbrand Support": {
-        "type": "迅速烙印輔助"
+        "type": "迅速組裝輔助"
     },
     "Trap Support": {
-        "type": "陷阱輔助"
+        "type": "迅速烙印輔助"
     },
     "Trap and Mine Damage Support": {
-        "type": "陷阱及地雷傷害輔助"
+        "type": "陷阱輔助"
     },
     "Advanced Traps Support": {
-        "type": "進階陷阱輔助"
+        "type": "陷阱及地雷傷害輔助"
     },
     "Trauma Support": {
-        "type": "創傷輔助"
+        "type": "進階陷阱輔助"
     },
     "Trinity Support": {
-        "type": "三體輔助"
+        "type": "創傷輔助"
     },
     "Unbound Ailments Support": {
-        "type": "無邊異能輔助"
+        "type": "三體輔助"
     },
     "Awakened Unbound Ailments Support": {
-        "type": "覺醒．無邊異能輔助"
+        "type": "無邊異能輔助"
     },
     "Awakened Unleash Support": {
-        "type": "覺醒．釋放輔助"
+        "type": "覺醒．無邊異能輔助"
     },
     "Urgent Orders Support": {
-        "type": "緊急詔令輔助"
+        "type": "覺醒．釋放輔助"
     },
     "Awakened Vicious Projectiles Support": {
-        "type": "覺醒．猛毒投射物輔助"
+        "type": "緊急詔令輔助"
     },
     "Vile Toxins Support": {
-        "type": "罪惡毒素輔助"
+        "type": "覺醒．猛毒投射物輔助"
     },
     "Void Manipulation Support": {
-        "type": "虛空操縱輔助"
+        "type": "罪惡毒素輔助"
     },
     "Awakened Void Manipulation Support": {
-        "type": "覺醒．虛空操縱輔助"
+        "type": "虛空操縱輔助"
     },
     "Volatility Support": {
-        "type": "易變輔助"
+        "type": "覺醒．虛空操縱輔助"
     },
     "Elemental Damage with Attacks Support": {
-        "type": "元素攻擊傷害輔助"
+        "type": "易變輔助"
     },
     "Awakened Elemental Damage with Attacks Support": {
+        "type": "元素攻擊傷害輔助"
+    },
+    "Windburst Support": {
         "type": "覺醒．元素攻擊傷害輔助"
     },
+    "Bladefall of Trarthus": {
+        "type": "風破輔助"
+    },
     "Animate Weapon of Ranged Arms": {
+        "type": "虛空刀雨",
+        "text": "特拉特斯虛空刀雨",
+        "disc": "alt_z"
+    },
+    "Arc of Oscillating": {
         "type": "幻化武器",
         "text": "幻化武器．遠程",
         "disc": "alt_y"
     },
-    "Arc of Oscillating": {
+    "Armageddon Brand of Recall": {
         "type": "電弧",
         "text": "電弧．震盪",
         "disc": "alt_y"
     },
-    "Armageddon Brand of Recall": {
+    "Artillery Ballista of Focus Fire": {
         "type": "末日烙印",
         "text": "末日烙印．呼喚",
         "disc": "alt_y"
     },
-    "Artillery Ballista of Focus Fire": {
+    "Ball Lightning of Static": {
         "type": "火砲砲塔",
         "text": "集火之火砲砲塔",
         "disc": "alt_y"
     },
-    "Ball Lightning of Static": {
+    "Blade Blast of Dagger Detonation": {
         "type": "天雷之珠",
         "text": "天雷之珠．靜電",
         "disc": "alt_y"
     },
-    "Blade Blast of Dagger Detonation": {
+    "Bladefall of Impaling": {
         "type": "劍刃爆破",
         "text": "劍刃爆破．匕首爆炸",
         "disc": "alt_y"
     },
-    "Bladefall of Impaling": {
+    "Blade Trap of Laceration": {
         "type": "虛空刀雨",
         "text": "虛空刀雨．穿刺",
         "disc": "alt_y"
     },
-    "Blade Trap of Laceration": {
+    "Blight of Atrophy": {
         "type": "刀鋒陷阱",
         "text": "刀鋒陷阱．撕裂",
         "disc": "alt_y"
     },
-    "Blight of Atrophy": {
+    "Blink Arrow of Prismatic Clones": {
         "type": "萎滅",
         "text": "萎滅．萎縮",
         "disc": "alt_y"
     },
-    "Blink Arrow of Prismatic Clones": {
+    "Boneshatter of Carnage": {
         "type": "閃現射擊",
         "text": "閃現射擊．神秘客",
         "disc": "alt_y"
     },
-    "Boneshatter of Carnage": {
+    "Chain Hook of Trarthus": {
         "type": "碎骨",
         "text": "碎骨．屠殺",
         "disc": "alt_y"
     },
-    "Chain Hook of Trarthus": {
+    "Contagion of Transference": {
         "type": "奪魂勾索",
         "text": "特拉特斯奪魂勾索",
         "disc": "alt_y"
     },
-    "Contagion of Transference": {
+    "Cremation of the Volcano": {
         "type": "瘟疫",
         "text": "瘟疫．移轉",
         "disc": "alt_y"
     },
-    "Cremation of the Volcano": {
+    "Crackling Lance of Disintegration": {
         "type": "熔炎送葬",
         "text": "熔炎送葬．火山",
         "disc": "alt_y"
     },
-    "Crackling Lance of Disintegration": {
+    "Detonate Dead of Chain Reaction": {
         "type": "碎雷電閃",
         "text": "碎雷電閃．毀滅",
         "disc": "alt_y"
     },
-    "Detonate Dead of Chain Reaction": {
+    "Divine Ire of Disintegration": {
         "type": "屍體爆破",
         "text": "屍體爆破．連鎖",
         "disc": "alt_y"
     },
-    "Divine Ire of Disintegration": {
+    "Double Strike of Momentum": {
         "type": "聖怒",
         "text": "聖怒．毀滅",
         "disc": "alt_y"
     },
-    "Double Strike of Momentum": {
+    "Earthshatter of Prominence": {
         "type": "雙重打擊",
         "text": "雙重打擊．氣勢",
         "disc": "alt_y"
     },
-    "Earthshatter of Prominence": {
+    "Essence Drain of Wickedness": {
         "type": "碎地重擊",
         "text": "碎地重擊．卓越",
         "disc": "alt_y"
     },
-    "Essence Drain of Wickedness": {
+    "Ethereal Knives of the Massacre": {
         "type": "靈魂吸取",
         "text": "靈魂吸取．邪惡",
         "disc": "alt_y"
     },
-    "Ethereal Knives of the Massacre": {
+    "Eye of Winter of Transience": {
         "type": "虛空匕首",
         "text": "虛空匕首．屠殺",
         "disc": "alt_y"
     },
-    "Eye of Winter of Transience": {
+    "Firestorm of Pelting": {
         "type": "凜冬之眼",
         "text": "凜冬之眼．轉瞬",
         "disc": "alt_y"
     },
-    "Firestorm of Pelting": {
+    "Flameblast of Contraction": {
         "type": "烈炎風暴",
         "text": "烈炎風暴．猛擲",
         "disc": "alt_y"
     },
-    "Flameblast of Contraction": {
+    "Flame Dash of Return": {
         "type": "烈焰爆破",
         "text": "烈焰爆破．緊縮",
         "disc": "alt_y"
     },
-    "Flame Dash of Return": {
+    "Icicle Mine of Sabotage": {
         "type": "烈焰衝刺",
         "text": "烈焰衝刺．返回",
         "disc": "alt_y"
     },
-    "Icicle Mine of Sabotage": {
+    "Frost Bomb of Forthcoming": {
         "type": "冰雹地雷",
         "text": "冰雹地雷．破壞",
         "disc": "alt_y"
     },
-    "Frost Bomb of Forthcoming": {
+    "Heavy Strike of Trarthus": {
         "type": "寒霜爆",
         "text": "寒霜爆．來臨",
         "disc": "alt_y"
     },
-    "Heavy Strike of Trarthus": {
+    "Hexblast of Havoc": {
         "type": "沉重之擊",
         "text": "特拉特斯沉重之擊",
         "disc": "alt_y"
     },
-    "Hexblast of Havoc": {
+    "Ice Nova of Deep Freeze": {
         "type": "咒術枯萎",
         "text": "咒術枯萎．浩劫",
         "disc": "alt_y"
     },
-    "Ice Nova of Deep Freeze": {
+    "Incinerate of Venting": {
         "type": "冰霜新星",
         "text": "冰霜新星．深層冰凍",
         "disc": "alt_y"
     },
-    "Incinerate of Venting": {
+    "Lacerate of Haemorrhage": {
         "type": "燒毀",
         "text": "燒毀．通風",
         "disc": "alt_y"
     },
-    "Lacerate of Haemorrhage": {
+    "Lightning Tendrils of Escalation": {
         "type": "破空斬",
         "text": "破空斬．出血",
         "disc": "alt_y"
     },
-    "Lightning Tendrils of Escalation": {
+    "Lightning Spire Trap of Overloading": {
         "type": "電能釋放",
         "text": "電能釋放．擴大",
         "disc": "alt_y"
     },
-    "Lightning Spire Trap of Overloading": {
+    "Mirror Arrow of Prismatic Clones": {
         "type": "鋒雷陷阱",
         "text": "鋒雷陷阱．過載",
         "disc": "alt_y"
     },
-    "Mirror Arrow of Prismatic Clones": {
+    "Penance Brand of Conduction": {
         "type": "魅影射擊",
         "text": "魅影射擊．神秘客",
         "disc": "alt_y"
     },
-    "Penance Brand of Conduction": {
+    "Perforate of Bloodshed": {
         "type": "贖罪烙印",
         "text": "贖罪烙印．傳導",
         "disc": "alt_y"
     },
-    "Perforate of Bloodshed": {
+    "Wave of Conviction of Trarthus": {
         "type": "裂地刺穿",
         "text": "裂地刺穿．流血",
         "disc": "alt_y"
     },
-    "Wave of Conviction of Trarthus": {
+    "Rain of Arrows of Saturation": {
         "type": "信念浪湧",
         "text": "特拉特斯信念浪湧",
         "disc": "alt_y"
     },
-    "Rain of Arrows of Saturation": {
+    "Raise Zombie of Falling": {
         "type": "箭雨",
         "text": "箭雨．飽和",
         "disc": "alt_y"
     },
-    "Raise Zombie of Falling": {
+    "Galvanic Arrow of Surging": {
         "type": "殭屍復甦",
         "text": "殭屍復甦．殞落",
         "disc": "alt_y"
     },
-    "Galvanic Arrow of Surging": {
+    "Explosive Trap of Magnitude": {
         "type": "電流箭矢",
         "text": "電流箭矢．波動",
         "disc": "alt_y"
     },
-    "Explosive Trap of Magnitude": {
+    "Siege Ballista of Trarthus": {
         "type": "爆裂陷阱",
         "text": "爆裂陷阱．量級",
         "disc": "alt_y"
     },
-    "Siege Ballista of Trarthus": {
+    "Soulrend of the Spiral": {
         "type": "攻城炮台",
         "text": "特拉特斯攻城炮台",
         "disc": "alt_y"
     },
-    "Soulrend of the Spiral": {
+    "Spark of Unpredictability": {
         "type": "靈體撕裂",
         "text": "靈體撕裂．螺旋",
         "disc": "alt_y"
     },
-    "Spark of Unpredictability": {
+    "Spectral Helix of Trarthus": {
         "type": "電球",
         "text": "電球．未知",
         "disc": "alt_y"
     },
-    "Spectral Helix of Trarthus": {
+    "Storm Rain of the Fence": {
         "type": "靈體旋武",
         "text": "特拉特斯靈體旋武",
         "disc": "alt_y"
     },
-    "Storm Rain of the Fence": {
+    "Summon Carrion Golem of Scavenging": {
         "type": "暴風雷雨",
         "text": "暴風雷雨．籬笆",
         "disc": "alt_y"
     },
-    "Summon Carrion Golem of Scavenging": {
+    "Summon Chaos Golem of the Maelström": {
         "type": "召喚食腐魔像",
         "text": "召喚食腐魔像．清洗",
         "disc": "alt_y"
     },
-    "Summon Chaos Golem of the Maelström": {
+    "Summon Flame Golem of the Meteor": {
         "type": "召喚混沌魔像",
         "text": "召喚混沌魔像．漩渦",
         "disc": "alt_y"
     },
-    "Summon Flame Golem of the Meteor": {
+    "Summon Ice Golem of Shattering": {
         "type": "召喚烈焰魔像",
         "text": "召喚烈焰魔像．隕石",
         "disc": "alt_y"
     },
-    "Summon Ice Golem of Shattering": {
+    "Summon Reaper of Eviscerating": {
         "type": "召喚寒冰魔像",
         "text": "召喚寒冰魔像．粉碎",
         "disc": "alt_y"
     },
-    "Summon Reaper of Eviscerating": {
+    "Summon Stone Golem of Safeguarding": {
         "type": "召喚奪魂鐮",
         "text": "召喚奪魂鐮．剜剖",
         "disc": "alt_y"
     },
-    "Summon Stone Golem of Safeguarding": {
+    "Summon Skeletons of Mages": {
         "type": "召喚巨石魔像",
         "text": "召喚巨石魔像．保安",
         "disc": "alt_y"
     },
-    "Summon Skeletons of Mages": {
+    "Sunder of Trarthus": {
         "type": "召喚骷髏",
         "text": "召喚骷髏．巫術",
         "disc": "alt_y"
     },
-    "Sunder of Trarthus": {
+    "Spectral Shield Throw of Trarthus": {
         "type": "大地震擊",
         "text": "特拉特斯大地震擊",
         "disc": "alt_y"
     },
-    "Spectral Shield Throw of Trarthus": {
+    "Spectral Throw of Trarthus": {
         "type": "盾靈投擲",
         "text": "特拉特斯盾靈投擲",
         "disc": "alt_y"
     },
-    "Spectral Throw of Trarthus": {
+    "Tornado of Elemental Turbulence": {
         "type": "靈體投擲",
         "text": "特拉特斯靈體投擲",
         "disc": "alt_y"
     },
-    "Tornado of Elemental Turbulence": {
+    "Toxic Rain of Withering": {
         "type": "龍捲風",
         "text": "元素湍流之龍捲風",
         "disc": "alt_y"
     },
-    "Toxic Rain of Withering": {
+    "Vaal Animate Weapon (Animate Weapon of Ranged Arms)": {
         "type": "腐蝕毒雨",
         "text": "腐蝕毒雨．凋零",
         "disc": "alt_y"
     },
-    "Vaal Animate Weapon (Animate Weapon of Ranged Arms)": {
+    "Vaal Arc (Arc of Oscillating)": {
         "type": "瓦爾．幻化武器",
         "text": "瓦爾．幻化武器 (幻化武器．遠程)",
         "disc": "alt_y"
     },
-    "Vaal Arc (Arc of Oscillating)": {
+    "Vaal Blight (Blight of Atrophy)": {
         "type": "瓦爾．電弧",
         "text": "瓦爾．電弧 (電弧．震盪)",
         "disc": "alt_y"
     },
-    "Vaal Blight (Blight of Atrophy)": {
+    "Vaal Detonate Dead (Detonate Dead of Chain Reaction)": {
         "type": "瓦爾．萎滅",
         "text": "瓦爾．萎滅 (萎滅．萎縮)",
         "disc": "alt_y"
     },
-    "Vaal Detonate Dead (Detonate Dead of Chain Reaction)": {
+    "Vaal Double Strike (Double Strike of Momentum)": {
         "type": "瓦爾．屍體爆破",
         "text": "瓦爾．屍體爆破 (屍體爆破．連鎖)",
         "disc": "alt_y"
     },
-    "Vaal Double Strike (Double Strike of Momentum)": {
+    "Vaal Firestorm (Firestorm of Pelting)": {
         "type": "瓦爾．雙重打擊",
         "text": "瓦爾．雙重打擊 (雙重打擊．氣勢)",
         "disc": "alt_y"
     },
-    "Vaal Firestorm (Firestorm of Pelting)": {
+    "Vaal Flameblast (Flameblast of Contraction)": {
         "type": "瓦爾．烈炎風暴",
         "text": "瓦爾．烈炎風暴 (烈炎風暴．猛擲)",
         "disc": "alt_y"
     },
-    "Vaal Flameblast (Flameblast of Contraction)": {
+    "Vaal Ice Nova (Ice Nova of Deep Freeze)": {
         "type": "瓦爾．烈焰爆破",
         "text": "瓦爾．烈焰爆破 (烈焰爆破．緊縮)",
         "disc": "alt_y"
     },
-    "Vaal Ice Nova (Ice Nova of Deep Freeze)": {
+    "Vaal Rain of Arrows (Rain of Arrows of Saturation)": {
         "type": "瓦爾．冰霜新星",
         "text": "瓦爾．冰霜新星 (冰霜新星．深層冰凍)",
         "disc": "alt_y"
     },
-    "Vaal Rain of Arrows (Rain of Arrows of Saturation)": {
+    "Vaal Spark (Spark of Unpredictability)": {
         "type": "瓦爾．箭雨",
         "text": "瓦爾．箭雨 (箭雨．飽和)",
         "disc": "alt_y"
     },
-    "Vaal Spark (Spark of Unpredictability)": {
+    "Vaal Summon Skeletons (Summon Skeletons of Mages)": {
         "type": "瓦爾．電球",
         "text": "瓦爾．電球 (電球．未知)",
         "disc": "alt_y"
     },
-    "Vaal Summon Skeletons (Summon Skeletons of Mages)": {
+    "Vaal Spectral Throw (Spectral Throw of Trarthus)": {
         "type": "瓦爾．召喚骷髏",
         "text": "瓦爾．召喚骷髏 (召喚骷髏．巫術)",
         "disc": "alt_y"
     },
     "Volatile Dead of Seething": {
+        "type": "瓦爾．靈體投擲",
+        "text": "瓦爾．靈體投擲 (特拉特斯靈體投擲)",
+        "disc": "alt_y"
+    },
+    "Absolution of Inspiring": {
         "type": "致命之息",
         "text": "致命之息．沸騰",
         "disc": "alt_y"
     },
-    "Absolution of Inspiring": {
+    "Animate Guardian of Smiting": {
         "type": "赦免",
         "text": "赦免．啟發",
         "disc": "alt_x"
     },
-    "Animate Guardian of Smiting": {
+    "Animate Weapon of Self Reflection": {
         "type": "幻化守衛",
         "text": "幻化守衛．重擊",
         "disc": "alt_x"
     },
-    "Animate Weapon of Self Reflection": {
+    "Arc of Surging": {
         "type": "幻化武器",
         "text": "幻化武器．反射",
         "disc": "alt_x"
     },
-    "Arc of Surging": {
+    "Armageddon Brand of Volatility": {
         "type": "電弧",
         "text": "電弧．波動",
         "disc": "alt_x"
     },
-    "Armageddon Brand of Volatility": {
+    "Artillery Ballista of Cross Strafe": {
         "type": "末日烙印",
         "text": "末日烙印．揮發",
         "disc": "alt_x"
     },
-    "Artillery Ballista of Cross Strafe": {
+    "Ball Lightning of Orbiting": {
         "type": "火砲砲塔",
         "text": "交叉掃射之火砲砲塔",
         "disc": "alt_x"
     },
-    "Ball Lightning of Orbiting": {
+    "Barrage of Volley Fire": {
         "type": "天雷之珠",
         "text": "天雷之珠．軌跡",
         "disc": "alt_x"
     },
-    "Barrage of Volley Fire": {
+    "Bear Trap of Skewers": {
         "type": "彈幕",
         "text": "彈幕．齊射",
         "disc": "alt_x"
     },
-    "Bear Trap of Skewers": {
+    "Blade Blast of Unloading": {
         "type": "捕熊陷阱",
         "text": "捕熊陷阱．串燒",
         "disc": "alt_x"
     },
-    "Blade Blast of Unloading": {
+    "Bladefall of Volleys": {
         "type": "劍刃爆破",
         "text": "劍刃爆破．卸載",
         "disc": "alt_x"
     },
-    "Bladefall of Volleys": {
+    "Bladestorm of Uncertainty": {
         "type": "虛空刀雨",
         "text": "虛空刀雨．齊射",
         "disc": "alt_x"
     },
-    "Bladestorm of Uncertainty": {
+    "Blade Trap of Greatswords": {
         "type": "旋天劍舞",
         "text": "旋天劍舞．未知",
         "disc": "alt_x"
     },
-    "Blade Trap of Greatswords": {
+    "Blade Vortex of the Scythe": {
         "type": "刀鋒陷阱",
         "text": "刀鋒陷阱．巨劍",
         "disc": "alt_x"
     },
-    "Blade Vortex of the Scythe": {
+    "Blast Rain of Trarthus": {
         "type": "飛刃風暴",
         "text": "飛刃風暴．鐮刀",
         "disc": "alt_x"
     },
-    "Blast Rain of Trarthus": {
+    "Blight of Contagion": {
         "type": "爆裂箭雨",
         "text": "特拉特斯爆裂箭雨",
         "disc": "alt_x"
     },
-    "Blight of Contagion": {
+    "Blink Arrow of Bombarding Clones": {
         "type": "萎滅",
         "text": "萎滅．瘟疫",
         "disc": "alt_x"
     },
-    "Blink Arrow of Bombarding Clones": {
+    "Boneshatter of Complex Trauma": {
         "type": "閃現射擊",
         "text": "閃現射擊．炸彈客",
         "disc": "alt_x"
     },
-    "Boneshatter of Complex Trauma": {
+    "Burning Arrow of Vigour": {
         "type": "碎骨",
         "text": "碎骨．創傷",
         "disc": "alt_x"
     },
-    "Burning Arrow of Vigour": {
+    "Blade Flurry of Incision": {
         "type": "燃燒箭矢",
         "text": "燃燒箭矢．活力",
         "disc": "alt_x"
     },
-    "Blade Flurry of Incision": {
+    "Cleave of Rage": {
         "type": "刀鋒亂舞",
         "text": "刀鋒亂舞．切割",
         "disc": "alt_x"
     },
-    "Cleave of Rage": {
+    "Cold Snap of Power": {
         "type": "劈砍",
         "text": "劈砍．盛怒",
         "disc": "alt_x"
     },
-    "Cold Snap of Power": {
+    "Consecrated Path of Endurance": {
         "type": "霜暴",
         "text": "霜暴．暴擊",
         "disc": "alt_x"
     },
-    "Consecrated Path of Endurance": {
+    "Contagion of Subsiding": {
         "type": "奉獻之路",
         "text": "奉獻之路．持久",
         "disc": "alt_x"
     },
-    "Contagion of Subsiding": {
+    "Cremation of Exhuming": {
         "type": "瘟疫",
         "text": "瘟疫．消退",
         "disc": "alt_x"
     },
-    "Cremation of Exhuming": {
+    "Bodyswap of Sacrifice": {
         "type": "熔炎送葬",
         "text": "熔炎送葬．深掘",
         "disc": "alt_x"
     },
-    "Bodyswap of Sacrifice": {
+    "Crackling Lance of Branching": {
         "type": "屍術傳送",
         "text": "屍術傳送．獻祭",
         "disc": "alt_x"
     },
-    "Crackling Lance of Branching": {
+    "Cyclone of Tumult": {
         "type": "碎雷電閃",
         "text": "碎雷電閃．分支",
         "disc": "alt_x"
     },
-    "Cyclone of Tumult": {
+    "Dark Pact of Trarthus": {
         "type": "旋風斬",
         "text": "旋風斬．騷動",
         "disc": "alt_x"
     },
-    "Dark Pact of Trarthus": {
+    "Bane of Condemnation": {
         "type": "暗夜血契",
         "text": "特拉特斯暗夜血契",
         "disc": "alt_x"
     },
-    "Bane of Condemnation": {
+    "Detonate Dead of Scavenging": {
         "type": "災厄",
         "text": "災厄．譴責",
         "disc": "alt_x"
     },
-    "Detonate Dead of Scavenging": {
+    "Discharge of Misery": {
         "type": "屍體爆破",
         "text": "屍體爆破．清洗",
         "disc": "alt_x"
     },
-    "Discharge of Misery": {
+    "Divine Ire of Holy Lightning": {
         "type": "解放",
         "text": "解放．苦痛",
         "disc": "alt_x"
     },
-    "Divine Ire of Holy Lightning": {
+    "Dominating Blow of Inspiring": {
         "type": "聖怒",
         "text": "聖怒．雷神",
         "disc": "alt_x"
     },
-    "Dominating Blow of Inspiring": {
+    "Double Strike of Impaling": {
         "type": "霸氣之擊",
         "text": "霸氣之擊．啟發",
         "disc": "alt_x"
     },
-    "Double Strike of Impaling": {
+    "Dual Strike of Ambidexterity": {
         "type": "雙重打擊",
         "text": "雙重打擊．穿刺",
         "disc": "alt_x"
     },
-    "Dual Strike of Ambidexterity": {
+    "Earthquake of Amplification": {
         "type": "雙持打擊",
         "text": "雙持打擊．靈活",
         "disc": "alt_x"
     },
-    "Earthquake of Amplification": {
+    "Earthshatter of Fragility": {
         "type": "震地",
         "text": "震地．增幅",
         "disc": "alt_x"
     },
-    "Earthshatter of Fragility": {
+    "Elemental Hit of the Spectrum": {
         "type": "碎地重擊",
         "text": "碎地重擊．易碎",
         "disc": "alt_x"
     },
-    "Elemental Hit of the Spectrum": {
+    "Essence Drain of Desperation": {
         "type": "元素打擊",
         "text": "元素打擊．光譜",
         "disc": "alt_x"
     },
-    "Essence Drain of Desperation": {
+    "Ethereal Knives of Lingering Blades": {
         "type": "靈魂吸取",
         "text": "靈魂吸取．絕望",
         "disc": "alt_x"
     },
-    "Ethereal Knives of Lingering Blades": {
+    "Explosive Concoction of Destruction": {
         "type": "虛空匕首",
         "text": "虛空匕首．餘刃",
         "disc": "alt_x"
     },
-    "Explosive Concoction of Destruction": {
+    "Exsanguinate of Transmission": {
         "type": "爆裂物",
         "text": "爆裂物．破壞",
         "disc": "alt_x"
     },
-    "Exsanguinate of Transmission": {
+    "Eye of Winter of Finality": {
         "type": "抽血",
         "text": "抽血．傳染",
         "disc": "alt_x"
     },
-    "Eye of Winter of Finality": {
+    "Scorching Ray of Immolation": {
         "type": "凜冬之眼",
         "text": "凜冬之眼．終結",
         "disc": "alt_x"
     },
-    "Scorching Ray of Immolation": {
+    "Pyroclast Mine of Sabotage": {
         "type": "熾灼奔流",
         "text": "熾灼奔流．焚燒",
         "disc": "alt_x"
     },
-    "Pyroclast Mine of Sabotage": {
+    "Firestorm of Meteors": {
         "type": "炎爆新星地雷",
         "text": "炎爆新星地雷．破壞",
         "disc": "alt_x"
     },
-    "Firestorm of Meteors": {
+    "Fire Trap of Blasting": {
         "type": "烈炎風暴",
         "text": "烈炎風暴．隕石",
         "disc": "alt_x"
     },
-    "Fire Trap of Blasting": {
+    "Flameblast of Celerity": {
         "type": "火焰陷阱",
         "text": "火焰陷阱．爆發",
         "disc": "alt_x"
     },
-    "Flameblast of Celerity": {
+    "Holy Flame Totem of Ire": {
         "type": "烈焰爆破",
         "text": "烈焰爆破．迅速",
         "disc": "alt_x"
     },
-    "Holy Flame Totem of Ire": {
+    "Flame Surge of Combusting": {
         "type": "神聖火舌圖騰",
         "text": "神聖火舌圖騰．怒火",
         "disc": "alt_x"
     },
-    "Flame Surge of Combusting": {
+    "Flicker Strike of Power": {
         "type": "怒焰奔騰",
         "text": "怒焰奔騰．燃燒",
         "disc": "alt_x"
     },
-    "Flicker Strike of Power": {
+    "Forbidden Rite of Soul Sacrifice": {
         "type": "閃現打擊",
         "text": "閃現打擊．暴擊",
         "disc": "alt_x"
     },
-    "Forbidden Rite of Soul Sacrifice": {
+    "Icicle Mine of Fanning": {
         "type": "禁忌儀式",
         "text": "禁忌儀式．靈魂獻祭",
         "disc": "alt_x"
     },
-    "Icicle Mine of Fanning": {
+    "Frenzy of Onslaught": {
         "type": "冰雹地雷",
         "text": "冰雹地雷．扇動",
         "disc": "alt_x"
     },
-    "Frenzy of Onslaught": {
+    "Frost Blades of Katabasis": {
         "type": "狂怒",
         "text": "狂怒．猛攻",
         "disc": "alt_x"
     },
-    "Frost Blades of Katabasis": {
+    "Frostblink of Wintry Blast": {
         "type": "冰霜之刃",
         "text": "冰霜之刃．降臨",
         "disc": "alt_x"
     },
-    "Frostblink of Wintry Blast": {
+    "Vortex of Projection": {
         "type": "霜漣之瞬",
         "text": "霜漣之瞬．寒風",
         "disc": "alt_x"
     },
-    "Vortex of Projection": {
+    "Frost Bomb of Instability": {
         "type": "漩渦",
         "text": "漩渦．投射",
         "disc": "alt_x"
     },
-    "Frost Bomb of Instability": {
+    "Frozen Legion of Rallying": {
         "type": "寒霜爆",
         "text": "寒霜爆．不穩定",
         "disc": "alt_x"
     },
-    "Frozen Legion of Rallying": {
+    "Galvanic Field of Intensity": {
         "type": "戰亂．凍結",
         "text": "戰亂．凍結．號召",
         "disc": "alt_x"
     },
-    "Galvanic Field of Intensity": {
+    "Glacial Cascade of the Fissure": {
         "type": "電光領域",
         "text": "電光領域．強度",
         "disc": "alt_x"
     },
-    "Glacial Cascade of the Fissure": {
+    "Glacial Hammer of Shattering": {
         "type": "冰川之刺",
         "text": "冰川之刺．裂隙",
         "disc": "alt_x"
     },
-    "Glacial Hammer of Shattering": {
+    "Ground Slam of Earthshaking": {
         "type": "冰霜之錘",
         "text": "冰霜之錘．粉碎",
         "disc": "alt_x"
     },
-    "Ground Slam of Earthshaking": {
+    "Hexblast of Contradiction": {
         "type": "裂地之擊",
         "text": "裂地之擊．地震",
         "disc": "alt_x"
     },
-    "Hexblast of Contradiction": {
+    "Ice Crash of Cadence": {
         "type": "咒術枯萎",
         "text": "咒術枯萎．矛盾",
         "disc": "alt_x"
     },
-    "Ice Crash of Cadence": {
+    "Ice Nova of Frostbolts": {
         "type": "寒冰衝擊",
         "text": "寒冰衝擊．節奏",
         "disc": "alt_x"
     },
-    "Ice Nova of Frostbolts": {
+    "Ice Shot of Penetration": {
         "type": "冰霜新星",
         "text": "冰霜新星．寒冰彈",
         "disc": "alt_x"
     },
-    "Ice Shot of Penetration": {
+    "Ice Spear of Splitting": {
         "type": "冰霜射擊",
         "text": "穿透之冰霜射擊",
         "disc": "alt_x"
     },
-    "Ice Spear of Splitting": {
+    "Ice Trap of Hollowness": {
         "type": "冰矛",
         "text": "冰矛．分裂",
         "disc": "alt_x"
     },
-    "Ice Trap of Hollowness": {
+    "Incinerate of Expanse": {
         "type": "冰凍陷阱",
         "text": "冰凍陷阱．空心",
         "disc": "alt_x"
     },
-    "Incinerate of Expanse": {
+    "Infernal Blow of Immolation": {
         "type": "燒毀",
         "text": "燒毀．蔓延",
         "disc": "alt_x"
     },
-    "Infernal Blow of Immolation": {
+    "Kinetic Blast of Clustering": {
         "type": "煉獄之擊",
         "text": "煉獄之擊．自焚",
         "disc": "alt_x"
     },
-    "Kinetic Blast of Clustering": {
+    "Kinetic Bolt of Fragmentation": {
         "type": "力量爆破",
         "text": "聚集之力量爆破",
         "disc": "alt_x"
     },
-    "Kinetic Bolt of Fragmentation": {
+    "Kinetic Rain of Impact": {
         "type": "力量穿引",
         "text": "力量穿引．碎片",
         "disc": "alt_x"
     },
     "Lacerate of Butchering": {
+        "type": "力量驟雨",
+        "text": "力量驟雨．衝擊",
+        "disc": "alt_x"
+    },
+    "Lancing Steel of Spraying": {
         "type": "破空斬",
         "text": "破空斬．屠宰",
         "disc": "alt_x"
     },
-    "Lancing Steel of Spraying": {
+    "Leap Slam of Groundbreaking": {
         "type": "鋼之突刺",
         "text": "鋼之突刺．噴射",
         "disc": "alt_x"
     },
-    "Leap Slam of Groundbreaking": {
+    "Lightning Arrow of Electrocution": {
         "type": "躍擊",
         "text": "躍擊．地破",
         "disc": "alt_x"
     },
-    "Lightning Arrow of Electrocution": {
+    "Lightning Conduit of the Heavens": {
         "type": "閃電箭矢",
         "text": "閃電箭矢．電刑",
         "disc": "alt_x"
     },
-    "Lightning Conduit of the Heavens": {
+    "Lightning Strike of Arcing": {
         "type": "導雷",
         "text": "導雷．天堂",
         "disc": "alt_x"
     },
-    "Lightning Strike of Arcing": {
+    "Lightning Tendrils of Eccentricity": {
         "type": "閃電打擊",
         "text": "閃電打擊．電弧",
         "disc": "alt_x"
     },
-    "Lightning Tendrils of Eccentricity": {
+    "Lightning Spire Trap of Zapping": {
         "type": "電能釋放",
         "text": "電能釋放．異變",
         "disc": "alt_x"
     },
-    "Lightning Spire Trap of Zapping": {
+    "Lightning Trap of Sparking": {
         "type": "鋒雷陷阱",
         "text": "鋒雷陷阱．殘喘",
         "disc": "alt_x"
     },
-    "Lightning Trap of Sparking": {
+    "Mirror Arrow of Bombarding Clones": {
         "type": "閃電陷阱",
         "text": "閃電陷阱．電球",
         "disc": "alt_x"
     },
-    "Mirror Arrow of Bombarding Clones": {
+    "Molten Strike of the Zenith": {
         "type": "魅影射擊",
         "text": "魅影射擊．炸彈客",
         "disc": "alt_x"
     },
-    "Molten Strike of the Zenith": {
+    "Penance Brand of Dissipation": {
         "type": "熔岩之擊",
         "text": "熔岩之擊．極盛",
         "disc": "alt_x"
     },
-    "Penance Brand of Dissipation": {
+    "Perforate of Duality": {
         "type": "贖罪烙印",
         "text": "贖罪烙印．消散",
         "disc": "alt_x"
     },
-    "Perforate of Duality": {
+    "Seismic Trap of Swells": {
         "type": "裂地刺穿",
         "text": "裂地刺穿．雙持",
         "disc": "alt_x"
     },
-    "Seismic Trap of Swells": {
+    "Caustic Arrow of Poison": {
         "type": "地裂陷阱",
         "text": "地裂陷阱．膨脹",
         "disc": "alt_x"
     },
-    "Caustic Arrow of Poison": {
+    "Poisonous Concoction of Bouncing": {
         "type": "腐蝕箭矢",
         "text": "腐蝕箭矢．中毒",
         "disc": "alt_x"
     },
-    "Poisonous Concoction of Bouncing": {
+    "Power Siphon of the Archmage": {
         "type": "毒藥",
         "text": "彈炸之毒藥",
         "disc": "alt_x"
     },
-    "Power Siphon of the Archmage": {
+    "Puncture of Shanking": {
         "type": "力量抽取",
         "text": "力量抽取．大法師",
         "disc": "alt_x"
     },
-    "Puncture of Shanking": {
+    "Rage Vortex of Berserking": {
         "type": "放血",
         "text": "腿脛放血",
         "disc": "alt_x"
     },
-    "Rage Vortex of Berserking": {
+    "Rain of Arrows of Artillery": {
         "type": "盛怒漩渦",
         "text": "盛怒漩渦．狂暴",
         "disc": "alt_x"
     },
-    "Rain of Arrows of Artillery": {
+    "Raise Spectre of Transience": {
         "type": "箭雨",
         "text": "箭雨．火炮",
         "disc": "alt_x"
     },
-    "Raise Spectre of Transience": {
+    "Raise Zombie of Slamming": {
         "type": "喚醒幽魂",
         "text": "喚醒幽魂．轉瞬",
         "disc": "alt_x"
     },
-    "Raise Zombie of Slamming": {
+    "Reave of Refraction": {
         "type": "殭屍復甦",
         "text": "殭屍復甦．重擊",
         "disc": "alt_x"
     },
-    "Reave of Refraction": {
+    "Righteous Fire of Arcane Devotion": {
         "type": "衝擊波",
         "text": "衝擊波．折射",
         "disc": "alt_x"
     },
-    "Righteous Fire of Arcane Devotion": {
+    "Purifying Flame of Revelations": {
         "type": "正義之火",
         "text": "正義之火．秘能奉獻",
         "disc": "alt_x"
     },
-    "Purifying Flame of Revelations": {
+    "Scourge Arrow of Menace": {
         "type": "淨化烈焰",
         "text": "淨化烈焰．啟示",
         "disc": "alt_x"
     },
-    "Scourge Arrow of Menace": {
+    "Shattering Steel of Ammunition": {
         "type": "天譴之箭",
         "text": "天譴之箭．威脅",
         "disc": "alt_x"
     },
-    "Shattering Steel of Ammunition": {
+    "Shield Crush of the Chieftain": {
         "type": "鋼之碎擊",
         "text": "鋼之碎擊．彈藥",
         "disc": "alt_x"
     },
-    "Shield Crush of the Chieftain": {
+    "Shrapnel Ballista of Steel": {
         "type": "重盾粉碎",
         "text": "重盾粉碎．酋長",
         "disc": "alt_x"
     },
-    "Shrapnel Ballista of Steel": {
+    "Galvanic Arrow of Energy": {
         "type": "彈片砲塔",
         "text": "彈片砲塔．鋼鐵",
         "disc": "alt_x"
     },
-    "Galvanic Arrow of Energy": {
+    "Explosive Trap of Shrapnel": {
         "type": "電流箭矢",
         "text": "電流箭矢．能量",
         "disc": "alt_x"
     },
-    "Explosive Trap of Shrapnel": {
+    "Siege Ballista of Splintering": {
         "type": "爆裂陷阱",
         "text": "爆裂陷阱．彈片",
         "disc": "alt_x"
     },
-    "Siege Ballista of Splintering": {
+    "Smite of Divine Judgement": {
         "type": "攻城炮台",
         "text": "攻城炮台．碎片",
         "disc": "alt_x"
     },
-    "Smite of Divine Judgement": {
+    "Soulrend of Reaping": {
         "type": "雷鳴重擊",
         "text": "雷鳴重擊．聖判",
         "disc": "alt_x"
     },
-    "Soulrend of Reaping": {
+    "Spark of the Nova": {
         "type": "靈體撕裂",
         "text": "靈體撕裂．收割",
         "disc": "alt_x"
     },
-    "Spark of the Nova": {
+    "Split Arrow of Splitting": {
         "type": "電球",
         "text": "電球．新星",
         "disc": "alt_x"
     },
-    "Split Arrow of Splitting": {
+    "Splitting Steel of Ammunition": {
         "type": "分裂箭矢",
         "text": "分裂箭矢．分裂",
         "disc": "alt_x"
     },
-    "Splitting Steel of Ammunition": {
+    "Stormbind of Teleportation": {
         "type": "鋼之裂化",
         "text": "鋼之裂化．彈藥",
         "disc": "alt_x"
     },
-    "Stormbind of Teleportation": {
+    "Storm Brand of Indecision": {
         "type": "風暴術符",
         "text": "風暴術符．傳送",
         "disc": "alt_x"
     },
-    "Storm Brand of Indecision": {
+    "Storm Call of Trarthus": {
         "type": "風暴烙印",
         "text": "風暴烙印．躊躇",
         "disc": "alt_x"
     },
-    "Storm Call of Trarthus": {
+    "Storm Rain of the Conduit": {
         "type": "風暴呼喚",
         "text": "特拉特斯風暴呼喚",
         "disc": "alt_x"
     },
-    "Storm Rain of the Conduit": {
+    "Summon Carrion Golem of Hordes": {
         "type": "暴風雷雨",
         "text": "暴風雷雨．導管",
         "disc": "alt_x"
     },
-    "Summon Carrion Golem of Hordes": {
+    "Summon Chaos Golem of Hordes": {
         "type": "召喚食腐魔像",
         "text": "召喚食腐魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Chaos Golem of Hordes": {
+    "Summon Flame Golem of Hordes": {
         "type": "召喚混沌魔像",
         "text": "召喚混沌魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Flame Golem of Hordes": {
+    "Summon Ice Golem of Hordes": {
         "type": "召喚烈焰魔像",
         "text": "召喚烈焰魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Ice Golem of Hordes": {
+    "Summon Lightning Golem of Hordes": {
         "type": "召喚寒冰魔像",
         "text": "召喚寒冰魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Lightning Golem of Hordes": {
+    "Summon Raging Spirit of Enormity": {
         "type": "召喚閃電魔像",
         "text": "召喚閃電魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Raging Spirit of Enormity": {
+    "Summon Reaper of Revenants": {
         "type": "召喚憤怒狂靈",
         "text": "召喚憤怒狂靈．巨型",
         "disc": "alt_x"
     },
-    "Summon Reaper of Revenants": {
+    "Summon Holy Relic of Conviction": {
         "type": "召喚奪魂鐮",
         "text": "召喚奪魂鐮．亡靈",
         "disc": "alt_x"
     },
-    "Summon Holy Relic of Conviction": {
+    "Summon Stone Golem of Hordes": {
         "type": "召喚聖物",
         "text": "信念之召喚聖物",
         "disc": "alt_x"
     },
-    "Summon Stone Golem of Hordes": {
+    "Summon Skeletons of Archers": {
         "type": "召喚巨石魔像",
         "text": "召喚巨石魔像．部落",
         "disc": "alt_x"
     },
-    "Summon Skeletons of Archers": {
+    "Sunder of Earthbreaking": {
         "type": "召喚骷髏",
         "text": "召喚骷髏．箭術",
         "disc": "alt_x"
     },
-    "Sunder of Earthbreaking": {
+    "Tectonic Slam of Cataclysm": {
         "type": "大地震擊",
         "text": "大地震擊．地破",
         "disc": "alt_x"
     },
-    "Tectonic Slam of Cataclysm": {
+    "Spectral Shield Throw of Shattering": {
         "type": "破體之擊",
         "text": "破體之擊．災變",
         "disc": "alt_x"
     },
-    "Spectral Shield Throw of Shattering": {
+    "Spectral Throw of Materialising": {
         "type": "盾靈投擲",
         "text": "盾靈投擲．粉碎",
         "disc": "alt_x"
     },
-    "Spectral Throw of Materialising": {
+    "Tornado Shot of Cloudburst": {
         "type": "靈體投擲",
         "text": "靈體投擲．具現化",
         "disc": "alt_x"
     },
-    "Tornado Shot of Cloudburst": {
+    "Toxic Rain of Sporeburst": {
         "type": "龍捲射擊",
         "text": "龍捲射擊．雲爆",
         "disc": "alt_x"
     },
-    "Toxic Rain of Sporeburst": {
+    "Vaal Absolution (Absolution of Inspiring)": {
         "type": "腐蝕毒雨",
         "text": "腐蝕毒雨．爆發",
         "disc": "alt_x"
     },
-    "Vaal Absolution (Absolution of Inspiring)": {
+    "Vaal Animate Weapon (Animate Weapon of Self Reflection)": {
         "type": "瓦爾．赦免",
         "text": "瓦爾．赦免 (赦免．啟發)",
         "disc": "alt_x"
     },
-    "Vaal Animate Weapon (Animate Weapon of Self Reflection)": {
+    "Vaal Arc (Arc of Surging)": {
         "type": "瓦爾．幻化武器",
         "text": "瓦爾．幻化武器 (幻化武器．反射)",
         "disc": "alt_x"
     },
-    "Vaal Arc (Arc of Surging)": {
+    "Vaal Blade Vortex (Blade Vortex of the Scythe)": {
         "type": "瓦爾．電弧",
         "text": "瓦爾．電弧 (電弧．波動)",
         "disc": "alt_x"
     },
-    "Vaal Blade Vortex (Blade Vortex of the Scythe)": {
+    "Vaal Blight (Blight of Contagion)": {
         "type": "瓦爾．飛刃風暴",
         "text": "瓦爾．飛刃風暴 (飛刃風暴．鐮刀)",
         "disc": "alt_x"
     },
-    "Vaal Blight (Blight of Contagion)": {
+    "Vaal Burning Arrow (Burning Arrow of Vigour)": {
         "type": "瓦爾．萎滅",
         "text": "瓦爾．萎滅 (萎滅．瘟疫)",
         "disc": "alt_x"
     },
-    "Vaal Burning Arrow (Burning Arrow of Vigour)": {
+    "Vaal Caustic Arrow (Caustic Arrow of Poison)": {
         "type": "瓦爾．燃燒箭矢",
         "text": "瓦爾．燃燒箭矢 (燃燒箭矢．活力)",
         "disc": "alt_x"
     },
-    "Vaal Caustic Arrow (Caustic Arrow of Poison)": {
+    "Vaal Blade Flurry (Blade Flurry of Incision)": {
         "type": "瓦爾．腐蝕箭矢",
         "text": "瓦爾．腐蝕箭矢 (腐蝕箭矢．中毒)",
         "disc": "alt_x"
     },
-    "Vaal Blade Flurry (Blade Flurry of Incision)": {
+    "Vaal Cleave (Cleave of Rage)": {
         "type": "瓦爾．刀鋒亂舞",
         "text": "瓦爾．刀鋒亂舞 (刀鋒亂舞．切割)",
         "disc": "alt_x"
     },
-    "Vaal Cleave (Cleave of Rage)": {
+    "Vaal Cold Snap (Cold Snap of Power)": {
         "type": "瓦爾．劈砍",
         "text": "瓦爾．劈砍 (劈砍．盛怒)",
         "disc": "alt_x"
     },
-    "Vaal Cold Snap (Cold Snap of Power)": {
+    "Vaal Cyclone (Cyclone of Tumult)": {
         "type": "瓦爾．霜暴",
         "text": "瓦爾．霜暴 (霜暴．暴擊)",
         "disc": "alt_x"
     },
-    "Vaal Cyclone (Cyclone of Tumult)": {
+    "Vaal Detonate Dead (Detonate Dead of Scavenging)": {
         "type": "瓦爾．旋風斬",
         "text": "瓦爾．旋風斬 (旋風斬．騷動)",
         "disc": "alt_x"
     },
-    "Vaal Detonate Dead (Detonate Dead of Scavenging)": {
+    "Vaal Domination (Dominating Blow of Inspiring)": {
         "type": "瓦爾．屍體爆破",
         "text": "瓦爾．屍體爆破 (屍體爆破．清洗)",
         "disc": "alt_x"
     },
-    "Vaal Domination (Dominating Blow of Inspiring)": {
+    "Vaal Double Strike (Double Strike of Impaling)": {
         "type": "瓦爾．霸氣",
         "text": "瓦爾．霸氣 (霸氣之擊．啟發)",
         "disc": "alt_x"
     },
-    "Vaal Double Strike (Double Strike of Impaling)": {
+    "Vaal Earthquake (Earthquake of Amplification)": {
         "type": "瓦爾．雙重打擊",
         "text": "瓦爾．雙重打擊 (雙重打擊．穿刺)",
         "disc": "alt_x"
     },
-    "Vaal Earthquake (Earthquake of Amplification)": {
+    "Vaal Firestorm (Firestorm of Meteors)": {
         "type": "瓦爾．震地",
         "text": "瓦爾．震地 (震地．增幅)",
         "disc": "alt_x"
     },
-    "Vaal Firestorm (Firestorm of Meteors)": {
+    "Vaal Flameblast (Flameblast of Celerity)": {
         "type": "瓦爾．烈炎風暴",
         "text": "瓦爾．烈炎風暴 (烈炎風暴．隕石)",
         "disc": "alt_x"
     },
-    "Vaal Flameblast (Flameblast of Celerity)": {
+    "Vaal Flicker Strike (Flicker Strike of Power)": {
         "type": "瓦爾．烈焰爆破",
         "text": "瓦爾．烈焰爆破 (烈焰爆破．迅速)",
         "disc": "alt_x"
     },
-    "Vaal Flicker Strike (Flicker Strike of Power)": {
+    "Vaal Glacial Hammer (Glacial Hammer of Shattering)": {
         "type": "瓦爾．閃現打擊",
         "text": "瓦爾．閃現打擊 (閃現打擊．暴擊)",
         "disc": "alt_x"
     },
-    "Vaal Glacial Hammer (Glacial Hammer of Shattering)": {
+    "Vaal Ground Slam (Ground Slam of Earthshaking)": {
         "type": "瓦爾．冰霜之錘",
         "text": "瓦爾．冰霜之錘 (冰霜之錘．粉碎)",
         "disc": "alt_x"
     },
-    "Vaal Ground Slam (Ground Slam of Earthshaking)": {
+    "Vaal Ice Nova (Ice Nova of Frostbolts)": {
         "type": "瓦爾．裂地之擊",
         "text": "瓦爾．裂地之擊 (裂地之擊．地震)",
         "disc": "alt_x"
     },
-    "Vaal Ice Nova (Ice Nova of Frostbolts)": {
+    "Vaal Ice Shot (Ice Shot of Penetration)": {
         "type": "瓦爾．冰霜新星",
         "text": "瓦爾．冰霜新星 (冰霜新星．寒冰彈)",
         "disc": "alt_x"
     },
-    "Vaal Ice Shot (Ice Shot of Penetration)": {
+    "Vaal Lightning Arrow (Lightning Arrow of Electrocution)": {
         "type": "瓦爾．冰霜射擊",
         "text": "瓦爾．冰霜射擊 (穿透之冰霜射擊)",
         "disc": "alt_x"
     },
-    "Vaal Lightning Arrow (Lightning Arrow of Electrocution)": {
+    "Vaal Lightning Strike (Lightning Strike of Arcing)": {
         "type": "瓦爾．閃電箭矢",
         "text": "瓦爾．閃電箭矢 (閃電箭矢．電刑)",
         "disc": "alt_x"
     },
-    "Vaal Lightning Strike (Lightning Strike of Arcing)": {
+    "Vaal Lightning Trap (Lightning Trap of Sparking)": {
         "type": "瓦爾．閃電打擊",
         "text": "瓦爾．閃電打擊 (閃電打擊．電弧)",
         "disc": "alt_x"
     },
-    "Vaal Lightning Trap (Lightning Trap of Sparking)": {
+    "Vaal Molten Strike (Molten Strike of the Zenith)": {
         "type": "瓦爾．閃電陷阱",
         "text": "瓦爾．閃電陷阱 (閃電陷阱．電球)",
         "disc": "alt_x"
     },
-    "Vaal Molten Strike (Molten Strike of the Zenith)": {
+    "Vaal Power Siphon (Power Siphon of the Archmage)": {
         "type": "瓦爾．熔岩之擊",
         "text": "瓦爾．熔岩之擊 (熔岩之擊．極盛)",
         "disc": "alt_x"
     },
-    "Vaal Power Siphon (Power Siphon of the Archmage)": {
+    "Vaal Rain of Arrows (Rain of Arrows of Artillery)": {
         "type": "瓦爾．力量抽取",
         "text": "瓦爾．力量抽取 (力量抽取．大法師)",
         "disc": "alt_x"
     },
-    "Vaal Rain of Arrows (Rain of Arrows of Artillery)": {
+    "Vaal Reave (Reave of Refraction)": {
         "type": "瓦爾．箭雨",
         "text": "瓦爾．箭雨 (箭雨．火炮)",
         "disc": "alt_x"
     },
-    "Vaal Reave (Reave of Refraction)": {
+    "Vaal Righteous Fire (Righteous Fire of Arcane Devotion)": {
         "type": "瓦爾．衝擊波",
         "text": "瓦爾．衝擊波 (衝擊波．折射)",
         "disc": "alt_x"
     },
-    "Vaal Righteous Fire (Righteous Fire of Arcane Devotion)": {
+    "Vaal Smite (Smite of Divine Judgement)": {
         "type": "瓦爾．正義之火",
         "text": "瓦爾．正義之火 (正義之火．秘能奉獻)",
         "disc": "alt_x"
     },
-    "Vaal Smite (Smite of Divine Judgement)": {
+    "Vaal Spark (Spark of the Nova)": {
         "type": "瓦爾．雷鳴重擊",
         "text": "瓦爾．雷鳴重擊 (雷鳴重擊．聖判)",
         "disc": "alt_x"
     },
-    "Vaal Spark (Spark of the Nova)": {
+    "Vaal Storm Call (Storm Call of Trarthus)": {
         "type": "瓦爾．電球",
         "text": "瓦爾．電球 (電球．新星)",
         "disc": "alt_x"
     },
     "Vaal Summon Skeletons (Summon Skeletons of Archers)": {
+        "type": "瓦爾．風暴呼喚",
+        "text": "瓦爾．風暴呼喚 (特拉特斯風暴呼喚)",
+        "disc": "alt_x"
+    },
+    "Vaal Spectral Throw (Spectral Throw of Materialising)": {
         "type": "瓦爾．召喚骷髏",
         "text": "瓦爾．召喚骷髏 (召喚骷髏．箭術)",
         "disc": "alt_x"
     },
-    "Vaal Spectral Throw (Spectral Throw of Materialising)": {
+    "Vaal Volcanic Fissure (Volcanic Fissure of Snaking)": {
         "type": "瓦爾．靈體投擲",
         "text": "瓦爾．靈體投擲 (靈體投擲．具現化)",
         "disc": "alt_x"
     },
-    "Vaal Volcanic Fissure (Volcanic Fissure of Snaking)": {
+    "Viper Strike of the Mamba": {
         "type": "瓦爾．炎火脈動",
         "text": "瓦爾．炎火脈動 (炎火脈動．蜿蜒)",
         "disc": "alt_x"
     },
-    "Viper Strike of the Mamba": {
+    "Void Sphere of Rending": {
         "type": "毒蛇打擊",
         "text": "毒蛇打擊．曼巴",
         "disc": "alt_x"
     },
-    "Void Sphere of Rending": {
+    "Volatile Dead of Confinement": {
         "type": "虛無玉",
         "text": "虛無玉．分裂",
         "disc": "alt_x"
     },
-    "Volatile Dead of Confinement": {
+    "Volcanic Fissure of Snaking": {
         "type": "致命之息",
         "text": "致命之息．禁閉",
         "disc": "alt_x"
     },
-    "Volcanic Fissure of Snaking": {
+    "Wild Strike of Extremes": {
         "type": "炎火脈動",
         "text": "炎火脈動．蜿蜒",
-        "disc": "alt_x"
-    },
-    "Wild Strike of Extremes": {
-        "type": "野性打擊",
-        "text": "野性打擊．極致",
         "disc": "alt_x"
     }
 }
