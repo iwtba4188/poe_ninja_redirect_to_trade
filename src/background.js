@@ -155,6 +155,13 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
     dbg_log("[Status] gems_query_data = ");
     dbg_log(gems_query_data);
 
+    // 檢查並開啟更新分頁
+    const update_status = await chrome.storage.local.get(["show_update_popup"]);
+    if (update_status["show_update_popup"]) {
+        chrome.runtime.sendMessage({ action: "open_update_tab" });
+        await chrome.storage.local.remove("show_update_popup");
+    }
+
     const POE_TRADE_URL = `https://www.pathofexile.${redirect_to}/trade/search`;
     const BALANCE_ICON = `<path xmlns="http://www.w3.org/2000/svg" d="M14.6302 7L13.0002 3H14.0002V2H9.00024V1H8.00024V2H3.00024V3H4.00024L2.38024 7H2.00024V8H2.15024C2.30663 8.49791 2.623 8.93028 3.05024 9.23C3.47189 9.53576 3.9794 9.7004 4.50024 9.7004C5.02108 9.7004 5.5286 9.53576 5.95024 9.23C6.3776 8.92817 6.69663 8.49696 6.86024 8H7.00024V7H6.55024L4.88024 3H8.00024V11H6.00024L5.61024 11.18L3.61024 13.69L4.00024 14.5H13.0002L13.3902 13.69L11.3902 11.18L11.0002 11H9.00024V3H12.1302L10.4602 7H10.0002V8H10.1502C10.3138 8.49544 10.6294 8.92668 11.0522 9.23236C11.4751 9.53804 11.9835 9.70258 12.5052 9.70258C13.027 9.70258 13.5354 9.53804 13.9582 9.23236C14.3811 8.92668 14.6967 8.49544 14.8602 8H15.0002V7H14.6302ZM5.22024 8.51C4.99971 8.63205 4.75229 8.69734 4.50024 8.7C4.25119 8.69869 4.00667 8.63326 3.79024 8.51C3.56955 8.38903 3.38362 8.21342 3.25024 8H5.75024C5.61799 8.21083 5.436 8.38595 5.22024 8.51ZM5.47024 7H3.47024L4.47024 4.6L5.47024 7ZM10.7602 12L12.0002 13.5H5.00024L6.24024 12H10.7602ZM12.5402 4.62L13.5402 7.02H11.5402L12.5402 4.62ZM13.2202 8.53C13.0016 8.65671 12.7529 8.72233 12.5002 8.72V8.72C12.2506 8.72355 12.0048 8.65778 11.7902 8.53C11.5692 8.40065 11.3837 8.21856 11.2502 8H13.7502C13.6263 8.2225 13.4427 8.40604 13.2202 8.53V8.53Z" fill="#424242"/>`;
     const CHECK_ICON = `<path fill-rule="evenodd" clip-rule="evenodd" d="M14.4315 3.3232L5.96151 13.3232L5.1708 13.2874L1.8208 8.5174L2.63915 7.94268L5.61697 12.1827L13.6684 2.67688L14.4315 3.3232Z" fill="#388A34"/>`;
@@ -961,7 +968,21 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 };
 
 // 初始化所需設定
-chrome.runtime.onInstalled.addListener(init_status);
+chrome.runtime.onInstalled.addListener(async (details) => {
+    // 檢查是否為擴充功能更新
+    if (details.reason === "update") {
+        await chrome.storage.local.set({ "show_update_popup": true });
+    }
+
+    // 執行原有的初始化邏輯
+    await init_status();
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "open_update_tab") {
+        chrome.tabs.create({ url: "https://github.com/iwtba4188/poe_ninja_redirect_to_trade/releases/tag/v" + chrome.runtime.getManifest().version });
+    }
+});
 
 // 當頁面建立或重新整理時，擷取送出的封包以取得能拿到角色資料的 api 網址
 chrome.tabs.onUpdated.addListener(chrome.webRequest.onBeforeRequest.addListener(fetch_character_data, API_URLS_FILTER));
