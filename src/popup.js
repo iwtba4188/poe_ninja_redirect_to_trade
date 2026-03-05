@@ -5,7 +5,7 @@ let setting_ids = ["redirect-to", "lang", "mods-file-mode", "trade-type", "debug
 
 function refresh_page() {
     // refresh current focus ninja page
-    chrome.tabs.query({ active: true, currentWindow: true, url: "*://*.poe.ninja/*/builds/*" }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true, url: "*://poe.ninja/*" }, function (tabs) {
         if (tabs.length > 0) chrome.tabs.update(tabs[0].id, { url: tabs[0].url });
     });
 }
