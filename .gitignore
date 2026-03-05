@@ -8,3 +8,7 @@ uv.lock
 *.ignore.*
 
 __pycache__
+
+.cache
+.python-version
+pyproject.toml
