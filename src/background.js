@@ -223,8 +223,11 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
      */
     function translate_mod(mod_string) {
         dbg_log(`[Tippy Item] mod_string = "${mod_string}", lang_matching[mod_string] = "${lang_matching[mod_string]}"`);
-        if (lang_matching[mod_string]) return lang_matching[mod_string];
-        else return mod_string;
+        if (find_mod_id(mod_string)) { // XXX: 暫時髒寫法
+            if (lang_matching[mod_string]) return lang_matching[mod_string];
+            else return mod_string;
+        }
+        return null;
     }
 
     dbg_log(equipment_data);
@@ -233,9 +236,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
 
     dbg_log(lang_matching);
 
-
-    // TODO: New trade button add method
-    // [REFACTOR VERSION]
     const mod_types = ["enchant", "implicit", "fractured", "explicit", "crafted", "mutated"];
 
     function clean_empty_entries(obj) {
@@ -672,6 +672,31 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
         return JSON.stringify(filters);
     }
 
+    function get_all_deepest_div(node) {
+        if (!node) return [];
+        const all_divs = node.querySelectorAll("div");
+        const deepest_divs = Array.from(all_divs).filter(div => !div.querySelector("div"));
+        return deepest_divs;
+    }
+
+    function translate_node(node) {
+        const divs = get_all_deepest_div(node);
+
+        if (now_lang === "en") return;
+        for (const ele of divs) {
+            const lang_mod_string = translate_mod(ele.innerText);
+
+            if (!lang_mod_string) continue;
+
+            if (["zh-tw", "ko", "ru"].includes(now_lang)) {
+                ele.innerText = lang_mod_string;
+            }
+            else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) {
+                ele.innerText += "\n" + lang_mod_string;
+            }
+        }
+    }
+
     function process_tippy(tippy_node) {
         function get_item_name(node) {
             try {
@@ -859,16 +884,10 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             return best_match;
         }
 
-        function get_all_deepest_div(node) {
-            if (!node) return [];
-            const all_divs = node.querySelectorAll("div");
-            const deepest_divs = Array.from(all_divs).filter(div => !div.querySelector("div"));
-            return deepest_divs;
-        }
+        translate_node(tippy_node);
 
         const item_name = get_item_name(tippy_node);
         if (item_name === undefined) return;
-        dbg_log(item_name);
 
         const level = get_item_level(tippy_node);
         const quality = get_item_quality(tippy_node);
@@ -927,96 +946,6 @@ async function inject_script(stats_data, gems_data, tw_gems_data, query_data, ge
             childList: true
         });
     }
-
-    // // [Tippy Observers]
-    // const tippy_mods_record_callbacks = new Map();
-    // const tippy_mods_record = new Proxy({}, {
-    //     set(target, key, value, receiver) {
-    //         dbg_log(`[TIPPY MODS RECORD] key = ${key}, value = ${value}`);
-    //         target[key] = value;
-
-    //         // 如果有人在等這個 key，就觸發 callback
-    //         if (tippy_mods_record_callbacks.has(key)) {
-    //             const callbacks = tippy_mods_record_callbacks.get(key);
-    //             callbacks();
-    //             tippy_mods_record_callbacks.delete(key);
-    //         }
-    //     }
-    // });
-    // const translated_tippy_id = new Set();
-
-    // function translate_node(node) {
-    //     const tippy_id = node.id;
-    //     if (translated_tippy_id.has(tippy_id)) return;
-
-    //     const section = node.querySelectorAll("div._item-body_1tb3h_1 section");
-    //     if (section.length < 5) return;  // 此 Node 不是裝備的 tippy
-
-    //     const enchant = section[2]?.querySelectorAll("div div")[0];
-    //     const enchant_all = enchant?.querySelectorAll("div") || [];
-    //     const implicit = section[3]?.querySelectorAll("div#implicit")[0];
-    //     const implicit_all = section[3]?.querySelectorAll("div > div") || [];
-    //     const explicit = section[4]?.querySelectorAll("div#explicit")[0];
-    //     const explicit_all = section[4]?.querySelectorAll("div > div") || [];
-
-    //     let mod_text = "";
-    //     for (const mod_type of [enchant, implicit, explicit]) {
-    //         if (mod_type !== undefined) mod_text += mod_type["textContent"];
-    //     }
-    //     tippy_mods_record[tippy_id] = mod_text;
-
-    //     let translated = false;
-    //     if (now_lang === "en") return;
-    //     for (const ele of [...enchant_all, ...implicit_all, ...explicit_all]) {
-    //         translated = true;
-
-    //         const lang_mod_string = translate_mod(ele.innerText);
-
-    //         if (["zh-tw", "ko", "ru"].includes(now_lang)) {
-    //             ele.innerText = lang_mod_string;
-    //         }
-    //         else if (["en-zh-tw", "en-ko", "en-ru"].includes(now_lang) && ele.innerText !== lang_mod_string) {
-    //             ele.innerText += "\n" + lang_mod_string;
-    //         }
-    //     }
-
-    //     if (translated)
-    //         translated_tippy_id.add(tippy_id);
-    // }
-
-    // function waiting_tippy_data(node) {
-    //     dbg_log(node.innerHTML);
-    //     if (node.innerText !== "") {
-    //         dbg_log("tippy data already received, translate now");
-    //         translate_node(node);
-    //         return;
-    //     }
-
-    //     const content_observer = new MutationObserver((mutationRecords, observer) => {
-    //         // XXX: 現在還是會觀察到兩次這個 node 的變化，不太確定是什麼原因
-    //         // dbg_log(node.innerHTML);
-    //         dbg_log("triggered tippy content observer");
-    //         observer.disconnect();
-    //         queueMicrotask(() => { translate_node(node); });  // 放到下一次的微任務中，確保 observer 已經斷開連線
-    //     });
-
-    //     content_observer.observe(node, {
-    //         childList: true,
-    //         subtree: true,
-    //     });
-    // }
-
-    // const observer = new MutationObserver(mutationRecords => {
-    //     for (const mutationRecord of mutationRecords) {
-    //         for (const addedNode of mutationRecord["addedNodes"]) {
-    //             waiting_tippy_data(addedNode);
-    //         }
-    //     }
-    // });
-    // observer.observe(document.body, {
-    //     childList: true
-    // });
-
 };
 
 // 初始化所需設定
