@@ -7,17 +7,20 @@
 <https://github.com/user-attachments/assets/26498680-cfa1-4897-997e-38ccb25e45ce>
 
 ## Introduction
-這是一個簡易的 Chrome 擴充功能（Chrome extension），用來自動生成 [poe ninja](https://poe.ninja/builds) 中各角色所有裝備（含藥劑、珠寶及寶石）導向至官方交易網站的按鈕，並內建提供詞綴中文化功能（可關閉）。
+簡易的 Chrome 擴充功能（Chrome extension），連結 [poe.ninja](https://poe.ninja/builds) 中所有裝備（含藥劑、珠寶及寶石）至官方交易網站，並內建詞綴中文化功能。
+
+**注意:** 請注意這個插件暫不支援 PoE 2 Ninja 網頁。
 
 ## Features
-- 裝備、藥劑、珠寶及寶石一鍵導向官方交易市集，同時套用詞綴篩選（寶石則為品質與寶石等級）。
+- 裝備、藥劑、珠寶及寶石一鍵導向官方交易市集。
+- 套用詞綴篩選（寶石則為品質與寶石等級）。
 - 裝備、藥劑及珠寶的詞綴中文化。
 
 ## Getting Started
-目前這個 Chrome 擴充功能已經上架至 Chrome 線上應用程式商店。如需手動安裝，請自行搜尋相關方法，或按照下文介紹安裝。
+**PoE Ninja Redirect to Trade** 已經上架至 Chrome 線上應用程式商店。你也可以手動安裝。
 
 ### Installation
-1. 從 [Github 網頁](https://github.com/iwtba4188/poe_ninja_redirect_to_trade) 下載當前腳本內容的 ZIP 檔。
+1. 從 [Github 網頁](https://github.com/iwtba4188/poe_ninja_redirect_to_trade) 或 [最新版本](https://github.com/iwtba4188/poe_ninja_redirect_to_trade/releases) 下載 ZIP 檔。解壓縮檔案。
 ![installation_1](../image/installation_1.png)
 2. 以 Edge 瀏覽器為例，選擇「Load unpacked」。
 ![installation_2](../image/installation_2.png)
@@ -25,6 +28,9 @@
 4. 接著，到任一角色的裝備頁面，即可一鍵前往交易市集。
 
 ### Usage
+
+<!-- TODO: update v1.2.0 contents -->
+
 1. 前往任意角色頁面，將滑鼠移至裝備上方，如果出現「Trade」代表運作正常，可以點擊前往交易市集。
 ![usage_1](../image/usage_1.png)
 
@@ -41,11 +47,14 @@
 ![usage_4](../image/usage_4.png)
 
 ## TODO
-- [x] （已修復）目前仍有些許詞綴配對錯誤或無法配對成功。
-- [x] （已修復）藥劑與珠寶的順序錯誤。
+- [x] 目前仍有些許詞綴配對錯誤或無法配對成功。
+- [x] 藥劑與珠寶的順序錯誤。
 - [ ] 其餘非詞綴部分中文化。
-- [ ] 更多自定義 Filter 規則。
+- [x] 更多自定義 Filter 規則。
 
 ## Acknowledges
 - 詞綴查找使用 [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe) 中的詞綴比對表（中英文、韓文、俄文）。
 - 英文版本使用 Copilot 協助翻譯。
+
+## Support Me
+<a href="https://www.buymeacoffee.com/iwtba4188" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
