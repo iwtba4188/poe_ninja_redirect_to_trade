@@ -12,3 +12,5 @@ __pycache__
 .cache
 .python-version
 pyproject.toml
+
+.vscode
